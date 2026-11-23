@@ -1,0 +1,751 @@
+<!doctype html><html lang="id"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>AHmathZ | Les Matematika dan Kalkulus, Surabaya dan Online</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Les privat atau belajar bareng teman, offline di Surabaya atau online. Cek biaya, lihat paket, dan chat WhatsApp untuk daftar.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Gaya poster/stiker satu tema terang (sengaja tidak ikut mode gelap). Kiri: langkah 01-05 berupa chip dan kartu tebal. Kanan: nota (struk) perkiraan biaya yang menempel. */
+:root {
+  color-scheme: light;
+  --cream: #EEF5FC;
+  --ink: #1B2A3C;
+  --pink: #8DBBEA;
+  --pink-soft: #D6E6F7;
+  --lime: #BCD7F5;
+  --lime-soft: #E3EEFA;
+  --white: #FFFFFF;
+  --butter: #FFF0BF;
+  --peach: #FFE0CC;
+  --mint: #D6EFE2;
+  --muted: #5F6C7B;
+  --paper: #FBFDFF;
+  --head: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Space Mono", ui-monospace, Menlo, monospace;
+  --b: 2.5px solid var(--ink);
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15.5px;
+  line-height: 1.5;
+  padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logo { font-family: var(--head); font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
+.logo span { background: var(--ink); color: var(--lime); padding: 1px 6px; border-radius: 6px; margin: 0 2px; }
+.top small { font-weight: 500; color: var(--muted); }
+.menu{display:flex;flex-wrap:wrap;gap:8px}
+.menu a{font-weight:700;font-size:13.5px;line-height:1.3;color:var(--ink);text-decoration:none;background:var(--white);border:2px solid var(--ink);border-radius:999px;padding:6px 13px;min-height:36px;display:inline-flex;align-items:center}
+.menu a:hover{background:var(--pink-soft)}
+.menu a[aria-current="page"]{background:var(--pink);box-shadow:3px 3px 0 var(--ink)}
+@media (max-width:480px){div.contact{grid-template-columns:1fr}div.ct strong{overflow-wrap:normal;word-break:normal}}
+@media (max-width:560px){.menu{flex-wrap:wrap;width:100%;padding:2px 2px 6px}.menu a{min-height:40px;display:inline-flex;align-items:center}}
+
+
+.hero { position: relative; background: var(--pink); border: var(--b); border-radius: 22px; padding: clamp(22px, 5vw, 44px); box-shadow: 6px 6px 0 var(--ink); overflow: hidden; }
+.hero h1 { font-family: var(--head); font-weight: 800; font-size: clamp(30px, 6.4vw, 60px); line-height: 1.02; letter-spacing: -.03em; margin: 0; max-width: 15ch; text-wrap: balance; position: relative; }
+.hero p { margin: 14px 0 0; max-width: 48ch; font-size: 17px; font-weight: 500; position: relative; }
+.hero .formula { position: absolute; right: 0; bottom: -18px; font-family: var(--mono); font-size: clamp(54px, 11vw, 120px); font-weight: 700; color: var(--ink); opacity: .1; pointer-events: none; white-space: nowrap; }
+.stickers { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; position: relative; }
+.sticker { font-weight: 800; font-size: 13.5px; line-height: 1.35; background: var(--lime); border: var(--b); border-radius: 18px; padding: 6px 14px; transform: rotate(-2deg); max-width: 100%; overflow-wrap: anywhere; }
+.sticker:nth-child(2) { background: var(--butter); transform: rotate(1.5deg); }
+.sticker:nth-child(3) { background: var(--cream); transform: rotate(-1deg); }
+.sticker:nth-child(4) { background: var(--peach); transform: rotate(1deg); }
+
+.main { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr); gap: 28px; align-items: start; }
+.steps { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.step { background: var(--white); border: var(--b); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.step-h { display: flex; align-items: center; gap: 12px; }
+.num { font-family: var(--head); font-weight: 800; font-size: 14px; background: var(--ink); color: var(--lime); border-radius: 10px; padding: 6px 9px; line-height: 1; }
+.step h2 { font-family: var(--head); font-weight: 600; font-size: 18px; letter-spacing: -.01em; margin: 0; }
+.hint { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; }
+.chip span { border: var(--b); border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 14px; background: var(--white); line-height: 1.3; min-height: 40px; display: flex; align-items: center; transition: transform .12s; }
+.chip:hover span { transform: translateY(-1px); }
+.chip input:checked + span { background: var(--pink); box-shadow: 3px 3px 0 var(--ink); }
+.chip input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 3px; }
+.chip input:disabled { cursor: not-allowed; }
+.chip input:disabled + span { opacity: .35; }
+.chip.big span { font-size: 15px; padding: 11px 16px; min-height: 46px; }
+
+.packs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.pack { position: relative; }
+.pack input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+.pack .card { height: 100%; border: var(--b); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px; background: var(--cream); transition: transform .12s; }
+.pack:hover .card { transform: translateY(-2px); }
+.pack b { font-family: var(--head); font-weight: 800; font-size: 17px; letter-spacing: -.02em; line-height: 1.15; }
+.pack .meta { font-family: var(--mono); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.pack .desc { font-size: 13.5px; color: var(--muted); }
+.pack .tag { align-self: flex-start; font-size: 11.5px; font-weight: 800; background: #FFD2AD; color: #1B2A3C; border: 2px solid #1B2A3C; border-radius: 999px; padding: 3px 9px; white-space: nowrap; line-height: 1.3; }
+.pack input:checked + .card { background: var(--lime); box-shadow: 5px 5px 0 var(--ink); transform: translate(-2px, -2px); }
+.pack input:checked + .card .desc { color: var(--ink); }
+.pack input:focus-visible + .card { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.pair { display: flex; flex-wrap: wrap; gap: 20px; }
+.pair > div { flex: 1 1 220px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.lbl { font-family: var(--mono); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+
+.people { display: flex; flex-wrap: wrap; gap: 8px; }
+.person { width: 44px; height: 44px; border: var(--b); border-radius: 50%; background: var(--white); cursor: pointer; font-family: var(--head); font-weight: 800; font-size: 14px; color: var(--ink); display: grid; place-items: center; }
+.person.on { background: var(--pink); }
+.person:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.mtg { display: flex; flex-direction: column; gap: 8px; }
+.stepper { display: inline-flex; border: var(--b); border-radius: 999px; overflow: hidden; width: fit-content; background: var(--white); }
+.stepper button { width: 46px; min-height: 44px; border: 0; background: var(--lime-soft); font-size: 22px; font-weight: 800; color: var(--ink); cursor: pointer; font-family: var(--body); }
+.stepper button:disabled { opacity: .35; cursor: not-allowed; }
+.stepper output { min-width: 60px; display: grid; place-items: center; font-family: var(--head); font-weight: 800; font-size: 17px; }
+
+.side { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.nota { position: relative; background: var(--paper); padding: 22px 20px 26px; font-family: var(--mono); font-size: 13.5px; filter: drop-shadow(5px 5px 0 var(--ink)); transform: rotate(.6deg); margin-top: 10px; }
+.nota::before, .nota::after { content: ""; position: absolute; left: 0; right: 0; height: 10px; background: radial-gradient(circle at 7px 10px, var(--paper) 7px, transparent 7.5px) repeat-x; background-size: 14px 10px; }
+.nota::before { top: -9px; }
+.nota::after { bottom: -9px; transform: rotate(180deg); }
+.nota-h { text-align: center; display: flex; flex-direction: column; gap: 2px; }
+.nota-h b { font-family: var(--head); font-size: 18px; letter-spacing: -.01em; }
+.nota-h span { font-size: 12px; color: var(--muted); }
+.cut { border: 0; border-top: 2px dashed var(--ink); margin: 14px 0; opacity: .6; }
+.lines { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 5px 12px; margin: 0; }
+.lines dt { color: var(--muted); }
+.lines dd { margin: 0; text-align: right; font-weight: 700; overflow-wrap: anywhere; }
+.total { display: flex; flex-direction: column; gap: 2px; }
+.total .lbl { font-size: 11.5px; }
+.total .big { font-family: var(--head); font-weight: 800; font-size: clamp(30px, 6vw, 40px); letter-spacing: -.03em; line-height: 1.05; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.was { font-family: var(--head); font-weight: 600; font-size: 17px; color: var(--muted); text-decoration-color: #3A78B8; text-decoration-thickness: 2px; }
+.save { align-self: flex-start; background: var(--lime); border: 2px solid var(--ink); border-radius: 999px; padding: 2px 10px; font-weight: 700; font-size: 12.5px; margin-top: 6px; }
+.incl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.incl li { padding-left: 18px; position: relative; font-family: var(--body); font-size: 13.5px; }
+.incl li::before { content: "+"; position: absolute; left: 0; font-family: var(--mono); font-weight: 700; color: #3A78B8; }
+.warn { margin: 12px 0 0; background: var(--pink-soft); border: 2px solid var(--ink); border-radius: 10px; padding: 9px 11px; font-family: var(--body); font-size: 13.5px; }
+.nota .fine { margin: 10px 0 0; font-size: 11.5px; color: var(--muted); text-align: center; }
+
+.cta { display: flex; justify-content: center; align-items: center; gap: 10px; background: var(--ink); color: var(--lime); text-decoration: none; font-family: var(--head); font-weight: 800; font-size: 16px; border-radius: 999px; padding: 15px 18px; border: var(--b); box-shadow: 4px 4px 0 var(--pink); transition: transform .12s; text-align: center; }
+.cta:hover { transform: translate(-1px, -1px); }
+.cta:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.ct { background: var(--white); border: var(--b); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ct small { font-size: 12px; font-weight: 700; color: var(--muted); }
+.ct strong { font-family: var(--head); font-weight: 600; font-size: 15px; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.ct a { display: inline-block; min-height: 24px; padding: 2px 0; color: var(--ink); text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.ct a:hover { text-decoration: underline; }
+.copy { align-self: flex-start; font-family: var(--body); font-weight: 700; font-size: 12.5px; border: 2px solid var(--ink); background: var(--lime-soft); color: var(--ink); border-radius: 999px; padding: 3px 12px; cursor: pointer; min-height: 30px; }
+
+.bar { display: none; }
+@media (max-width: 860px) {
+  .main { grid-template-columns: minmax(0, 1fr); }
+  .side { position: static; }
+  .packs { grid-template-columns: minmax(0, 1fr); }
+
+  .bar {
+    display: flex; transform: translateY(110%); transition: transform .2s; justify-content: space-between; align-items: center; gap: 12px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    background: var(--ink); color: var(--cream); border-top: 3px solid var(--pink);
+    padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .bar.on { transform: none; }
+  .bar .bl { display: block; font-size: 12px; opacity: .75; }
+  .bar .bp { font-family: var(--head); font-weight: 800; font-size: 20px; }
+  .bar a { background: var(--lime); color: var(--ink); text-decoration: none; font-weight: 800; border-radius: 999px; padding: 10px 16px; white-space: nowrap; }
+  .step { padding: 16px; }
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:12px}
+.hero.big{padding:clamp(24px,4.5vw,48px);box-shadow:8px 8px 0 var(--ink)}
+.hero.big h1{font-size:clamp(30px,4.8vw,56px);line-height:1.04;letter-spacing:-.04em;max-width:14ch}
+.hero.big p{font-size:clamp(16px,2.2vw,20px);max-width:44ch;margin-top:18px}
+.hero .go{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;position:relative}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:800;font-size:15px;text-decoration:none;border:var(--b);border-radius:999px;padding:13px 22px;min-height:48px;background:var(--ink);color:var(--lime);box-shadow:4px 4px 0 var(--pink-soft);transition:transform .12s}
+.btn.alt{background:var(--white);color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.btn:hover{transform:translate(-1px,-1px)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.sec{display:flex;flex-direction:column;gap:18px}
+.sec>h2{font-family:var(--head);font-weight:800;font-size:clamp(24px,3.4vw,36px);line-height:1;letter-spacing:-.04em;margin:0;max-width:16ch;text-wrap:balance}
+.sec>.lead{margin:0;max-width:56ch;font-size:16.5px;font-weight:500}
+.paket{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pk{background:var(--butter);border:var(--b);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pk:nth-child(2){background:var(--peach)}
+.pk:nth-child(3){background:var(--mint)}
+.pk h3{font-family:var(--head);font-weight:800;font-size:21px;letter-spacing:-.025em;line-height:1.1;margin:0}
+.pk .tag{align-self:flex-start;font-size:12px;font-weight:800;background:#FFD2AD;border:2px solid var(--ink);border-radius:999px;padding:2px 10px}
+.pk .cocok{margin:0;font-size:14px;color:#46535F}
+.pk ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.pk li{padding-left:20px;position:relative}
+.pk li::before{content:"\2713";position:absolute;left:0;font-weight:800;color:#3A78B8}
+.pk .hrg{margin-top:auto;border-top:2px dashed var(--ink);padding-top:12px;font-family:var(--head);font-weight:800;font-size:22px;letter-spacing:-.03em;line-height:1.1}
+.pk .hrg small{display:block;font-family:var(--body);font-weight:600;font-size:12.5px;letter-spacing:0;color:#46535F;margin-top:4px}
+.catatan{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.catatan p{margin:0;background:var(--white);border:var(--b);border-radius:16px;padding:14px 16px;font-size:14px}
+.catatan p:nth-child(2){background:var(--butter)}
+.catatan p:nth-child(3){background:var(--mint)}
+.catatan b{font-family:var(--head);font-weight:800;display:block;margin-bottom:2px}
+.diag{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:var(--ink);color:var(--cream);border-radius:20px;padding:20px 22px}
+.diag p{margin:0;max-width:52ch;font-weight:500}
+.diag b{font-family:var(--head);font-weight:800;font-size:19px;display:block;margin-bottom:2px;color:var(--butter)}
+.diag .btn{background:var(--butter);color:var(--ink);box-shadow:none}
+.harga-h{display:flex;flex-direction:column;gap:8px}
+.harga-h h2{font-family:var(--head);font-weight:800;font-size:clamp(24px,3.4vw,36px);line-height:1;letter-spacing:-.04em;margin:0}
+.harga-h p{margin:0;max-width:56ch;font-size:16.5px;font-weight:500}
+.materi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mt{display:flex;flex-direction:column;gap:8px;background:var(--mint);border:var(--b);border-radius:20px;padding:20px;text-decoration:none;color:var(--ink);min-width:0;transition:transform .12s,box-shadow .12s}
+.mt:nth-child(2){background:var(--butter)}
+.mt:nth-child(3){background:var(--peach)}
+.mt:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.mt:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.mt b{font-family:var(--head);font-weight:800;font-size:20px;letter-spacing:-.02em;line-height:1.1}
+.mt span{font-size:14px;color:#46535F}
+.mt em{font-style:normal;margin-top:auto;font-weight:800;font-size:14px;text-decoration:underline;text-decoration-color:var(--pink);text-decoration-thickness:3px;text-underline-offset:3px}
+.toko{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
+.tk{background:var(--butter);border:var(--b);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px;box-shadow:6px 6px 0 var(--ink);min-width:0}
+.tk.alt{background:var(--peach);box-shadow:none}
+.tk h3{font-family:var(--head);font-weight:800;font-size:clamp(20px,3vw,28px);letter-spacing:-.03em;line-height:1.08;margin:0}
+.tk p{margin:0;font-size:14.5px}
+.tk .rp{font-family:var(--head);font-weight:800;font-size:30px;letter-spacing:-.04em}
+.tk .btn{align-self:flex-start;margin-top:auto}
+.daftar{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:d}
+.daftar li{counter-increment:d;background:var(--white);border:var(--b);border-radius:16px;padding:16px;font-size:14.5px;font-weight:600}
+.daftar li::before{content:counter(d);font-family:var(--head);font-weight:800;font-size:14px;background:var(--ink);color:var(--lime);border-radius:10px;padding:6px 9px;line-height:1;display:block;width:fit-content;margin-bottom:10px}
+.daftar li:nth-child(2){background:var(--butter)}
+.daftar li:nth-child(3){background:var(--peach)}
+.daftar li:nth-child(4){background:var(--mint)}
+.daftar a{color:var(--ink);text-decoration-color:var(--pink);text-decoration-thickness:3px;text-underline-offset:3px}
+.jd-wrap{display:flex;flex-direction:column;gap:10px}
+.jd-scroll{overflow-x:auto;border:var(--b);border-radius:16px;background:var(--white)}
+table.jd{border-collapse:collapse;width:100%;table-layout:fixed;font-size:12.5px;text-align:center}
+.jd th{font-family:var(--head);font-weight:800;font-size:11px;padding:8px 0;background:var(--butter);border-bottom:2px solid var(--ink)}
+.jd th small{display:block;font-family:var(--body);font-weight:600;color:#46535F}
+.jd td{height:22px;padding:0;border-top:1px solid #DCE7F3;font-weight:700}
+.jd td:first-child,.jd th:first-child{font-family:var(--mono);font-size:11px;padding:0 2px;white-space:nowrap;width:46px}
+.jd td.k{background:var(--lime-soft)}
+.jd td.p{background:#FFC9A3;color:#7A4A27;font-size:9.5px;overflow:hidden}
+.jd-leg{margin:0;font-size:13px;color:var(--muted)}
+.ds-foot{margin-top:8px}
+.ds-foot-in{border-top:var(--b);padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between;font-size:13.5px;color:var(--muted)}
+.ds-foot-in nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+.ds-foot-in nav a{display:inline-flex;align-items:center;gap:7px;min-height:32px}
+.ds-foot-in nav[aria-label="Toko di lynk.id"]{flex-basis:100%}
+.ds-foot-in a{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--pink);text-decoration-thickness:3px;text-underline-offset:3px}
+.ds-foot-in a.ds-logo{font-family:var(--head);font-weight:800;font-size:17px;text-decoration:none;margin-right:6px}
+.ds-foot-in a.ds-logo span{background:var(--ink);color:var(--lime);padding:1px 6px;border-radius:6px;margin:0 2px}
+.ds-foot-brand{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px 6px}
+
+#jadwal>h2,#materi>h2,#toko>h2,#daftar>h2{font-size:clamp(22px,2.8vw,30px);letter-spacing:-.03em}
+#jadwal .lead,#materi .lead,#jdInfo{font-size:14.5px}
+.mt b{font-size:17px}.mt span{font-size:13px}.mt em{font-size:13px}
+.tk h3{font-size:clamp(17px,2.2vw,22px)}.tk p{font-size:13.5px}.tk .rp{font-size:24px}
+.daftar li{font-size:13.5px;padding:14px}
+.jd-leg{font-size:12px}
+.btn{font-size:14px;padding:11px 18px;min-height:44px}
+@media (max-width:860px){.paket,.materi,.toko{grid-template-columns:minmax(0,1fr)}.daftar{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.daftar{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="index.html" style="text-decoration:none;color:inherit" aria-label="AHmathZ, ke beranda"><span>AH</span>math<span>Z</span></a>
+    <nav class="menu" aria-label="Menu utama"><a href="#layanan">Layanan</a><a href="#harga">Cek harga</a><a href="#jadwal">Jadwal</a><a href="#materi">Materi gratis</a><a href="#toko">Toko</a></nav>
+  </div>
+
+  <section class="hero big">
+    <div class="formula" aria-hidden="true">&int; f(x) dx</div>
+    <h1>Belajar jadi lebih paham, tidak pusing sendirian.</h1>
+    <p>Les privat atau belajar bareng teman. Offline di Surabaya, atau online dari mana saja.</p>
+    <div class="go">
+      <a class="btn" href="https://wa.me/6285176971148?text=Halo%20kak%2C%20aku%20mau%20tanya-tanya%20les%20dulu" target="_blank" rel="noopener">Chat WhatsApp</a>
+      <a class="btn alt" href="#harga">Cek biaya dulu</a>
+    </div>
+    <div class="stickers">
+      <span class="sticker">Tutor mahasiswa &amp; lulusan Matematika ITS</span>
+      <span class="sticker">Konsultasi gratis dulu</span>
+      <span class="sticker">Rekaman &amp; catatan tiap pertemuan</span>
+      <span class="sticker">Makin ramai, makin hemat</span>
+    </div>
+  </section>
+
+  <section class="sec" id="layanan">
+    <h2>Pilih cara belajar yang pas.</h2>
+    <p class="lead">Materinya menyesuaikan silabus kampusmu, jamnya kamu yang tentukan. Jadwal diatur bareng dan bisa digeser.</p>
+    <div class="paket">
+      <article class="pk">
+        <span class="tag">Paling terarah</span>
+        <h3>Les Rutin<br>6 pertemuan</h3>
+        <p class="cocok">Belajar runtut dari awal bab sampai siap ujian. Bayar sekali untuk 6 pertemuan.</p>
+        <ul>
+          <li>Konsep dulu, lalu latihan soal</li>
+          <li>Boleh tanya lewat chat di luar jam les selama paket berjalan</li>
+          <li>File latihan soal lengkap dengan pembahasan</li>
+          <li>Soal ETS/EAS tahun lalu (khusus Kalkulus ITS)</li>
+          <li>Try out sebelum ujian, request paling lambat H-3</li>
+        </ul>
+        <div class="hrg">mulai Rp28.000<small>per pertemuan, per orang, belajar bareng</small></div>
+      </article>
+      <article class="pk">
+        <span class="tag">Paling fleksibel</span>
+        <h3>Paket Satuan<br>bayar per pertemuan</h3>
+        <p class="cocok">Buat yang mendadak: besok kuis, minggu depan ujian, atau satu bab yang belum nyambung.</p>
+        <ul>
+          <li>Materi atau latihan soal sesuai kebutuhanmu hari itu</li>
+          <li>Jumlah pertemuan bebas</li>
+          <li>Boleh tanya lewat chat sampai 24 jam setelah pertemuan</li>
+          <li>File latihan soal lengkap dengan pembahasan</li>
+        </ul>
+        <div class="hrg">mulai Rp28.000<small>per pertemuan, per orang, belajar bareng</small></div>
+      </article>
+      <article class="pk">
+        <span class="tag">Fokus soal</span>
+        <h3>Latihan Soal Mandiri<br>4 x 2 jam</h3>
+        <p class="cocok">Konsep sudah paham, tapi butuh jam terbang mengerjakan soal sebelum ujian.</p>
+        <ul>
+          <li>Kamu mengerjakan soal, tutor mendampingi di sebelahmu</li>
+          <li>Langsung dijelaskan kalau konsep atau caranya keliru</li>
+          <li>Soal ETS/EAS tahun lalu (khusus Kalkulus ITS)</li>
+          <li>Offline, khusus Surabaya</li>
+        </ul>
+        <div class="hrg">mulai Rp100.000<small>per orang untuk 4 pertemuan, belajar bareng</small></div>
+      </article>
+    </div>
+    <div class="catatan">
+      <p><b>Belajar bareng teman</b>2 sampai 7 mahasiswa, makin ramai makin murah per orang. Offline maksimal 5. Mulai 3 mahasiswa, offline dapat ruangan AC, WiFi gratis, es teh, dan refill air.</p>
+      <p><b>Harga khusus ITS</b>Mahasiswa ITS dapat tarif khusus. Untuk mata kuliah selain Kalkulus ada diskon 10% untuk mahasiswa ITS, dan diskon tambahan 5% untuk mahasiswa Matematika ITS.</p>
+      <p><b>Durasi</b>Rutin dan Satuan bisa 60 atau 90 menit per pertemuan. Semua paket dapat rekaman dan catatan tiap pertemuan, online maupun offline.</p>
+    </div>
+    <div class="diag">
+      <p><b>Belum yakin mulai dari mana?</b>Kerjakan tes diagnostik Kalkulus 1 dulu, supaya kelihatan bagian mana yang belum nyambung.</p>
+      <a class="btn" href="tes-diagnostik/index.html">Coba tes diagnostik</a>
+    </div>
+  </section>
+
+  <div class="harga-h" id="harga">
+    <h2>Hitung biayamu sendiri.</h2>
+    <p>Pilih mata kuliah, paket, dan ajak berapa teman. Notanya langsung jadi di samping, tinggal kirim ke WhatsApp. Harga dikonfirmasi lewat chat sebelum mulai.</p>
+  </div>
+
+  <div class="main">
+    <form class="steps" onsubmit="return false">
+      <section class="step">
+        <div class="step-h"><span class="num">01</span><h2>Mata kuliahnya apa?</h2></div>
+        <div class="chips" id="mkChips"></div>
+        <p class="hint">Matkul kamu tidak ada? Chat saja, barangkali bisa dibantu.</p>
+      </section>
+
+      <section class="step">
+        <div class="step-h"><span class="num">02</span><h2>Kamu mahasiswa mana?</h2></div>
+        <div class="chips">
+          <label class="chip big"><input type="radio" name="status" value="itsmat"><span>Matematika ITS</span></label>
+          <label class="chip big"><input type="radio" name="status" value="its"><span>ITS jurusan lain</span></label>
+          <label class="chip big"><input type="radio" name="status" value="nonits"><span>Bukan ITS</span></label>
+        </div>
+        <p class="hint" id="statusHint"></p>
+      </section>
+
+      <section class="step">
+        <div class="step-h"><span class="num">03</span><h2>Pilih paket</h2></div>
+        <div class="packs">
+          <label class="pack"><input type="radio" name="paket" value="rutin"><span class="card">
+            <span class="tag">Paling terarah</span>
+            <b>Les Rutin</b><span class="meta">6 pertemuan berurutan</span>
+            <span class="desc">Belajar runtut dari awal bab sampai siap ujian, plus try out sebelum hari H.</span></span></label>
+          <label class="pack"><input type="radio" name="paket" value="satuan"><span class="card">
+            <span class="tag">Paling fleksibel</span>
+            <b>Paket Satuan</b><span class="meta">bayar per pertemuan</span>
+            <span class="desc">Buat yang mendadak: besok kuis, minggu depan ujian, atau satu bab yang belum nyambung.</span></span></label>
+        </div>
+      </section>
+
+      <section class="step">
+        <div class="step-h"><span class="num">04</span><h2>Belajarnya gimana?</h2></div>
+        <div class="pair">
+          <div>
+            <span class="lbl">Tempat</span>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="mode" value="online"><span>Online</span></label>
+              <label class="chip"><input type="radio" name="mode" value="offline"><span>Offline Surabaya</span></label>
+            </div>
+          </div>
+          <div>
+            <span class="lbl">Durasi per pertemuan</span>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="dur" value="60"><span>60 menit</span></label>
+              <label class="chip"><input type="radio" name="dur" value="90"><span>90 menit</span></label>
+            </div>
+          </div>
+        </div>
+        <p class="hint" id="modeHint"></p>
+      </section>
+
+      <section class="step">
+        <div class="step-h"><span class="num">05</span><h2>Belajar bareng berapa orang?</h2></div>
+        <div class="people" id="people" role="group" aria-label="Jumlah mahasiswa"></div>
+        <p class="hint" id="nHint"></p>
+        <div class="mtg" id="mtgField">
+          <span class="lbl">Jumlah pertemuan (Paket Satuan)</span>
+          <div class="stepper"><button type="button" id="mMinus" aria-label="Kurangi pertemuan">&minus;</button><output id="mOut" aria-live="polite">4</output><button type="button" id="mPlus" aria-label="Tambah pertemuan">+</button></div>
+        </div>
+      </section>
+    </form>
+
+    <aside class="side" id="nota">
+      <div class="nota" aria-live="polite">
+        <div class="nota-h"><b>AHmathZ</b><span>NOTA PERKIRAAN &middot; <span id="tgl"></span></span></div>
+        <hr class="cut">
+        <dl class="lines" id="lines"></dl>
+        <hr class="cut">
+        <div class="total">
+          <span class="lbl">Bayar per orang</span>
+          <s class="was" id="was" hidden></s>
+          <span class="big" id="price">-</span>
+          <span class="save" id="save" hidden></span>
+        </div>
+        <hr class="cut">
+        <dl class="lines" id="lines2"></dl>
+        <p class="warn" id="warn" hidden></p>
+        <hr class="cut">
+        <ul class="incl" id="incl"></ul>
+        <p class="fine">Ini perkiraan. Harga dikonfirmasi lewat chat sebelum mulai.</p>
+      </div>
+      <a class="cta" id="cta" href="#" target="_blank" rel="noopener">Kirim nota ke WhatsApp &rarr;</a>
+      <div class="contact">
+        <div class="ct"><small>WhatsApp</small><strong><a id="waShow" href="https://wa.me/6285176971148" target="_blank" rel="noopener"></a></strong><button type="button" class="copy" id="copy">Salin nomor</button></div>
+        <div class="ct"><small>TikTok</small><strong><a id="tt" href="https://www.tiktok.com/@ahmathz" target="_blank" rel="noopener"></a></strong><small>Tips &amp; pembahasan soal</small></div><div class="ct"><small>Instagram</small><strong><a href="https://www.instagram.com/belajar.ahmathz/" target="_blank" rel="noopener">belajar.ahmathz</a></strong><small>Info les &amp; materi</small></div>
+        <div class="ct"><small>CV Tutor</small><strong><a href="https://bit.ly/CVAHmathZ" target="_blank" rel="noopener">bit.ly/CVAHmathZ</a></strong><small>Pengalaman mengajar</small></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="sec" id="jadwal">
+    <h2>Jadwal yang masih kosong.</h2>
+    <p class="lead" id="jdInfo">Tanya jadwal yang masih kosong lewat WhatsApp, nanti dicarikan jam yang cocok.</p>
+    <div class="jd-wrap" id="jdWrap" hidden>
+      <div class="jd-scroll"><table class="jd" id="jd"></table></div>
+      <p class="jd-leg">Biru muda = masih kosong, oranye = sudah terisi. Kalau hanya bisa di hari yang penuh, chat saja, bisa dibantu dihubungkan dengan tutor lain.</p>
+    </div>
+    <div class="go"><a class="btn alt" href="https://wa.me/6285176971148?text=Halo%20kak%2C%20aku%20mau%20tanya%20jadwal%20yang%20masih%20kosong" target="_blank" rel="noopener">Tanya jadwal lewat chat</a></div>
+  </section>
+
+  <section class="sec" id="materi">
+    <h2>Materi gratis, buka kapan saja.</h2>
+    <p class="lead">Dibuat untuk Kalkulus 1.</p>
+    <div class="materi">
+      <a class="mt" href="pembahasan.html"><b>Pembahasan</b><span>Pembahasan latihan Kalkulus 1 per bab dan subbab. Langkah lengkapnya terbuka untuk murid yang sudah punya kode.</span><em>Buka pembahasan</em></a>
+      <a class="mt" href="visualisasi/index.html"><b>Visualisasi</b><span>Gambar yang bisa digeser-geser supaya konsepnya kelihatan, mulai dari laju terkait.</span><em>Coba visualisasi</em></a>
+      <a class="mt" href="grafik-5-4.html"><b>Grafik 5.4</b><span>Grafik interaktif semua soal sketsa Latihan 5.4.</span><em>Buka grafik</em></a>
+    </div>
+  </section>
+
+  <section class="sec" id="toko">
+    <h2>Mau latihan sendiri? Ada soalnya.</h2>
+    <div class="toko">
+      <div class="tk">
+        <h3>1104 Soal dan Pembahasan Aplikasi Turunan</h3>
+        <p>Latihan soal Aplikasi Turunan lengkap dengan pembahasannya, bisa dikerjakan kapan saja.</p>
+        <span class="rp">Rp11.040</span>
+        <a class="btn" href="https://lynk.id/ahmathz/k1eqxoww801p" target="_blank" rel="noopener">Lihat di lynk.id</a>
+      </div>
+      <div class="tk alt">
+        <h3>Support suka-suka</h3>
+        <p>Materi di web ini gratis. Kalau terbantu dan mau traktir, nominalnya terserah kamu.</p>
+        <a class="btn alt" href="https://lynk.id/ahmathz/s/olv7vl4x56mj" target="_blank" rel="noopener">Kasih support</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="daftar">
+    <h2>Cara daftar.</h2>
+    <ol class="daftar">
+      <li>Cek mata kuliahmu dulu. Kalau tidak ada di daftar, chat saja, barangkali bisa dibantu.</li>
+      <li>Hitung biayamu di <a href="#harga">kalkulator di atas</a>.</li>
+      <li>Lihat <a href="#jadwal">jadwal yang masih kosong</a>, lalu pilih jam yang cocok.</li>
+      <li>Chat WhatsApp untuk daftar atau tanya-tanya dulu.</li>
+    </ol>
+  </section>
+
+  <footer class="ds-foot"><!-- Ikon: Font Awesome Free 6.7.2 (CC BY 4.0) --><div class="ds-foot-in"><span class="ds-foot-brand"><a class="ds-logo" href="index.html"><span>AH</span>math<span>Z</span></a> Les Kalkulus dan Matematika, offline di Surabaya dan online</span><nav aria-label="Kontak"><a href="https://wa.me/6285176971148" aria-label="WhatsApp 0851-7697-1148" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg><span>0851-7697-1148</span></a><a href="https://www.tiktok.com/@ahmathz" aria-label="TikTok @ahmathz" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg><span>@ahmathz</span></a><a href="https://www.instagram.com/belajar.ahmathz/" aria-label="Instagram belajar.ahmathz" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg><span>belajar.ahmathz</span></a><a href="https://lynk.id/ahmathz" aria-label="Toko lynk.id/ahmathz" target="_blank" rel="noopener"><span aria-hidden="true" style="font-size:18px;line-height:1;width:18px;text-align:center">🛒</span><span>lynk.id/ahmathz</span></a></nav></div></footer>
+</div>
+
+<div class="bar">
+  <div><span class="bl">Bayar per orang</span><span class="bp" id="barPrice">-</span></div>
+  <a href="#nota">Lihat nota</a>
+</div>
+
+<script>
+/* Pengaturan diskon dan kontak. */
+const CFG = {
+  kenaikan: 0, diskonITS: 0.10, diskonMatITS: 0.05,
+  wa: "6285176971148", waShow: "0851-7697-1148", tiktok: "@ahmathz"
+};
+/* Harga dasar per mahasiswa. Kolom: Offline 60, Offline 90, Online 60, Online 90. Rutin = harga paket 6 pertemuan, Satuan = per pertemuan. */
+const N = null;
+const T = {
+  umum: {
+    rutin: [N,[530000,729000,488000,686000],[342000,492000,309000,444000],[342000,492000,251000,363000],[289000,418000,224000,323000],[259000,374000,205000,297000],[N,N,195000,280000],[N,N,185000,270000]],
+    satuan: [N,[92500,125500,81500,114500],[59000,83500,51500,74000],[59000,83500,43500,60500],[49500,71000,39500,55000],[44000,63500,36000,49500],[N,N,32500,47000],[N,N,31000,45000]],
+    mandiri: [N,250000,175000,150000,125000]
+  },
+  its: {
+    rutin: [N,[482000,663000,444000,624000],[311000,447000,282000,405000],[311000,447000,228000,330000],[263000,380000,204000,294000],[235000,340000,186000,270000],[N,N,177000,255000],[N,N,168000,246000]],
+    satuan: [N,[84000,114000,74000,104000],[53500,76000,47000,67500],[53500,76000,39500,55000],[45000,64500,36000,50000],[40000,57500,32500,45000],[N,N,29500,42500],[N,N,28000,41000]],
+    mandiri: [N,220000,150000,125000,100000]
+  },
+  lain: {
+    rutin: [N,[705000,987000,660000,942000],[423000,599000,402000,576000],[411000,593000,315000,456000],[343000,498000,273000,396000],[303000,440000,246000,360000],[N,N,228000,336000],[N,N,216000,318000]],
+    satuan: [N,[121500,168500,110000,157000],[72500,102000,67000,96000],[70000,100500,52500,76000],[58500,84000,45500,66000],[51500,74500,41000,60000],[N,N,38000,56000],[N,N,36000,53000]],
+    mandiri: [N,350000,250000,220000,180000]
+  }
+};
+const MATKUL = ["Kalkulus","Aljabar / Struktur Aljabar 1","Aljabar / Struktur Aljabar 2","Aljabar Linear","Aljabar Linear Elementer","Analisis Real 1","Analisis Real 2","Matematika Diskrit","Matematika Statistika","Metode Matematika","Persamaan Diferensial Biasa","Geometri Analitik","Dasar Pemrograman (Java & Python)","Metode Numerik","Fisika Matematika"];
+const PAKET = {
+  rutin:   { nama: "Les Rutin", pert: 6, incl: ["6 pertemuan berurutan: konsep dulu, lalu latihan soal","Rekaman dan catatan setiap pertemuan","Boleh tanya lewat chat di luar jam les selama paket berjalan","File latihan soal lengkap dengan pembahasan","Soal ETS/EAS tahun lalu (Kalkulus ITS)","Try out sebelum ujian (request paling lambat H-3)","Kalkulator perhitungan nilai","Jadwal diatur bareng dan bisa digeser"] },
+  satuan:  { nama: "Paket Satuan", pert: 1, incl: ["Materi atau latihan soal sesuai kebutuhanmu hari itu","Rekaman dan catatan setiap pertemuan","Boleh tanya lewat chat sampai 24 jam setelah pertemuan","File latihan soal lengkap dengan pembahasan","Soal ETS/EAS tahun lalu (Kalkulus ITS)","Kalkulator perhitungan nilai","Jadwal diatur bareng dan bisa digeser"] },
+  mandiri: { nama: "Latihan Soal Mandiri", pert: 4, incl: ["Kamu mengerjakan soal, tutor mendampingi di sebelahmu","Langsung dijelaskan kalau konsep atau caranya keliru","Soal ETS/EAS tahun lalu (Kalkulus ITS)","Rekaman dan catatan setiap pertemuan","Kalkulator perhitungan nilai","4 pertemuan x 2 jam, offline khusus Surabaya","Jadwal diatur bareng dan bisa digeser"] }
+};
+const STATUS_LBL = { itsmat: "Matematika ITS", its: "ITS jurusan lain", nonits: "Bukan ITS" };
+
+const S = { mk: "Kalkulus", status: "its", paket: "satuan", mode: "online", dur: 90, n: 1, mtg: 1 };
+const $ = (id) => document.getElementById(id);
+const rp = (x) => "Rp" + Math.round(x).toLocaleString("id-ID");
+const round500 = (x) => Math.round(x / 500) * 500;
+
+function tarifOf() { return S.mk === "Kalkulus" ? (S.status === "nonits" ? "umum" : "its") : "lain"; }
+function factor(noDisc) {
+  let f = 1;
+  if (S.mk !== "Kalkulus" && !noDisc) {
+    if (S.status === "itsmat") f = (1 - CFG.diskonITS) * (1 - CFG.diskonMatITS);
+    else if (S.status === "its") f = 1 - CFG.diskonITS;
+  }
+  return f * (1 + CFG.kenaikan);
+}
+function maxN() { return S.paket === "mandiri" ? 4 : (S.mode === "offline" ? 5 : 7); }
+function priceFor(n, paket, noDisc) {
+  paket = paket || S.paket;
+  const t = T[tarifOf()];
+  let base;
+  if (paket === "mandiri") base = t.mandiri[n];
+  else {
+    const r = t[paket][n];
+    if (!r) return null;
+    base = r[(S.mode === "offline" ? 0 : 2) + [60, 90].indexOf(S.dur)];
+  }
+  if (base == null) return null;
+  /* Diskon ITS dihitung persis (tanpa pembulatan ke Rp500). */
+  return Math.round(base * factor(noDisc));
+}
+
+function buildPeople() {
+  const box = $("people"); box.innerHTML = "";
+  for (let i = 1; i <= 7; i++) {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "person"; b.textContent = i;
+    b.setAttribute("aria-label", i + " mahasiswa");
+    b.addEventListener("click", () => { S.n = i; sync(); });
+    box.appendChild(b);
+  }
+}
+
+function sync() {
+  if (S.paket === "mandiri") { S.mode = "offline"; S.dur = 120; }
+  else if (S.dur === 120) S.dur = 90;
+  if (S.n > maxN()) S.n = maxN();
+  document.querySelectorAll('input[name="mk"]').forEach((i) => (i.checked = i.value === S.mk));
+  document.querySelectorAll('input[name="status"]').forEach((i) => (i.checked = i.value === S.status));
+  document.querySelectorAll('input[name="paket"]').forEach((i) => (i.checked = i.value === S.paket));
+  document.querySelectorAll('input[name="mode"]').forEach((i) => { i.checked = i.value === S.mode; i.disabled = S.paket === "mandiri"; });
+  document.querySelectorAll('input[name="dur"]').forEach((i) => { i.checked = Number(i.value) === S.dur; i.disabled = S.paket === "mandiri"; });
+  document.querySelectorAll(".person").forEach((b, idx) => {
+    const k = idx + 1;
+    b.classList.toggle("on", k <= S.n);
+    b.hidden = k > maxN();
+    b.setAttribute("aria-pressed", k === S.n ? "true" : "false");
+  });
+  $("mtgField").hidden = S.paket !== "satuan";
+  $("mOut").textContent = S.mtg;
+  $("mMinus").disabled = S.mtg <= 1;
+  $("mPlus").disabled = S.mtg >= 40;
+  $("statusHint").textContent = S.mk === "Kalkulus"
+    ? "Kalkulus: semua mahasiswa ITS dapat tarif khusus ITS."
+    : "Matkul selain Kalkulus: diskon " + Math.round(CFG.diskonITS * 100) + "% untuk mahasiswa ITS, lalu Matematika ITS dapat potongan " + Math.round(CFG.diskonMatITS * 100) + "% lagi.";
+  $("modeHint").textContent = S.paket === "mandiri"
+    ? "Latihan Soal Mandiri selalu offline di Surabaya, 2 jam per pertemuan."
+    : (S.mode === "offline" ? "Offline mulai 3 orang dapat ruangan ber-AC, WiFi, es teh, dan refill air." : "Online lewat zoom meeting, dari mana saja.");
+  $("nHint").textContent = S.paket === "mandiri"
+    ? "Paket ini untuk 1 sampai 4 orang."
+    : (S.mode === "offline" ? "Offline maksimal 5 orang." : "Online maksimal 7 orang.") + " Ketuk lingkarannya.";
+  render();
+}
+
+function row(dl, k, v) { const dt = document.createElement("dt"); dt.textContent = k; const dd = document.createElement("dd"); dd.textContent = v; dl.append(dt, dd); }
+
+function render() {
+  const pk = PAKET[S.paket];
+  const meetings = S.paket === "satuan" ? S.mtg : pk.pert;
+  const p = priceFor(S.n);
+  const lines = $("lines"), lines2 = $("lines2");
+  lines.innerHTML = ""; lines2.innerHTML = "";
+  row(lines, "Matkul", S.mk);
+  row(lines, "Status", STATUS_LBL[S.status]);
+  row(lines, "Paket", pk.nama);
+  row(lines, "Tempat", S.mode === "online" ? "Online" : "Offline Sby");
+  row(lines, "Durasi", S.dur + " menit");
+  row(lines, "Pertemuan", meetings + "x");
+  row(lines, "Peserta", S.n + " orang");
+
+  const incl = $("incl"); incl.innerHTML = "";
+  const kIts = S.mk === "Kalkulus" && S.status !== "nonits";
+  pk.incl.filter((t) => kIts || !/ETS\/EAS/.test(t)).forEach((t) => { const li = document.createElement("li"); li.textContent = t; incl.appendChild(li); });
+
+  const warn = $("warn"), save = $("save");
+  warn.hidden = true; save.hidden = true;
+  if (p == null) {
+    $("price").textContent = "-"; $("barPrice").textContent = "-";
+    warn.hidden = false; warn.textContent = "Kombinasi ini belum tersedia. Chat dulu, nanti dicarikan yang pas.";
+    updateCta(null, meetings); return;
+  }
+  const perStudent = S.paket === "satuan" ? p * meetings : p;
+  const perMeeting = S.paket === "satuan" ? p : p / meetings;
+  $("price").textContent = rp(perStudent);
+  $("barPrice").textContent = rp(perStudent);
+  const t = tarifOf();
+  const was = $("was"); was.hidden = true;
+  const disc = t === "lain" && S.status !== "nonits";
+  if (disc) {
+    const preOne = priceFor(S.n, S.paket, true);
+    const pre = S.paket === "satuan" ? preOne * meetings : preOne;
+    const pD = Math.round(CFG.diskonITS * 100), pM = Math.round(CFG.diskonMatITS * 100);
+    was.hidden = false; was.textContent = rp(pre);
+    row(lines2, "Sebelum diskon", rp(pre) + " / orang");
+    row(lines2, "Diskon ITS " + pD + "%" + (S.status === "itsmat" ? " + " + pM + "%" : ""), "hemat " + rp(pre - perStudent));
+    row(lines2, "Setelah diskon", rp(perStudent) + " / orang");
+  }
+  row(lines2, "Per pertemuan", rp(perMeeting));
+  row(lines2, "Total " + S.n + " orang", rp(perStudent * S.n));
+  if (t === "its") row(lines2, "Tarif", "Khusus ITS");
+  if (S.paket === "rutin") {
+    const sat = priceFor(S.n, "satuan");
+    if (sat && sat * 6 > perStudent) {
+      if (!disc) { was.hidden = false; was.textContent = rp(sat * 6); }
+      save.hidden = false;
+      save.textContent = (sat * 6 - perStudent >= sat - 1)
+        ? "Hemat setara 1 pertemuan (" + rp(sat * 6 - perStudent) + ")"
+        : "Hemat " + rp(sat * 6 - perStudent) + " dibanding bayar per pertemuan";
+      if (!disc) row(lines2, "Harga normal", "6 x " + rp(sat));
+    }
+  }
+  if (S.n > 1) {
+    const solo = priceFor(1);
+    if (solo) {
+      const soloTotal = S.paket === "satuan" ? solo * meetings : solo;
+      const pct = Math.round((1 - perStudent / soloTotal) * 100);
+      if (pct > 0) {
+        if (S.paket === "rutin") row(lines2, "Dibanding les sendiri", "hemat " + pct + "%");
+        else { save.hidden = false; save.textContent = "Hemat " + pct + "% dibanding les sendiri"; }
+      }
+    }
+  }
+  updateCta(perStudent, meetings);
+}
+
+function updateCta(perStudent, meetings) {
+  const parts = ["Halo kak, saya mau tanya les " + S.mk + ".",
+    "Paket: " + PAKET[S.paket].nama + ", " + meetings + " pertemuan.",
+    S.paket === "mandiri" ? "Offline Surabaya, 2 jam." : (S.mode === "online" ? "Online" : "Offline Surabaya") + ", " + S.dur + " menit.",
+    S.n + " orang. Status: " + STATUS_LBL[S.status] + "."];
+  if (perStudent != null) parts.push("Perkiraan dari kalkulator: " + rp(perStudent) + " per orang.");
+  $("cta").href = "https://wa.me/" + CFG.wa + "?text=" + encodeURIComponent(parts.join(" "));
+}
+
+MATKUL.forEach((m) => {
+  const l = document.createElement("label"); l.className = "chip";
+  const i = document.createElement("input"); i.type = "radio"; i.name = "mk"; i.value = m;
+  const s = document.createElement("span"); s.textContent = m;
+  l.append(i, s); $("mkChips").appendChild(l);
+});
+buildPeople();
+$("waShow").textContent = CFG.waShow;
+$("tt").textContent = CFG.tiktok;
+$("tgl").textContent = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" });
+
+document.querySelectorAll('input[name="mk"]').forEach((i) => i.addEventListener("change", () => { S.mk = i.value; sync(); }));
+document.querySelectorAll('input[name="status"]').forEach((i) => i.addEventListener("change", () => { S.status = i.value; sync(); }));
+document.querySelectorAll('input[name="paket"]').forEach((i) => i.addEventListener("change", () => { S.paket = i.value; sync(); }));
+document.querySelectorAll('input[name="mode"]').forEach((i) => i.addEventListener("change", () => { S.mode = i.value; sync(); }));
+document.querySelectorAll('input[name="dur"]').forEach((i) => i.addEventListener("change", () => { S.dur = Number(i.value); sync(); }));
+$("mMinus").addEventListener("click", () => { S.mtg--; sync(); });
+$("mPlus").addEventListener("click", () => { S.mtg++; sync(); });
+$("copy").addEventListener("click", () => {
+  const btn = $("copy");
+  const done = (t) => { btn.textContent = t; setTimeout(() => (btn.textContent = "Salin nomor"), 1600); };
+  try { navigator.clipboard.writeText("0" + CFG.wa.slice(2)).then(() => done("Tersalin"), () => done("Salin manual ya")); }
+  catch (e) { done("Salin manual ya"); }
+});
+sync();
+
+/* Ambil harga terbaru dari Google Sheet (tab Daftar Harga). Kalau gagal, pakai tabel di atas. */
+/* Tempel link CSV hasil "Publikasikan ke web" (tab Daftar Harga) di bawah. Kosong = pakai harga di tabel T. */
+const PUB_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTgm4heD62Ixk2rIqpwGWDPGB5jAlA__hhlKJHbY77l1PUc8P7xG1TuPgr8KjFr-dmKT2xl7etopZyf/pub?gid=2&single=true&output=csv";
+function parseCSV(txt) {
+  const rows = []; let r = [], c = "", q = false;
+  for (let i = 0; i < txt.length; i++) {
+    const ch = txt[i];
+    if (q) { if (ch === '"') { if (txt[i + 1] === '"') { c += '"'; i++; } else q = false; } else c += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ",") { r.push(c); c = ""; }
+    else if (ch === "\n") { r.push(c); rows.push(r); r = []; c = ""; }
+    else if (ch !== "\r") c += ch;
+  }
+  if (c !== "" || r.length) { r.push(c); rows.push(r); }
+  return rows;
+}
+async function loadSheetPrices() {
+  if (!PUB_CSV) throw new Error("tidak ada link sheet");
+  const url = PUB_CSV;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error("http " + res.status);
+  const rows = parseCSV(await res.text());
+  const num = (v) => { const d = String(v == null ? "" : v).replace(/[^0-9]/g, ""); return d ? Number(d) : null; };
+  const block = (start) => { /* start = nomor baris sheet (1-based) murid ke-1; 7 baris */
+    const out = [N];
+    for (let k = 0; k < 7; k++) {
+      const r = rows[start - 1 + k]; if (!r) throw new Error("baris hilang");
+      out.push([num(r[3]), num(r[4]), num(r[6]), num(r[7])]);
+    }
+    if (!out[1].every((x) => x != null)) throw new Error("format tidak cocok");
+    return out;
+  };
+  const nt = {};
+  [["umum", 5], ["its", 23], ["lain", 41]].forEach(([k, s]) => { nt[k] = { rutin: block(s), satuan: block(s + 7), mandiri: T[k].mandiri }; });
+  Object.assign(T, nt);
+}
+loadSheetPrices().then(() => { try { sync(); } catch (e) {} }).catch(() => {});
+</script>
+
+<script>
+(function(){var bar=document.querySelector(".bar"),h=document.getElementById("harga"),m=document.querySelector(".main");if(!bar||!("IntersectionObserver" in window)){if(bar)bar.classList.add("on");return}
+var seen=new Set();var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?seen.add(e.target):seen.delete(e.target)});bar.classList.toggle("on",seen.size>0)});io.observe(m)})();
+</script>
+<script>
+/* Alamat web app Apps Script jadwal (lihat jadwal-apps-script.gs). Kosong = pakai JADWAL_SEMENTARA di bawah. */
+window.JADWAL_API="";
+/* Data sementara: salinan sheet Jadwal Available pekan 23 Nov 2026 (hanya kosong/penuh). */
+var JADWAL_SEMENTARA={"tutor":"Zaki","minggu":"23 Nov 2026","hari":["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"],"tanggal":["23 Nov","24 Nov","25 Nov","26 Nov","27 Nov","28 Nov","29 Nov"],"slot":[{"jam":"07.00","penuh":[false,false,false,false,false,false,false]},{"jam":"07.30","penuh":[false,false,false,false,false,false,false]},{"jam":"08.00","penuh":[false,false,false,false,false,false,false]},{"jam":"08.30","penuh":[false,false,false,true,false,false,false]},{"jam":"09.00","penuh":[false,false,false,true,false,false,false]},{"jam":"09.30","penuh":[false,false,false,true,false,false,false]},{"jam":"10.00","penuh":[false,true,true,true,false,false,false]},{"jam":"10.30","penuh":[false,true,true,false,false,false,false]},{"jam":"11.00","penuh":[false,true,true,false,false,false,false]},{"jam":"11.30","penuh":[false,false,true,false,false,false,false]},{"jam":"12.00","penuh":[false,false,false,false,false,false,false]},{"jam":"12.30","penuh":[false,false,false,false,false,false,false]},{"jam":"13.00","penuh":[true,false,false,false,false,false,false]},{"jam":"13.30","penuh":[true,false,false,false,false,false,false]},{"jam":"14.00","penuh":[true,false,false,false,false,false,false]},{"jam":"14.30","penuh":[true,false,false,false,false,false,false]},{"jam":"15.00","penuh":[false,false,true,true,false,false,false]},{"jam":"15.30","penuh":[true,false,true,true,false,false,false]},{"jam":"16.00","penuh":[true,true,true,true,false,false,false]},{"jam":"16.30","penuh":[true,true,true,true,false,false,false]},{"jam":"17.00","penuh":[true,true,false,false,false,false,false]},{"jam":"17.30","penuh":[false,true,false,false,false,false,false]},{"jam":"18.00","penuh":[false,false,false,false,false,false,false]},{"jam":"18.30","penuh":[false,false,false,false,false,false,false]},{"jam":"19.00","penuh":[true,true,false,true,false,false,false]},{"jam":"19.30","penuh":[true,true,false,true,false,false,false]},{"jam":"20.00","penuh":[true,true,false,true,false,false,false]},{"jam":"20.30","penuh":[false,false,false,true,false,false,false]},{"jam":"21.00","penuh":[false,false,false,false,false,false,false]},{"jam":"21.30","penuh":[false,false,false,false,false,false,false]},{"jam":"22.00","penuh":[false,false,false,false,false,false,false]},{"jam":"22.30","penuh":[false,false,false,false,false,false,false]}]};
+(function(){
+function gambar(d){var t=document.getElementById("jd"),h="<tr><th>Jam</th>";
+d.hari.forEach(function(x,i){h+="<th>"+x.slice(0,3)+"<small>"+(d.tanggal[i]||"").replace(/\s?\d{4}$/,"")+"</small></th>"});h+="</tr>";
+d.slot.forEach(function(s){h+="<tr><td>"+s.jam+"</td>";s.penuh.forEach(function(p){h+=p?'<td class="p">penuh</td>':'<td class="k"></td>'});h+="</tr>"});
+t.innerHTML=h;document.getElementById("jdWrap").hidden=false;
+document.getElementById("jdInfo").textContent="Pekan mulai "+d.minggu+(d.tutor?", tutor "+d.tutor:"")+". Kotak biru berarti jamnya masih kosong."}
+var u=window.JADWAL_API;
+if(!u){gambar(JADWAL_SEMENTARA);return}
+fetch(u).then(function(r){return r.json()}).then(function(d){gambar(d&&d.slot?d:JADWAL_SEMENTARA)}).catch(function(){gambar(JADWAL_SEMENTARA)})})();
+</script>
+</body></html>

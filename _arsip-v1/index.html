@@ -1,0 +1,519 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Kalkulator Harga AHmathZ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Gaya poster/stiker satu tema terang (sengaja tidak ikut mode gelap). Kiri: langkah 01-05 berupa chip dan kartu tebal. Kanan: nota (struk) perkiraan biaya yang menempel. */
+:root {
+  color-scheme: light;
+  --cream: #EEF5FC;
+  --ink: #1B2A3C;
+  --pink: #8DBBEA;
+  --pink-soft: #D6E6F7;
+  --lime: #BCD7F5;
+  --lime-soft: #E3EEFA;
+  --white: #FFFFFF;
+  --muted: #5F6C7B;
+  --paper: #FBFDFF;
+  --head: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Space Mono", ui-monospace, Menlo, monospace;
+  --b: 2.5px solid var(--ink);
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 15.5px;
+  line-height: 1.5;
+  padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logo { font-family: var(--head); font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
+.logo span { background: var(--ink); color: var(--lime); padding: 1px 6px; border-radius: 6px; margin: 0 2px; }
+.top small { font-weight: 500; color: var(--muted); }
+
+.hero { position: relative; background: var(--pink); border: var(--b); border-radius: 22px; padding: clamp(22px, 5vw, 44px); box-shadow: 6px 6px 0 var(--ink); overflow: hidden; }
+.hero h1 { font-family: var(--head); font-weight: 800; font-size: clamp(30px, 6.4vw, 60px); line-height: 1.02; letter-spacing: -.03em; margin: 0; max-width: 15ch; text-wrap: balance; position: relative; }
+.hero p { margin: 14px 0 0; max-width: 48ch; font-size: 17px; font-weight: 500; position: relative; }
+.hero .formula { position: absolute; right: 0; bottom: -18px; font-family: var(--mono); font-size: clamp(54px, 11vw, 120px); font-weight: 700; color: var(--ink); opacity: .1; pointer-events: none; white-space: nowrap; }
+.stickers { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; position: relative; }
+.sticker { font-weight: 800; font-size: 13.5px; line-height: 1.35; background: var(--lime); border: var(--b); border-radius: 18px; padding: 6px 14px; transform: rotate(-2deg); max-width: 100%; overflow-wrap: anywhere; }
+.sticker:nth-child(2) { background: var(--white); transform: rotate(1.5deg); }
+.sticker:nth-child(3) { background: var(--cream); transform: rotate(-1deg); }
+.sticker:nth-child(4) { background: var(--pink-soft); transform: rotate(1deg); }
+
+.main { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr); gap: 28px; align-items: start; }
+.steps { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.step { background: var(--white); border: var(--b); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.step-h { display: flex; align-items: center; gap: 12px; }
+.num { font-family: var(--head); font-weight: 800; font-size: 14px; background: var(--ink); color: var(--lime); border-radius: 10px; padding: 6px 9px; line-height: 1; }
+.step h2 { font-family: var(--head); font-weight: 600; font-size: 18px; letter-spacing: -.01em; margin: 0; }
+.hint { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; }
+.chip span { border: var(--b); border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 14px; background: var(--white); line-height: 1.3; min-height: 40px; display: flex; align-items: center; transition: transform .12s; }
+.chip:hover span { transform: translateY(-1px); }
+.chip input:checked + span { background: var(--pink); box-shadow: 3px 3px 0 var(--ink); }
+.chip input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 3px; }
+.chip input:disabled { cursor: not-allowed; }
+.chip input:disabled + span { opacity: .35; }
+.chip.big span { font-size: 15px; padding: 11px 16px; min-height: 46px; }
+
+.packs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.pack { position: relative; }
+.pack input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+.pack .card { height: 100%; border: var(--b); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px; background: var(--cream); transition: transform .12s; }
+.pack:hover .card { transform: translateY(-2px); }
+.pack b { font-family: var(--head); font-weight: 800; font-size: 17px; letter-spacing: -.02em; line-height: 1.15; }
+.pack .meta { font-family: var(--mono); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.pack .desc { font-size: 13.5px; color: var(--muted); }
+.pack .tag { align-self: flex-start; font-size: 11.5px; font-weight: 800; background: #FFD2AD; color: #1B2A3C; border: 2px solid #1B2A3C; border-radius: 999px; padding: 3px 9px; white-space: nowrap; line-height: 1.3; }
+.pack input:checked + .card { background: var(--lime); box-shadow: 5px 5px 0 var(--ink); transform: translate(-2px, -2px); }
+.pack input:checked + .card .desc { color: var(--ink); }
+.pack input:focus-visible + .card { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.pair { display: flex; flex-wrap: wrap; gap: 20px; }
+.pair > div { flex: 1 1 220px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.lbl { font-family: var(--mono); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+
+.people { display: flex; flex-wrap: wrap; gap: 8px; }
+.person { width: 44px; height: 44px; border: var(--b); border-radius: 50%; background: var(--white); cursor: pointer; font-family: var(--head); font-weight: 800; font-size: 14px; color: var(--ink); display: grid; place-items: center; }
+.person.on { background: var(--pink); }
+.person:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.mtg { display: flex; flex-direction: column; gap: 8px; }
+.stepper { display: inline-flex; border: var(--b); border-radius: 999px; overflow: hidden; width: fit-content; background: var(--white); }
+.stepper button { width: 46px; min-height: 44px; border: 0; background: var(--lime-soft); font-size: 22px; font-weight: 800; color: var(--ink); cursor: pointer; font-family: var(--body); }
+.stepper button:disabled { opacity: .35; cursor: not-allowed; }
+.stepper output { min-width: 60px; display: grid; place-items: center; font-family: var(--head); font-weight: 800; font-size: 17px; }
+
+.side { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.nota { position: relative; background: var(--paper); padding: 22px 20px 26px; font-family: var(--mono); font-size: 13.5px; filter: drop-shadow(5px 5px 0 var(--ink)); transform: rotate(.6deg); margin-top: 10px; }
+.nota::before, .nota::after { content: ""; position: absolute; left: 0; right: 0; height: 10px; background: radial-gradient(circle at 7px 10px, var(--paper) 7px, transparent 7.5px) repeat-x; background-size: 14px 10px; }
+.nota::before { top: -9px; }
+.nota::after { bottom: -9px; transform: rotate(180deg); }
+.nota-h { text-align: center; display: flex; flex-direction: column; gap: 2px; }
+.nota-h b { font-family: var(--head); font-size: 18px; letter-spacing: -.01em; }
+.nota-h span { font-size: 12px; color: var(--muted); }
+.cut { border: 0; border-top: 2px dashed var(--ink); margin: 14px 0; opacity: .6; }
+.lines { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 5px 12px; margin: 0; }
+.lines dt { color: var(--muted); }
+.lines dd { margin: 0; text-align: right; font-weight: 700; overflow-wrap: anywhere; }
+.total { display: flex; flex-direction: column; gap: 2px; }
+.total .lbl { font-size: 11.5px; }
+.total .big { font-family: var(--head); font-weight: 800; font-size: clamp(30px, 6vw, 40px); letter-spacing: -.03em; line-height: 1.05; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.was { font-family: var(--head); font-weight: 600; font-size: 17px; color: var(--muted); text-decoration-color: #3A78B8; text-decoration-thickness: 2px; }
+.save { align-self: flex-start; background: var(--lime); border: 2px solid var(--ink); border-radius: 999px; padding: 2px 10px; font-weight: 700; font-size: 12.5px; margin-top: 6px; }
+.incl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.incl li { padding-left: 18px; position: relative; font-family: var(--body); font-size: 13.5px; }
+.incl li::before { content: "+"; position: absolute; left: 0; font-family: var(--mono); font-weight: 700; color: #3A78B8; }
+.warn { margin: 12px 0 0; background: var(--pink-soft); border: 2px solid var(--ink); border-radius: 10px; padding: 9px 11px; font-family: var(--body); font-size: 13.5px; }
+.nota .fine { margin: 10px 0 0; font-size: 11.5px; color: var(--muted); text-align: center; }
+
+.cta { display: flex; justify-content: center; align-items: center; gap: 10px; background: var(--ink); color: var(--lime); text-decoration: none; font-family: var(--head); font-weight: 800; font-size: 16px; border-radius: 999px; padding: 15px 18px; border: var(--b); box-shadow: 4px 4px 0 var(--pink); transition: transform .12s; text-align: center; }
+.cta:hover { transform: translate(-1px, -1px); }
+.cta:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.ct { background: var(--white); border: var(--b); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ct small { font-size: 12px; font-weight: 700; color: var(--muted); }
+.ct strong { font-family: var(--head); font-weight: 600; font-size: 15px; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.ct a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.ct a:hover { text-decoration: underline; }
+.copy { align-self: flex-start; font-family: var(--body); font-weight: 700; font-size: 12.5px; border: 2px solid var(--ink); background: var(--lime-soft); color: var(--ink); border-radius: 999px; padding: 3px 12px; cursor: pointer; min-height: 30px; }
+
+.bar { display: none; }
+@media (max-width: 860px) {
+  .main { grid-template-columns: minmax(0, 1fr); }
+  .side { position: static; }
+  .packs { grid-template-columns: minmax(0, 1fr); }
+  body { padding-bottom: 100px; }
+  .bar {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    background: var(--ink); color: var(--cream); border-top: 3px solid var(--pink);
+    padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .bar .bl { display: block; font-size: 12px; opacity: .75; }
+  .bar .bp { font-family: var(--head); font-weight: 800; font-size: 20px; }
+  .bar a { background: var(--lime); color: var(--ink); text-decoration: none; font-weight: 800; border-radius: 999px; padding: 10px 16px; white-space: nowrap; }
+  .step { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div class="logo"><span>AH</span>math<span>Z</span></div>
+    <small>Les Kalkulus &amp; matkul Matematika &middot; offline Surabaya &amp; online</small>
+  </div>
+
+  <section class="hero">
+    <div class="formula" aria-hidden="true">&int; f(x) dx</div>
+    <h1>Cek biaya lesmu dulu, baru chat.</h1>
+    <p>Pilih mata kuliah, paket, dan ajak berapa teman. Notanya langsung jadi di samping, tinggal kirim ke WhatsApp.</p>
+    <div class="stickers">
+      <span class="sticker">Tutor mahasiswa &amp; lulusan Matematika ITS</span>
+      <span class="sticker">Rekaman &amp; catatan tiap pertemuan</span>
+      <span class="sticker">Makin ramai, makin hemat</span>
+      <span class="sticker">Konsultasi gratis dulu</span>
+    </div>
+  </section>
+
+  <div class="main">
+    <form class="steps" onsubmit="return false">
+      <section class="step">
+        <div class="step-h"><span class="num">01</span><h2>Mata kuliahnya apa?</h2></div>
+        <div class="chips" id="mkChips"></div>
+        <p class="hint">Matkul kamu tidak ada? Chat saja, barangkali bisa dibantu.</p>
+      </section>
+
+      <section class="step">
+        <div class="step-h"><span class="num">02</span><h2>Kamu mahasiswa mana?</h2></div>
+        <div class="chips">
+          <label class="chip big"><input type="radio" name="status" value="itsmat"><span>Matematika ITS</span></label>
+          <label class="chip big"><input type="radio" name="status" value="its"><span>ITS jurusan lain</span></label>
+          <label class="chip big"><input type="radio" name="status" value="nonits"><span>Bukan ITS</span></label>
+        </div>
+        <p class="hint" id="statusHint"></p>
+      </section>
+
+      <section class="step">
+        <div class="step-h"><span class="num">03</span><h2>Pilih paket</h2></div>
+        <div class="packs">
+          <label class="pack"><input type="radio" name="paket" value="rutin"><span class="card">
+            <span class="tag">Paling terarah</span>
+            <b>Les Rutin</b><span class="meta">6 pertemuan berurutan</span>
+            <span class="desc">Belajar runtut dari awal bab sampai siap ujian, plus try out sebelum hari H.</span></span></label>
+          <label class="pack"><input type="radio" name="paket" value="satuan"><span class="card">
+            <span class="tag">Paling fleksibel</span>
+            <b>Paket Satuan</b><span class="meta">bayar per pertemuan</span>
+            <span class="desc">Buat yang mendadak: besok kuis, minggu depan ujian, atau satu bab yang belum nyambung.</span></span></label>
+        </div>
+      </section>
+
+      <section class="step">
+        <div class="step-h"><span class="num">04</span><h2>Belajarnya gimana?</h2></div>
+        <div class="pair">
+          <div>
+            <span class="lbl">Tempat</span>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="mode" value="online"><span>Online</span></label>
+              <label class="chip"><input type="radio" name="mode" value="offline"><span>Offline Surabaya</span></label>
+            </div>
+          </div>
+          <div>
+            <span class="lbl">Durasi per pertemuan</span>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="dur" value="60"><span>60 menit</span></label>
+              <label class="chip"><input type="radio" name="dur" value="90"><span>90 menit</span></label>
+            </div>
+          </div>
+        </div>
+        <p class="hint" id="modeHint"></p>
+      </section>
+
+      <section class="step">
+        <div class="step-h"><span class="num">05</span><h2>Belajar bareng berapa orang?</h2></div>
+        <div class="people" id="people" role="group" aria-label="Jumlah mahasiswa"></div>
+        <p class="hint" id="nHint"></p>
+        <div class="mtg" id="mtgField">
+          <span class="lbl">Jumlah pertemuan (Paket Satuan)</span>
+          <div class="stepper"><button type="button" id="mMinus" aria-label="Kurangi pertemuan">&minus;</button><output id="mOut" aria-live="polite">4</output><button type="button" id="mPlus" aria-label="Tambah pertemuan">+</button></div>
+        </div>
+      </section>
+    </form>
+
+    <aside class="side" id="nota">
+      <div class="nota" aria-live="polite">
+        <div class="nota-h"><b>AHmathZ</b><span>NOTA PERKIRAAN &middot; <span id="tgl"></span></span></div>
+        <hr class="cut">
+        <dl class="lines" id="lines"></dl>
+        <hr class="cut">
+        <div class="total">
+          <span class="lbl">Bayar per orang</span>
+          <s class="was" id="was" hidden></s>
+          <span class="big" id="price">-</span>
+          <span class="save" id="save" hidden></span>
+        </div>
+        <hr class="cut">
+        <dl class="lines" id="lines2"></dl>
+        <p class="warn" id="warn" hidden></p>
+        <hr class="cut">
+        <ul class="incl" id="incl"></ul>
+        <p class="fine">Ini perkiraan. Harga dikonfirmasi lewat chat sebelum mulai.</p>
+      </div>
+      <a class="cta" id="cta" href="#" target="_blank" rel="noopener">Kirim nota ke WhatsApp &rarr;</a>
+      <div class="contact">
+        <div class="ct"><small>WhatsApp</small><strong><a id="waShow" href="https://wa.me/6285176971148" target="_blank" rel="noopener"></a></strong><button type="button" class="copy" id="copy">Salin nomor</button></div>
+        <div class="ct"><small>TikTok</small><strong><a id="tt" href="https://www.tiktok.com/@ahmathz" target="_blank" rel="noopener"></a></strong><small>Tips &amp; pembahasan soal</small></div>
+        <div class="ct"><small>CV Tutor</small><strong><a href="https://bit.ly/CVAHmathZ" target="_blank" rel="noopener">bit.ly/CVAHmathZ</a></strong><small>Pengalaman mengajar</small></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="bar">
+  <div><span class="bl">Bayar per orang</span><span class="bp" id="barPrice">-</span></div>
+  <a href="#nota">Lihat nota</a>
+</div>
+
+<script>
+/* Pengaturan diskon dan kontak. */
+const CFG = {
+  kenaikan: 0, diskonITS: 0.10, diskonMatITS: 0.05,
+  wa: "6285176971148", waShow: "0851-7697-1148", tiktok: "@ahmathz"
+};
+/* Harga dasar per mahasiswa. Kolom: Offline 60, Offline 90, Online 60, Online 90. Rutin = harga paket 6 pertemuan, Satuan = per pertemuan. */
+const N = null;
+const T = {
+  umum: {
+    rutin: [N,[530000,729000,488000,686000],[342000,492000,309000,444000],[342000,492000,251000,363000],[289000,418000,224000,323000],[259000,374000,205000,297000],[N,N,195000,280000],[N,N,185000,270000]],
+    satuan: [N,[92500,125500,81500,114500],[59000,83500,51500,74000],[59000,83500,43500,60500],[49500,71000,39500,55000],[44000,63500,36000,49500],[N,N,32500,47000],[N,N,31000,45000]],
+    mandiri: [N,250000,175000,150000,125000]
+  },
+  its: {
+    rutin: [N,[482000,663000,444000,624000],[311000,447000,282000,405000],[311000,447000,228000,330000],[263000,380000,204000,294000],[235000,340000,186000,270000],[N,N,177000,255000],[N,N,168000,246000]],
+    satuan: [N,[84000,114000,74000,104000],[53500,76000,47000,67500],[53500,76000,39500,55000],[45000,64500,36000,50000],[40000,57500,32500,45000],[N,N,29500,42500],[N,N,28000,41000]],
+    mandiri: [N,220000,150000,125000,100000]
+  },
+  lain: {
+    rutin: [N,[705000,987000,660000,942000],[423000,599000,402000,576000],[411000,593000,315000,456000],[343000,498000,273000,396000],[303000,440000,246000,360000],[N,N,228000,336000],[N,N,216000,318000]],
+    satuan: [N,[121500,168500,110000,157000],[72500,102000,67000,96000],[70000,100500,52500,76000],[58500,84000,45500,66000],[51500,74500,41000,60000],[N,N,38000,56000],[N,N,36000,53000]],
+    mandiri: [N,350000,250000,220000,180000]
+  }
+};
+const MATKUL = ["Kalkulus","Aljabar / Struktur Aljabar 1","Aljabar / Struktur Aljabar 2","Aljabar Linear","Aljabar Linear Elementer","Analisis Real 1","Analisis Real 2","Matematika Diskrit","Matematika Statistika","Metode Matematika","Persamaan Diferensial Biasa","Geometri Analitik","Dasar Pemrograman (Java & Python)","Metode Numerik","Fisika Matematika"];
+const PAKET = {
+  rutin:   { nama: "Les Rutin", pert: 6, incl: ["6 pertemuan berurutan: konsep dulu, lalu latihan soal","Rekaman dan catatan setiap pertemuan","Boleh tanya lewat chat di luar jam les selama paket berjalan","File latihan soal lengkap dengan pembahasan","Soal ETS/EAS tahun lalu (Kalkulus ITS)","Try out sebelum ujian (request paling lambat H-3)","Kalkulator perhitungan nilai","Jadwal diatur bareng dan bisa digeser"] },
+  satuan:  { nama: "Paket Satuan", pert: 1, incl: ["Materi atau latihan soal sesuai kebutuhanmu hari itu","Rekaman dan catatan setiap pertemuan","Boleh tanya lewat chat sampai 24 jam setelah pertemuan","File latihan soal lengkap dengan pembahasan","Soal ETS/EAS tahun lalu (Kalkulus ITS)","Kalkulator perhitungan nilai","Jadwal diatur bareng dan bisa digeser"] },
+  mandiri: { nama: "Latihan Soal Mandiri", pert: 4, incl: ["Kamu mengerjakan soal, tutor mendampingi di sebelahmu","Langsung dijelaskan kalau konsep atau caranya keliru","Soal ETS/EAS tahun lalu (Kalkulus ITS)","Rekaman dan catatan setiap pertemuan","Kalkulator perhitungan nilai","4 pertemuan x 2 jam, offline khusus Surabaya","Jadwal diatur bareng dan bisa digeser"] }
+};
+const STATUS_LBL = { itsmat: "Matematika ITS", its: "ITS jurusan lain", nonits: "Bukan ITS" };
+
+const S = { mk: "Kalkulus", status: "its", paket: "satuan", mode: "online", dur: 90, n: 1, mtg: 1 };
+const $ = (id) => document.getElementById(id);
+const rp = (x) => "Rp" + Math.round(x).toLocaleString("id-ID");
+const round500 = (x) => Math.round(x / 500) * 500;
+
+function tarifOf() { return S.mk === "Kalkulus" ? (S.status === "nonits" ? "umum" : "its") : "lain"; }
+function factor(noDisc) {
+  let f = 1;
+  if (S.mk !== "Kalkulus" && !noDisc) {
+    if (S.status === "itsmat") f = (1 - CFG.diskonITS) * (1 - CFG.diskonMatITS);
+    else if (S.status === "its") f = 1 - CFG.diskonITS;
+  }
+  return f * (1 + CFG.kenaikan);
+}
+function maxN() { return S.paket === "mandiri" ? 4 : (S.mode === "offline" ? 5 : 7); }
+function priceFor(n, paket, noDisc) {
+  paket = paket || S.paket;
+  const t = T[tarifOf()];
+  let base;
+  if (paket === "mandiri") base = t.mandiri[n];
+  else {
+    const r = t[paket][n];
+    if (!r) return null;
+    base = r[(S.mode === "offline" ? 0 : 2) + [60, 90].indexOf(S.dur)];
+  }
+  if (base == null) return null;
+  /* Diskon ITS dihitung persis (tanpa pembulatan ke Rp500). */
+  return Math.round(base * factor(noDisc));
+}
+
+function buildPeople() {
+  const box = $("people"); box.innerHTML = "";
+  for (let i = 1; i <= 7; i++) {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "person"; b.textContent = i;
+    b.setAttribute("aria-label", i + " mahasiswa");
+    b.addEventListener("click", () => { S.n = i; sync(); });
+    box.appendChild(b);
+  }
+}
+
+function sync() {
+  if (S.paket === "mandiri") { S.mode = "offline"; S.dur = 120; }
+  else if (S.dur === 120) S.dur = 90;
+  if (S.n > maxN()) S.n = maxN();
+  document.querySelectorAll('input[name="mk"]').forEach((i) => (i.checked = i.value === S.mk));
+  document.querySelectorAll('input[name="status"]').forEach((i) => (i.checked = i.value === S.status));
+  document.querySelectorAll('input[name="paket"]').forEach((i) => (i.checked = i.value === S.paket));
+  document.querySelectorAll('input[name="mode"]').forEach((i) => { i.checked = i.value === S.mode; i.disabled = S.paket === "mandiri"; });
+  document.querySelectorAll('input[name="dur"]').forEach((i) => { i.checked = Number(i.value) === S.dur; i.disabled = S.paket === "mandiri"; });
+  document.querySelectorAll(".person").forEach((b, idx) => {
+    const k = idx + 1;
+    b.classList.toggle("on", k <= S.n);
+    b.hidden = k > maxN();
+    b.setAttribute("aria-pressed", k === S.n ? "true" : "false");
+  });
+  $("mtgField").hidden = S.paket !== "satuan";
+  $("mOut").textContent = S.mtg;
+  $("mMinus").disabled = S.mtg <= 1;
+  $("mPlus").disabled = S.mtg >= 40;
+  $("statusHint").textContent = S.mk === "Kalkulus"
+    ? "Kalkulus: semua mahasiswa ITS dapat tarif khusus ITS."
+    : "Matkul selain Kalkulus: diskon " + Math.round(CFG.diskonITS * 100) + "% untuk mahasiswa ITS, lalu Matematika ITS dapat potongan " + Math.round(CFG.diskonMatITS * 100) + "% lagi.";
+  $("modeHint").textContent = S.paket === "mandiri"
+    ? "Latihan Soal Mandiri selalu offline di Surabaya, 2 jam per pertemuan."
+    : (S.mode === "offline" ? "Offline mulai 3 orang dapat ruangan ber-AC, WiFi, es teh, dan refill air." : "Online lewat zoom meeting, dari mana saja.");
+  $("nHint").textContent = S.paket === "mandiri"
+    ? "Paket ini untuk 1 sampai 4 orang."
+    : (S.mode === "offline" ? "Offline maksimal 5 orang." : "Online maksimal 7 orang.") + " Ketuk lingkarannya.";
+  render();
+}
+
+function row(dl, k, v) { const dt = document.createElement("dt"); dt.textContent = k; const dd = document.createElement("dd"); dd.textContent = v; dl.append(dt, dd); }
+
+function render() {
+  const pk = PAKET[S.paket];
+  const meetings = S.paket === "satuan" ? S.mtg : pk.pert;
+  const p = priceFor(S.n);
+  const lines = $("lines"), lines2 = $("lines2");
+  lines.innerHTML = ""; lines2.innerHTML = "";
+  row(lines, "Matkul", S.mk);
+  row(lines, "Status", STATUS_LBL[S.status]);
+  row(lines, "Paket", pk.nama);
+  row(lines, "Tempat", S.mode === "online" ? "Online" : "Offline Sby");
+  row(lines, "Durasi", S.dur + " menit");
+  row(lines, "Pertemuan", meetings + "x");
+  row(lines, "Peserta", S.n + " orang");
+
+  const incl = $("incl"); incl.innerHTML = "";
+  const kIts = S.mk === "Kalkulus" && S.status !== "nonits";
+  pk.incl.filter((t) => kIts || !/ETS\/EAS/.test(t)).forEach((t) => { const li = document.createElement("li"); li.textContent = t; incl.appendChild(li); });
+
+  const warn = $("warn"), save = $("save");
+  warn.hidden = true; save.hidden = true;
+  if (p == null) {
+    $("price").textContent = "-"; $("barPrice").textContent = "-";
+    warn.hidden = false; warn.textContent = "Kombinasi ini belum tersedia. Chat dulu, nanti dicarikan yang pas.";
+    updateCta(null, meetings); return;
+  }
+  const perStudent = S.paket === "satuan" ? p * meetings : p;
+  const perMeeting = S.paket === "satuan" ? p : p / meetings;
+  $("price").textContent = rp(perStudent);
+  $("barPrice").textContent = rp(perStudent);
+  const t = tarifOf();
+  const was = $("was"); was.hidden = true;
+  const disc = t === "lain" && S.status !== "nonits";
+  if (disc) {
+    const preOne = priceFor(S.n, S.paket, true);
+    const pre = S.paket === "satuan" ? preOne * meetings : preOne;
+    const pD = Math.round(CFG.diskonITS * 100), pM = Math.round(CFG.diskonMatITS * 100);
+    was.hidden = false; was.textContent = rp(pre);
+    row(lines2, "Sebelum diskon", rp(pre) + " / orang");
+    row(lines2, "Diskon ITS " + pD + "%" + (S.status === "itsmat" ? " + " + pM + "%" : ""), "hemat " + rp(pre - perStudent));
+    row(lines2, "Setelah diskon", rp(perStudent) + " / orang");
+  }
+  row(lines2, "Per pertemuan", rp(perMeeting));
+  row(lines2, "Total " + S.n + " orang", rp(perStudent * S.n));
+  if (t === "its") row(lines2, "Tarif", "Khusus ITS");
+  if (S.paket === "rutin") {
+    const sat = priceFor(S.n, "satuan");
+    if (sat && sat * 6 > perStudent) {
+      if (!disc) { was.hidden = false; was.textContent = rp(sat * 6); }
+      save.hidden = false;
+      save.textContent = (sat * 6 - perStudent >= sat - 1)
+        ? "Hemat setara 1 pertemuan (" + rp(sat * 6 - perStudent) + ")"
+        : "Hemat " + rp(sat * 6 - perStudent) + " dibanding bayar per pertemuan";
+      if (!disc) row(lines2, "Harga normal", "6 x " + rp(sat));
+    }
+  }
+  if (S.n > 1) {
+    const solo = priceFor(1);
+    if (solo) {
+      const soloTotal = S.paket === "satuan" ? solo * meetings : solo;
+      const pct = Math.round((1 - perStudent / soloTotal) * 100);
+      if (pct > 0) {
+        if (S.paket === "rutin") row(lines2, "Dibanding les sendiri", "hemat " + pct + "%");
+        else { save.hidden = false; save.textContent = "Hemat " + pct + "% dibanding les sendiri"; }
+      }
+    }
+  }
+  updateCta(perStudent, meetings);
+}
+
+function updateCta(perStudent, meetings) {
+  const parts = ["Halo kak, saya mau tanya les " + S.mk + ".",
+    "Paket: " + PAKET[S.paket].nama + ", " + meetings + " pertemuan.",
+    S.paket === "mandiri" ? "Offline Surabaya, 2 jam." : (S.mode === "online" ? "Online" : "Offline Surabaya") + ", " + S.dur + " menit.",
+    S.n + " orang. Status: " + STATUS_LBL[S.status] + "."];
+  if (perStudent != null) parts.push("Perkiraan dari kalkulator: " + rp(perStudent) + " per orang.");
+  $("cta").href = "https://wa.me/" + CFG.wa + "?text=" + encodeURIComponent(parts.join(" "));
+}
+
+MATKUL.forEach((m) => {
+  const l = document.createElement("label"); l.className = "chip";
+  const i = document.createElement("input"); i.type = "radio"; i.name = "mk"; i.value = m;
+  const s = document.createElement("span"); s.textContent = m;
+  l.append(i, s); $("mkChips").appendChild(l);
+});
+buildPeople();
+$("waShow").textContent = CFG.waShow;
+$("tt").textContent = CFG.tiktok;
+$("tgl").textContent = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" });
+
+document.querySelectorAll('input[name="mk"]').forEach((i) => i.addEventListener("change", () => { S.mk = i.value; sync(); }));
+document.querySelectorAll('input[name="status"]').forEach((i) => i.addEventListener("change", () => { S.status = i.value; sync(); }));
+document.querySelectorAll('input[name="paket"]').forEach((i) => i.addEventListener("change", () => { S.paket = i.value; sync(); }));
+document.querySelectorAll('input[name="mode"]').forEach((i) => i.addEventListener("change", () => { S.mode = i.value; sync(); }));
+document.querySelectorAll('input[name="dur"]').forEach((i) => i.addEventListener("change", () => { S.dur = Number(i.value); sync(); }));
+$("mMinus").addEventListener("click", () => { S.mtg--; sync(); });
+$("mPlus").addEventListener("click", () => { S.mtg++; sync(); });
+$("copy").addEventListener("click", () => {
+  const btn = $("copy");
+  const done = (t) => { btn.textContent = t; setTimeout(() => (btn.textContent = "Salin nomor"), 1600); };
+  try { navigator.clipboard.writeText("0" + CFG.wa.slice(2)).then(() => done("Tersalin"), () => done("Salin manual ya")); }
+  catch (e) { done("Salin manual ya"); }
+});
+sync();
+
+/* Ambil harga terbaru dari Google Sheet (tab Daftar Harga). Kalau gagal, pakai tabel di atas. */
+/* Tempel link CSV hasil "Publikasikan ke web" (tab Daftar Harga) di bawah. Kosong = pakai harga di tabel T. */
+const PUB_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTgm4heD62Ixk2rIqpwGWDPGB5jAlA__hhlKJHbY77l1PUc8P7xG1TuPgr8KjFr-dmKT2xl7etopZyf/pub?gid=2&single=true&output=csv";
+function parseCSV(txt) {
+  const rows = []; let r = [], c = "", q = false;
+  for (let i = 0; i < txt.length; i++) {
+    const ch = txt[i];
+    if (q) { if (ch === '"') { if (txt[i + 1] === '"') { c += '"'; i++; } else q = false; } else c += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ",") { r.push(c); c = ""; }
+    else if (ch === "\n") { r.push(c); rows.push(r); r = []; c = ""; }
+    else if (ch !== "\r") c += ch;
+  }
+  if (c !== "" || r.length) { r.push(c); rows.push(r); }
+  return rows;
+}
+async function loadSheetPrices() {
+  if (!PUB_CSV) throw new Error("tidak ada link sheet");
+  const url = PUB_CSV;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error("http " + res.status);
+  const rows = parseCSV(await res.text());
+  const num = (v) => { const d = String(v == null ? "" : v).replace(/[^0-9]/g, ""); return d ? Number(d) : null; };
+  const block = (start) => { /* start = nomor baris sheet (1-based) murid ke-1; 7 baris */
+    const out = [N];
+    for (let k = 0; k < 7; k++) {
+      const r = rows[start - 1 + k]; if (!r) throw new Error("baris hilang");
+      out.push([num(r[3]), num(r[4]), num(r[6]), num(r[7])]);
+    }
+    if (!out[1].every((x) => x != null)) throw new Error("format tidak cocok");
+    return out;
+  };
+  const nt = {};
+  [["umum", 5], ["its", 23], ["lain", 41]].forEach(([k, s]) => { nt[k] = { rutin: block(s), satuan: block(s + 7), mandiri: T[k].mandiri }; });
+  Object.assign(T, nt);
+}
+loadSheetPrices().then(() => { try { sync(); } catch (e) {} }).catch(() => {});
+</script>
+
+</body></html>

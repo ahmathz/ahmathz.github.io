@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Soal dan pembahasan Latihan 6.5 Kalkulus 1: Teorema Fundamental Kalkulus Pertama.">
+<title>Pembahasan 6.5 Kalkulus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<script src="../tryout/config.js"></script>
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]],
+    macros: { penting: ["\\bbox[2px,border:1.5px solid royalblue]{#1}", 1], nol: ["\\bbox[2px,border:1.5px solid royalblue]{#1}", 1],
+              hasil: ["\\bbox[2px,border:1.5px solid crimson]{#1}", 1], at: ["\\left.#1\\right|_{#2}", 2], R: "\\mathbb{R}" } },
+  svg: { fontCache: "global" }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.min.js"></script>
+<style>
+/* Layout: satu kolom; panel kode di atas; tiap soal = kartu (soal publik + petunjuk), langkah pembahasan disisipkan setelah kode terverifikasi */
+*,*::before,*::after{box-sizing:border-box}
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+[hidden] { display: none !important; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 22px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.eyebrow a { color: inherit; }
+h1 { font-family: var(--font-display); font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 4px 0 6px; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-size: 22px; margin: 0; }
+h3 { font-size: 15px; margin: 2px 0 0; }
+p { margin: 0; }
+.intro { color: var(--muted); font-size: 15px; display: grid; gap: 8px; }
+nav.nomor { display: flex; flex-wrap: wrap; gap: 6px; }
+nav.nomor a { font: 500 14px var(--font-mono); color: var(--biru); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 12px; min-width: 40px; text-align: center; background: var(--paper); font-variant-numeric: tabular-nums; }
+nav.nomor a:hover, nav.nomor a:focus-visible { border-color: var(--biru); }
+.kunci-panel { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; scroll-margin-top: 16px; }
+.kunci-panel.kedip { outline: 2px solid var(--biru); }
+.kunci-panel p { flex: 1 1 260px; font-size: 15px; }
+.kunci-panel form { display: flex; gap: 8px; flex-wrap: wrap; }
+.kunci-panel input { font: 500 16px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); width: 140px; }
+.kunci-panel .ok { color: var(--hijau); font-weight: 600; }
+.galat { color: var(--merah); font-size: 14px; flex-basis: 100%; }
+.instruksi { font-style: italic; color: var(--muted); font-size: 15px; border-left: 3px solid var(--rule); padding-left: 12px; }
+.soal { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; display: grid; gap: 14px; scroll-margin-top: 16px; min-width: 0; }
+.soal-head { display: flex; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
+.kata-kunci { display: flex; flex-wrap: wrap; gap: 6px; }
+.kata-kunci span { font-size: 12px; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 0 8px; }
+.teks, .isi { display: block; min-width: 0; }
+.teks > * + *, .isi > * + * { margin-top: 8px; }
+.isi > h3 + * { margin-top: 4px; }
+.teks ol, .teks ul, .isi ol, .isi ul { margin: 0; padding-left: 24px; display: grid; gap: 4px; }
+li.custom { list-style: none; margin-left: -20px; }
+.lbl { font-weight: 600; }
+.eq { overflow-x: auto; overflow-y: hidden; text-align: center; padding: 2px 0; }
+.biru, .merah { display: inline-block; border: 1.5px solid; border-radius: 4px; padding: 1px 6px; }
+.biru { border-color: var(--biru); background: var(--biru-bg); }
+.merah { border-color: var(--merah); background: var(--merah-bg); }
+.tengah { display: grid; justify-items: center; gap: 8px; text-align: center; min-width: 0; }
+.tengah > * { max-width: 100%; min-width: 0; }
+.gambar { background: #fff; border-radius: 8px; padding: 8px; max-width: 100%; overflow-x: auto; }
+.gambar img { display: block; max-width: min(100%, 640px); height: auto; }
+.tabel { overflow-x: auto; }
+.tabel table, .misal table { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.tabel td { border-bottom: 1px solid var(--rule); padding: 4px 14px; text-align: center; }
+.misal { display: grid; gap: 4px; }
+.misal td { padding: 1px 8px; vertical-align: top; }
+.misal td:first-child { text-align: right; }
+.petunjuk { background: var(--biru-bg); border-left: 3px solid var(--biru); border-radius: 6px; padding: 10px 12px; font-size: 15px; }
+.kontrol { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-top: 1px solid var(--rule); padding-top: 14px; }
+button { font: 500 15px var(--font-body); border-radius: 6px; padding: 9px 14px; min-height: 40px; touch-action: manipulation; cursor: pointer; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); }
+button.utama { background: var(--biru); border-color: var(--biru); color: #fff; }
+button:disabled { opacity: 0.45; cursor: default; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--biru); outline-offset: 2px; }
+.progres { font-size: 13px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+.langkah-list { display: grid; gap: 14px; }
+.langkah { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+.langkah .no { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--rule); display: grid; place-items: center; font: 500 13px var(--font-mono); color: var(--muted); }
+.grafik { display: grid; gap: 6px; width: 100%; }
+.g54-judul { font-size: 13px; color: var(--muted); }
+.canvas-box { position: relative; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; touch-action: none; background: var(--paper); }
+.canvas-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+.readout { position: absolute; left: 8px; bottom: 8px; font: 12px var(--font-mono); background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 2px 6px; color: var(--muted); pointer-events: none; }
+.g54-alat { display: flex; flex-wrap: wrap; gap: 6px; }
+.g54-alat button { padding: 8px 12px; font-size: 14px; min-height: 38px; }
+mjx-container.rumus-lebar { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+footer { font-size: 13px; color: var(--muted); }
+.eyebrow a { display: inline-block; padding: 6px 0; }
+@media (max-width: 480px) { .soal { padding: 14px; } .progres { margin-left: 0; width: 100%; } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../ds.css"><link rel="stylesheet" href="../ds-skin.css"></head>
+<body>
+<header class="ds-top"><a class="ds-logo" href="../index.html" aria-label="AHmathZ, ke beranda"><span>AH</span>math<span>Z</span></a><nav class="ds-nav" aria-label="Menu utama"><a href="../index.html">Kalkulator harga</a><a href="../pembahasan.html" aria-current="page">Pembahasan</a><a href="../grafik-5-4.html">Grafik 5.4</a><a href="../visualisasi/index.html">Visualisasi</a></nav></header>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><a href="../pembahasan.html">Pembahasan</a> / Bab 6 Integral</div>
+    <h1>Subbab 6.5: Teorema Fundamental Kalkulus Pertama</h1>
+    <p style="color:var(--muted)">Coba kerjakan dulu. Tombol <b>Petunjuk</b> memberi arah; langkah pembahasan terbuka dengan kode akses dari pengajar.</p>
+  </header>
+
+  <section class="kunci-panel" id="kunciPanel">
+    <p id="kunciTeks">Masukkan kode akses untuk membuka langkah pembahasan.</p>
+    <form id="formKode" autocomplete="off">
+      <input type="text" id="kode" maxlength="20" placeholder="KODE" aria-label="Kode akses" required>
+      <button type="submit" class="utama" id="btnKode">Buka</button>
+    </form>
+    <button type="button" id="btnKeluar" hidden>Keluar</button>
+    <div class="galat" id="galat" hidden></div>
+  </section>
+
+  <nav class="nomor" aria-label="Nomor soal"><a href="#no-1">1</a><a href="#no-2">2</a><a href="#no-3">3</a><a href="#no-4">4</a><a href="#no-5">5</a><a href="#no-6">6</a><a href="#no-7">7</a><a href="#no-8">8</a><a href="#no-9">9</a><a href="#no-10">10</a><a href="#no-11">11</a><a href="#no-12">12</a><a href="#no-13">13</a><a href="#no-14">14</a><a href="#no-15">15</a><a href="#no-16">16</a><a href="#no-17">17</a><a href="#no-18">18</a><a href="#no-19">19</a><a href="#no-20">20</a><a href="#no-21">21</a><a href="#no-22">22</a><a href="#no-23">23</a><a href="#no-24">24</a><a href="#no-25">25</a><a href="#no-26">26</a><a href="#no-27">27</a><a href="#no-28">28</a><a href="#no-29">29</a><a href="#no-30">30</a><a href="#no-31">31</a><a href="#no-32">32</a><a href="#no-33">33</a><a href="#no-34">34</a><a href="#no-35">35</a><a href="#no-36">36</a><a href="#no-37">37</a><a href="#no-38">38</a><a href="#no-39">39</a><a href="#no-40">40</a><a href="#no-41">41</a><a href="#no-42">42</a><a href="#no-43">43</a><a href="#no-44">44</a><a href="#no-45">45</a><a href="#no-46">46</a><a href="#no-47">47</a><a href="#no-48">48</a><a href="#no-49">49</a><a href="#no-50">50</a><a href="#no-51">51</a><a href="#no-52">52</a><a href="#no-53">53</a><a href="#no-54">54</a><a href="#no-55">55</a><a href="#no-56">56</a><a href="#no-57">57</a><a href="#no-58">58</a></nav>
+  <div class="intro"><p><i>Teorema Fundamental Kalkulus Pertama: jika \(F\) anti-turunan dari \(f\) pada \([a,b]\), maka \(\displaystyle\int_a^b f(x)\,dx=F(b)-F(a)=\Big[F(x)\Big]_a^b\). Konstanta \(C\) tidak perlu ditulis karena lenyap pada pengurangan.</i></p>
+<p><i>Untuk Soal 1&ndash;22, hitung integral tertentu menggunakan Teorema Fundamental Kalkulus Pertama.</i></p></div>
+
+  <article class="soal" id="no-1">
+    <div class="soal-head"><h2>No. 1</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_2^3 x^3\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan x^3 adalah x^4/4; hitung F(3) - F(2).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-2">
+    <div class="soal-head"><h2>No. 2</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{-1}^1 x^4\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan x^4 adalah x^5/5.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-3">
+    <div class="soal-head"><h2>No. 3</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{-1}^2 x(1+x^3)\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Jabarkan x(1 + x^3) = x + x^4 dulu.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-4">
+    <div class="soal-head"><h2>No. 4</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{-3}^0(x^2-4x+7)\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan: x^3/3 - 2x^2 + 7x.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-5">
+    <div class="soal-head"><h2>No. 5</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^2(t^2-2t+8)\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan: t^3/3 - t^2 + 8t.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-6">
+    <div class="soal-head"><h2>No. 6</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_0^1(x^5-x^3+2x)\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan: x^6/6 - x^4/4 + x^2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-7">
+    <div class="soal-head"><h2>No. 7</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^3\frac{1}{x^2}\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> 1/x^2 = x^-2, anti-turunannya -1/x.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-8">
+    <div class="soal-head"><h2>No. 8</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^2\frac{1}{x^6}\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> 1/x^6 = x^-6, anti-turunannya -1/(5x^5).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-9">
+    <div class="soal-head"><h2>No. 9</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^2\left(\frac{1}{x^3}-\frac{2}{x^2}+x^{-4}\right)dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Tulis sebagai x^-3 - 2x^-2 + x^-4, lalu rumus pangkat.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-10">
+    <div class="soal-head"><h2>No. 10</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{-2}^{-1}\left(u^{-4}-3u^{-2}+\frac{1}{u^5}\right)du\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan: -u^-3/3 + 3u^-1 - u^-4/4. Hati-hati tanda pangkat ganjil dari bilangan negatif.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-11">
+    <div class="soal-head"><h2>No. 11</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^9\sqrt{x}\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> akar x = x^1/2, anti-turunannya (2/3) x^3/2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-12">
+    <div class="soal-head"><h2>No. 12</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^4 x^{-3/5}\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan x^-3/5 adalah (5/2) x^2/5.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-13">
+    <div class="soal-head"><h2>No. 13</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_4^9 2y\sqrt{y}\,dy\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> 2y akar y = 2y^3/2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-14">
+    <div class="soal-head"><h2>No. 14</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^8\left(5x^{2/3}-4x^{-2}\right)dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Cari anti-turunan dengan rumus pangkat, lalu hitung F(8) - F(1).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-15">
+    <div class="soal-head"><h2>No. 15</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_4^9(4y^{-1/2}+2y^{1/2}+y^{-5/2})\,dy\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan suku demi suku: 8y^1/2 + (4/3) y^3/2 - (2/3) y^-3/2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-16">
+    <div class="soal-head"><h2>No. 16</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^4\left(\frac{3}{\sqrt{x}}-5\sqrt{x}-x^{-3/2}\right)dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Tulis 3x^-1/2 - 5x^1/2 - x^-3/2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-17">
+    <div class="soal-head"><h2>No. 17</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{-\pi/2}^{\pi/2}\sin\theta\,d\theta\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan sin adalah -cos.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-18">
+    <div class="soal-head"><h2>No. 18</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_0^{\pi/4}\sec^2\theta\,d\theta\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan sec^2 adalah tan.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-19">
+    <div class="soal-head"><h2>No. 19</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{-\pi/4}^{\pi/4}\cos x\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan cos adalah sin.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-20">
+    <div class="soal-head"><h2>No. 20</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_0^1(x-\sec x\tan x)\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan sec x tan x adalah sec x; batas 1 dalam radian.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-21">
+    <div class="soal-head"><h2>No. 21</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{\pi/6}^{\pi/2}\left(x+\frac{2}{\sin^2 x}\right)dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> 1/sin^2 x = csc^2 x, anti-turunannya -cot x.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-22">
+    <div class="soal-head"><h2>No. 22</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_a^{4a}\left(a^{1/2}-x^{1/2}\right)dx\quad\) (\(a\) konstanta positif).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Variabel integrasi adalah x; a^1/2 diperlakukan sebagai konstanta.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-23">
+    <div class="soal-head"><h2>No. 23</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_0^1 x(x+\sqrt{x})\,dx\) <b>(Soal EAS Gasal 2018/2019)</b>.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Jabarkan x(x + akar x) = x^2 + x^3/2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 24&ndash;29, gunakan Teorema 6.4.2 untuk menghitung integral-integralnya.</p></div>
+  <article class="soal" id="no-24">
+    <div class="soal-head"><h2>No. 24</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_0^2|2x-3|\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Cari x yang membuat 2x-3 = 0, pecah interval di titik itu, lalu tulis nilai mutlak tanpa tanda mutlak.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-25">
+    <div class="soal-head"><h2>No. 25</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^5|x-2|\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pecah di x = 2: |x - 2| = 2 - x di kiri dan x - 2 di kanan.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-26">
+    <div class="soal-head"><h2>No. 26</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_0^{3\pi/4}|\cos x|\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> cos x &gt;= 0 pada [0, pi/2] dan &lt;= 0 pada [pi/2, 3pi/4].</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-27">
+    <div class="soal-head"><h2>No. 27</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{-1}^2\sqrt{2+|x|}\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pecah di x = 0: untuk x &lt; 0 integrannya akar(2 - x), untuk x &gt;= 0 akar(2 + x).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-28">
+    <div class="soal-head"><h2>No. 28</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_{-2}^3 f(x)\,dx\), dengan \(f(x)=\begin{cases} -x, &amp; x\geq 0 \\ x^2, &amp; x&lt;0. \end{cases}\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pecah di x = 0 sesuai potongan fungsi.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-29">
+    <div class="soal-head"><h2>No. 29</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_0^4 f(x)\,dx\), dengan \(f(x)=\begin{cases} \sqrt{x}, &amp; 0\leq x&lt;1 \\ 1/x^2, &amp; x\geq 1. \end{cases}\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pecah di x = 1 sesuai potongan fungsi.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 30 dan 31, dapatkan hampiran titik tengah integral, dengan memilih \(x_k^*\) adalah titik tengah, menggunakan \(n=20\) interval bagian, kemudian dapatkan nilai eksak dari integral tersebut menggunakan Teorema Fundamental Kalkulus Pertama.</p></div>
+  <article class="soal" id="no-30">
+    <div class="soal-head"><h2>No. 30</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_1^3\frac{1}{x^2}\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Delta x = (3-1)/20 = 0,1; titik tengah x_k* = 1 + (k - 1/2)(0,1).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-31">
+    <div class="soal-head"><h2>No. 31</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\int_0^{2\pi}\sin x\,dx\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Delta x = pi/10; titik tengah berpasangan simetri terhadap pi sehingga nilai sinusnya saling menghapus.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 32 dan 33, dapatkan nilai limitnya dengan menghitung suatu integral tertentu yang sesuai.</p></div>
+  <article class="soal" id="no-32">
+    <div class="soal-head"><h2>No. 32</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\lim_{n\to+\infty}\frac{\sqrt{1}+\sqrt{2}+\sqrt{3}+\cdots+\sqrt{n}}{n^{3/2}}\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Bagi tiap suku dengan n^3/2 = akar(n) * n, sehingga muncul akar(k/n) * (1/n).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-33">
+    <div class="soal-head"><h2>No. 33</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\lim_{n\to+\infty}\frac{1^4+2^4+3^4+\cdots+n^4}{n^5}\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Tulis bentuk jumlah sebagai sum f(k/n) * (1/n) dengan f(x)=x^4 pada [0,1].</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-34">
+    <div class="soal-head"><h2>No. 34</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Dapatkan luas dataran daerah di bawah kurva \(y=x^2+1\) pada interval \([0,3]\). Gambarkan sketsa daerah itu.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> x^2 + 1 &gt; 0, jadi luasnya langsung integral dari 0 sampai 3.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-35">
+    <div class="soal-head"><h2>No. 35</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Dapatkan luas dataran di atas sumbu-\(x\), tetapi di bawah kurva \(y=(1-x)(x-2)\). Gambarkan sketsa daerah itu.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Cari pembuat nol, tentukan di interval mana kurva di atas sumbu-x, lalu integralkan di interval itu.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-36">
+    <div class="soal-head"><h2>No. 36</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Dapatkan luas daerah di bawah kurva \(y=3\sin x\) pada interval \([0,2\pi/3]\). Gambarkan sketsa daerahnya.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> sin x &gt;= 0 pada [0, 2pi/3], jadi luasnya langsung integral.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-37">
+    <div class="soal-head"><h2>No. 37</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Dapatkan luas daerah di bawah interval \([-2,-1]\), tetapi di atas kurva \(y=x^3\). Gambarkan sketsa daerahnya.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pada [-2,-1], x^3 &lt; 0; luasnya integral dari (0 - x^3).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-38">
+    <div class="soal-head"><h2>No. 38</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Dapatkan luas keseluruhan antara kurva \(y=x^2-3x-10\) dan interval \([-3,8]\). Gambarlah sketsa daerahnya. [<i>Petunjuk: Dapatkan luas bagian yang di atas interval tersebut dan juga bagian di bawahnya secara terpisah.</i>]</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Faktorkan (x-5)(x+2); pecah [-3,8] di x = -2 dan x = 5, lalu jumlahkan nilai mutlak tiap bagian.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-39">
+    <div class="soal-head"><h2>No. 39</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Dengan diketahui bahwa \(\dfrac{x}{x^4+1}&lt;\dfrac{1}{x^3}\) untuk \(1\leq x\leq 2\), tunjukkan bahwa
+    <div class="eq">\[
+        \int_1^2\frac{x}{x^4+1}\,dx&lt;\frac{3}{8}.
+    \]</div></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Jika f &lt; g pada [a,b] (keduanya kontinu) maka integral f &lt; integral g. Hitung integral 1/x^3.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-40">
+    <div class="soal-head"><h2>No. 40</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Telah diketahui bahwa \(\dfrac{1}{\sqrt{x^3+1}}&lt;\dfrac{1}{x^{3/2}}\) untuk \(4\leq x\leq 9\), tunjukkan bahwa
+    <div class="eq">\[
+        \int_4^9\frac{1}{\sqrt{x^3+1}}\,dx&lt;\frac{1}{3}.
+    \]</div></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Bandingkan dengan integral x^-3/2 dari 4 sampai 9.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-41">
+    <div class="soal-head"><h2>No. 41</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Gunakan ketaksamaan \(\dfrac{1}{x^{1.01}}\leq\dfrac{1}{x}\leq\dfrac{1}{x^{0.99}}\) yang dipenuhi untuk \(x\geq 1\), untuk mencari bilangan-bilangan \(m\) dan \(M\) sedemikian hingga \(m&lt;M\) dan \(m\leq\displaystyle\int_1^3\frac{1}{x}\,dx\leq M\).<br>
+    [<i>Catatan: Manfaatkan kalkulator untuk membantu.</i>]</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integralkan ketiga ruas dari 1 sampai 3; ruas kiri dan kanan dapat dihitung dengan rumus pangkat.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-42">
+    <div class="soal-head"><h2>No. 42</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Ulangi Soal 41 menggunakan ketidaksamaan \(\dfrac{1}{x^{1.001}}\leq\dfrac{1}{x}\leq\dfrac{1}{x^{0.999}}\) yang dipenuhi untuk \(x\geq 1\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Sama seperti Soal 41 dengan pangkat 1,001 dan 0,999.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal-soal 43&ndash;49, dapatkan nilai rata-rata fungsinya pada interval yang diberikan.</p></div>
+  <article class="soal" id="no-43">
+    <div class="soal-head"><h2>No. 43</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=3x;\ [1,3]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> f_rata = (1/(b-a)) integral f dari a ke b.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-44">
+    <div class="soal-head"><h2>No. 44</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=x^2;\ [-1,2]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Panjang interval 3.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-45">
+    <div class="soal-head"><h2>No. 45</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\sin x;\ [0,\pi]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integral sin dari 0 sampai pi adalah 2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-46">
+    <div class="soal-head"><h2>No. 46</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\cos x;\ [0,\pi]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integral cos dari 0 sampai pi adalah 0.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-47">
+    <div class="soal-head"><h2>No. 47</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\sqrt{x};\ [0,4]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integral akar x dari 0 sampai 4 adalah 16/3.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-48">
+    <div class="soal-head"><h2>No. 48</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=1/\sqrt{x};\ [1,4]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Anti-turunan x^-1/2 adalah 2 akar x.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-49">
+    <div class="soal-head"><h2>No. 49</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\sqrt{4-x^2};\ [-2,2]\). [<i>Petunjuk:</i> Hitung integralnya dengan menggunakan rumus geometri.]</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integralnya luas setengah lingkaran berjari-jari 2, yaitu 2 pi.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-50">
+    <div class="soal-head"><h2>No. 50</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><ol type="a"><li><p>Dapatkan \(f_{\text{rata}}\) dari \(f(x)=2x\) pada interval \([0,4]\).</p></li><li><p>Carilah suatu titik \(x^*\) dalam \([0,4]\) sedemikian hingga \(f(x^*)=f_{\text{rata}}\).</p></li><li><p>Gambarkan grafik dari \(f(x)=2x\) pada interval \([0,4]\) dan buatlah suatu persegi-panjang pada interval tersebut yang memiliki luas sama dengan luas daerah di bawah grafik dari \(f\) di atas interval itu.</p></li></ol></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> f_rata = (1/4) integral 2x; lalu selesaikan 2x* = f_rata; persegi panjangnya setinggi f_rata.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-51">
+    <div class="soal-head"><h2>No. 51</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><ol type="a"><li><p>Dapatkan \(f_{\text{rata}}\) dari \(f(x)=x^2\) pada interval \([0,2]\).</p></li><li><p>Carilah suatu titik \(x^*\) dalam \([0,2]\) sedemikian hingga \(f(x^*)=f_{\text{rata}}\).</p></li><li><p>Gambarkan grafik dari \(f(x)=x^2\) pada interval \([0,2]\) dan buatlah suatu persegi-panjang di atas interval tersebut yang memiliki luas sama dengan luas daerah di bawah grafik dari \(f\) di atas interval itu.</p></li></ol></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> f_rata = (1/2) integral x^2 = 4/3; selesaikan x*^2 = 4/3 dengan x* di [0,2].</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 52&ndash;55, dapatkan nilai rata-rata dari \(f(x)\) pada interval yang diberikan dan dapatkan nilai dari \(x^*\) yang diuraikan dalam Teorema Nilai Tengah untuk Integral.</p></div>
+  <article class="soal" id="no-52">
+    <div class="soal-head"><h2>No. 52</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=1/x^2;\ [1,3]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Hitung f_rata, lalu selesaikan f(x*) = f_rata dengan x* di dalam interval.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-53">
+    <div class="soal-head"><h2>No. 53</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\sqrt{x};\ [0,9]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integral akar x dari 0 sampai 9 adalah 18.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-54">
+    <div class="soal-head"><h2>No. 54</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\sin x;\ [-\pi,\pi]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> sin x fungsi ganjil, integral pada [-pi, pi] bernilai 0.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-55">
+    <div class="soal-head"><h2>No. 55</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\alpha x+\beta\ (\alpha\neq 0);\ [x_0,x_1]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Gunakan x_1^2 - x_0^2 = (x_1 - x_0)(x_1 + x_0).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-56">
+    <div class="soal-head"><h2>No. 56</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misal \(s(t)\) fungsi posisi suatu partikel yang bergerak pada suatu garis koordinat. Didefinisikan kecepatan rata-rata \(v_{\text{rata}}\) pada interval waktu \([t_0,t_1]\) dengan
+    <div class="eq">\[
+        v_{\text{rata}}=\frac{\text{perubahan posisi}}{\text{waktu yang ditempuh}}=\frac{s(t_1)-s(t_0)}{t_1-t_0}.
+    \]</div>
+    <ol type="a"><li><p>Tunjukkan bahwa
+        <div class="eq">\[
+            v_{\text{rata}}=\frac{1}{t_1-t_0}\int_{t_0}^{t_1}v(t)\,dt
+        \]</div>
+        sedemikian hingga \(v_{\text{rata}}\) dapat juga diinterpretasikan sebagai nilai rata-rata dari fungsi posisi pada interval waktu \([t_0,t_1]\).</p></li><li><p>Gunakan hasil bagian (a) untuk menghitung kecepatan rata-rata atas interval waktu \([0,5]\) untuk suatu partikel yang bergerak pada garis koordinat dengan fungsi kecepatan \(v(t)=32t\).</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> v = s', jadi s anti-turunan dari v; pakai TFK1 untuk integral v.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-57">
+    <div class="soal-head"><h2>No. 57</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Untuk suatu partikel yang bergerak pada suatu garis koordinat, tunjukkan bahwa percepatan rata-ratanya \(a_{\text{rata}}\) pada interval waktu \([t_0,t_1]\) dapat ditulis sebagai
+    <div class="eq">\[
+        a_{\text{rata}}=\frac{1}{t_1-t_0}\int_{t_0}^{t_1}a(t)\,dt
+    \]</div>
+    yang merupakan rata-rata fungsi percepatan pada interval waktu \([t_0,t_1]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Percepatan rata-rata = perubahan kecepatan / waktu; a = v'.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-58">
+    <div class="soal-head"><h2>No. 58</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Perhatikan suatu partikel yang bergerak pada suatu garis koordinat. Gunakan Soal 56 dan 57 untuk mencari
+    <ol type="a"><li><p>\(v_{\text{rata}}\) untuk \(1\leq t\leq 4\) jika \(v(t)=3t^2+2\),</p></li><li><p>\(a_{\text{rata}}\) untuk \(2\leq t\leq 9\) jika \(a(t)=t^{1/2}\),</p></li><li><p>\(v_{\text{rata}}\) untuk \(t_0\leq t\leq t_1\) jika \(v(t)=32t^2+v_0\).</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pakai rumus rata-rata integral dari Soal 56 dan 57.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <footer>Pembahasan lengkap juga tersedia dalam bentuk PDF dari pengajar.</footer>
+</div>
+<script>
+(() => {
+  const SUB = "6.5", API = window.TRYOUT_API || "", KUNCI = "portal-tryout-kode";
+  const $ = id => document.getElementById(id);
+  const typeset = el => (window.MathJax && MathJax.typesetPromise) ? MathJax.typesetPromise([el]).then(() => rapikanRumus(el)).catch(() => {}) : null;
+  /* rumus inline yang lebih lebar dari kolomnya: beri gulir mendatar sendiri (HP) */
+  function rapikanRumus(root) {
+    (root || document).querySelectorAll('mjx-container[jax="SVG"]:not([display="true"])').forEach(m => {
+      const induk = m.parentElement; if (!induk) return;
+      m.classList.remove("rumus-lebar");
+      const lebar = m.getBoundingClientRect().width, ruang = induk.getBoundingClientRect().width;
+      if (ruang >= 1 && lebar > ruang - 2) m.classList.add("rumus-lebar");   // ruang 0 = sedang tersembunyi
+    });
+  }
+  window.rapikanRumus = rapikanRumus;
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) MathJax.startup.promise.then(() => rapikanRumus());
+  let tundaRumus; addEventListener("resize", () => { clearTimeout(tundaRumus); tundaRumus = setTimeout(() => rapikanRumus(), 200); });
+
+  let terbuka = false;
+
+  function pasangKontrol(soal) {
+    const k = soal.querySelector(".kontrol"), hint = soal.querySelector(".petunjuk");
+    k.innerHTML = (hint ? '<button type="button" data-a="hint" aria-expanded="false">Petunjuk</button>' : '') +
+      '<button type="button" class="utama" data-a="next">Langkah berikutnya</button><button type="button" data-a="all">Tampilkan semua</button>' +
+      '<button type="button" data-a="hide">Sembunyikan</button><span class="progres"></span>';
+    const next = k.querySelector('[data-a="next"]'), all = k.querySelector('[data-a="all"]'), hide = k.querySelector('[data-a="hide"]'), prog = k.querySelector(".progres");
+    let shown = 0;
+    const steps = () => [...soal.querySelectorAll(".langkah")];
+    const show = n => {
+      const S = steps();
+      S.forEach((s, i) => {
+        s.hidden = i >= n;
+        if (!s.hidden) s.querySelectorAll(".grafik[data-grafik]:not([data-siap])").forEach(g => { g.dataset.siap = "1"; if (window.pasangGrafik54) pasangGrafik54(g, g.dataset.grafik); });
+      });
+      shown = n; next.disabled = all.disabled = terbuka && n >= S.length; hide.disabled = n === 0;
+      if (window.rapikanRumus) rapikanRumus(soal);
+      prog.textContent = terbuka ? n + " dari " + S.length + " langkah" : "";
+    };
+    const minta = () => { const p = $("kunciPanel"); p.scrollIntoView({ block: "start" }); p.classList.add("kedip"); setTimeout(() => p.classList.remove("kedip"), 1600); $("kode").focus({ preventScroll: true }); };
+    if (hint) { const hb = k.querySelector('[data-a="hint"]'); hb.onclick = () => { hint.hidden = !hint.hidden; hb.setAttribute("aria-expanded", String(!hint.hidden)); hb.textContent = hint.hidden ? "Petunjuk" : "Tutup petunjuk"; if (window.rapikanRumus) rapikanRumus(hint); }; }
+    next.onclick = () => { if (!terbuka) return minta(); show(shown + 1); steps()[shown - 1].scrollIntoView({ block: "nearest" }); };
+    all.onclick = () => { if (!terbuka) return minta(); show(steps().length); };
+    hide.onclick = () => { show(0); soal.scrollIntoView({ block: "start" }); };
+    soal._show = show; show(0);
+  }
+  document.querySelectorAll("article.soal").forEach(pasangKontrol);
+
+  async function buka(kode) {
+    $("galat").hidden = true; $("btnKode").disabled = true; $("btnKode").textContent = "Memeriksa...";
+    try {
+      if (!API) throw new Error("Situs belum terhubung ke server pembahasan.");
+      const res = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ aksi: "bahas", kode, subbab: SUB }) });
+      const r = await res.json();
+      if (!r.ok) throw new Error(r.pesan);
+      try { localStorage.setItem(KUNCI, kode); } catch (e) {}
+      terbuka = true;
+      r.soal.forEach(d => {
+        const soal = document.getElementById("no-" + d.no); if (!soal) return;
+        soal.querySelector(".kata-kunci").innerHTML = (d.kunci || "").split(",").map(x => x.trim()).filter(Boolean).map(x => "<span>" + x + "</span>").join("");
+        soal.querySelector(".langkah-list").innerHTML = d.langkah.map((l, i) => '<section class="langkah" hidden><div class="no">' + (i + 1) + '</div><div class="isi">' + (l.judul ? "<h3>" + l.judul + "</h3>" : "") + l.html + "</div></section>").join("");
+        soal._show(0);
+      });
+      $("kunciTeks").innerHTML = '<span class="ok">Pembahasan terbuka</span> untuk ' + (r.nama || "kode ini") + ".";
+      $("formKode").hidden = true; $("btnKeluar").hidden = false;
+      typeset(document.querySelector("main") || document.body);
+    } catch (e) {
+      $("galat").textContent = e.message || "Tidak bisa terhubung ke server."; $("galat").hidden = false;
+      try { localStorage.removeItem(KUNCI); } catch (x) {}
+    } finally { $("btnKode").disabled = false; $("btnKode").textContent = "Buka"; }
+  }
+  $("formKode").addEventListener("submit", e => { e.preventDefault(); buka($("kode").value.trim().toUpperCase()); });
+  $("btnKeluar").onclick = () => { try { localStorage.removeItem(KUNCI); } catch (e) {} location.reload(); };
+  let lama = null; try { lama = localStorage.getItem(KUNCI); } catch (e) {}
+  if (lama) { $("kode").value = lama; buka(lama); }
+})();
+</script>
+<script src="../ds-nav.js"></script><footer class="ds-foot"><!-- Ikon: Font Awesome Free 6.7.2 (CC BY 4.0) --><div class="ds-foot-in"><span class="ds-foot-brand"><a class="ds-logo" href="../index.html"><span>AH</span>math<span>Z</span></a> Les Kalkulus dan Matematika, offline di Surabaya dan online</span><nav aria-label="Kontak"><a href="https://wa.me/6285176971148" aria-label="WhatsApp 0851-7697-1148" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg><span>0851-7697-1148</span></a><a href="https://www.tiktok.com/@ahmathz" aria-label="TikTok @ahmathz" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg><span>@ahmathz</span></a><a href="https://www.instagram.com/belajar.ahmathz/" aria-label="Instagram belajar.ahmathz" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg><span>belajar.ahmathz</span></a></nav></div></footer>
+</body>
+</html>

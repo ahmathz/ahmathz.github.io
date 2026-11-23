@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Pembahasan latihan Kalkulus 1 dan grafik interaktif.">
+<title>Pembahasan Kalkulus 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: satu kolom; daftar subbab berupa baris tautan yang dikelompokkan per bab */
+*,*::before,*::after{box-sizing:border-box}
+:root {
+  --bg: #f5f6f8; --paper: #ffffff; --ink: #1b2330; --muted: #5c6777; --rule: #d8dde5; --biru: #1f5fbf;
+  --font-display: "Spectral", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #12161d; --paper: #1a2029; --ink: #e4e8ee; --muted: #9aa5b4; --rule: #2e3644; --biru: #7aa7ee; color-scheme: dark; }
+}
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 40px max(16px, env(safe-area-inset-right, 0px)) 56px max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 28px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--font-display); font-size: clamp(30px, 6vw, 44px); line-height: 1.1; margin: 6px 0 10px; text-wrap: balance; }
+p { margin: 0; color: var(--muted); max-width: 62ch; }
+h2 { font-family: var(--font-display); font-size: 22px; margin: 0 0 10px; }
+ul { list-style: none; margin: 0; padding: 0; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper); }
+li + li { border-top: 1px solid var(--rule); }
+li a { display: grid; grid-template-columns: 4.5em 1fr auto; gap: 12px; align-items: baseline; padding: 14px 16px; color: var(--ink); text-decoration: none; }
+li a:hover .judul, li a:focus-visible .judul { color: var(--biru); text-decoration: underline; }
+li a:focus-visible { outline: 2px solid var(--biru); outline-offset: -2px; border-radius: 10px; }
+.nomor { font-variant-numeric: tabular-nums; color: var(--muted); }
+.judul { font-weight: 500; }
+.jenis { font-size: 13px; color: var(--muted); white-space: nowrap; }
+@media (max-width: 480px) { li a { grid-template-columns: 3.5em 1fr; } .jenis { grid-column: 2; } }
+footer { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Kalkulus 1 · Bab 5 Aplikasi Turunan</div>
+    <h1>Pembahasan Kalkulus 1</h1>
+    <p>Pembahasan latihan buku Kalkulus 1 yang bisa dibuka langkah demi langkah, beserta grafik yang bisa digeser dan diperbesar.</p>
+  </header>
+  <section>
+    <h2>Bab 5</h2>
+    <ul>
+      <li><a href="pembahasan/5-1.html"><span class="nomor">5.1</span><span class="judul">Laju yang Berkaitan</span><span class="jenis">30 soal</span></a></li>
+      <li><a href="pembahasan/5-2.html"><span class="nomor">5.2</span><span class="judul">Interval Naik, Turun dan Kecekungan</span><span class="jenis">35 soal</span></a></li>
+      <li><a href="pembahasan/5-3.html"><span class="nomor">5.3</span><span class="judul">Ekstrim Relatif, Uji Turunan Pertama dan Kedua</span><span class="jenis">46 soal</span></a></li>
+      <li><a href="pembahasan/5-4.html"><span class="nomor">5.4</span><span class="judul">Grafik Polinomial dan Fungsi Rasional</span><span class="jenis">55 soal</span></a></li>
+      <li><a href="pembahasan/5-5.html"><span class="nomor">5.5</span><span class="judul">Nilai Maksimum atau Minimum Suatu Fungsi</span><span class="jenis">39 soal</span></a></li>
+      <li><a href="pembahasan/5-6.html"><span class="nomor">5.6</span><span class="judul">Aplikasi Masalah Maksimum dan Minimum</span><span class="jenis">50 soal</span></a></li>
+      <li><a href="grafik-5-4.html"><span class="nomor">5.4</span><span class="judul">Grafik interaktif semua sketsa</span><span class="jenis">grafik</span></a></li>
+    </ul>
+    <p style="margin-top:10px">Soal dan petunjuk bisa dibuka siapa saja. Langkah pembahasan terbuka dengan kode akses dari pengajar.</p>
+  </section>
+  <footer>Pembahasan lengkap dalam bentuk PDF tetap tersedia; halaman ini pelengkapnya.</footer>
+</div>
+</body>
+</html>

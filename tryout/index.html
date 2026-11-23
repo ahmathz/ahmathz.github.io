@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Portal Tryout Kalkulus</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+
 <script src="config.js"></script>
 <script>
 window.MathJax = { tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] }, svg: { fontCache: "global" }, startup: { typeset: false } };
@@ -15,18 +15,6 @@ window.MathJax = { tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\
 <style>
 /* Layout: satu kolom; layar berganti (masuk -> daftar paket -> konfirmasi -> mengerjakan -> pembahasan); timer menempel di atas saat mengerjakan */
 *,*::before,*::after{box-sizing:border-box}
-:root {
-  --bg: #f4f5f7; --paper: #ffffff; --ink: #1b2330; --muted: #5c6777; --rule: #d8dde5;
-  --biru: #1f5fbf; --biru-bg: #eef3fc; --merah: #c0262d; --merah-bg: #fcefef; --hijau: #1f7a3c; --hijau-bg: #ecf7ef;
-  --kuning: #8a5a00; --kuning-bg: #fff6e0;
-  --font-display: "Spectral", Georgia, serif;
-  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #12161d; --paper: #1a2029; --ink: #e4e8ee; --muted: #9aa5b4; --rule: #2e3644; --biru: #7aa7ee; --biru-bg: #1b2638;
-    --merah: #f07b80; --merah-bg: #321c20; --hijau: #6fcf8c; --hijau-bg: #17291d; --kuning: #e0b05a; --kuning-bg: #2d2412; color-scheme: dark; }
-}
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
 [hidden] { display: none !important; }
@@ -113,8 +101,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (max-width: 480px) { .kartu { padding: 14px; } .progres { margin-left: 0; width: 100%; } }
 footer { font-size: 13px; color: var(--muted); }
 </style>
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../ds.css"><link rel="stylesheet" href="../ds-skin.css"></head>
 <body>
+<header class="ds-top"><a class="ds-logo" href="../index.html" aria-label="AHmathZ, ke beranda"><span>AH</span>math<span>Z</span></a><nav class="ds-nav" aria-label="Menu utama"><a href="../index.html">Kalkulator harga</a><a href="../pembahasan.html">Pembahasan</a><a href="../grafik-5-4.html">Grafik 5.4</a><a href="../visualisasi/index.html">Visualisasi</a></nav></header>
+
 
 <div class="bar" id="bar" hidden>
   <div class="bar-isi">
@@ -126,7 +116,7 @@ footer { font-size: 13px; color: var(--muted); }
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Kalkulus 1 · Tryout dan kuis</div>
+    <div class="eyebrow">Kalkulus 1 / Tryout dan kuis</div>
     <h1>Portal Tryout Kalkulus</h1>
   </header>
 
