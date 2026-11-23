@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Coba warna | AHmathZ</title>
+<style>
+:root{--ink:#1B2A3C;--bg:#F4F6F9;--line:#D5DCE5}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);height:100vh;display:grid;grid-template-columns:minmax(0,1fr) 320px}
+.stage{display:flex;flex-direction:column;min-width:0;min-height:0;padding:12px;gap:8px}
+.view{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.view button{border:1.5px solid var(--ink);background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-weight:700;cursor:pointer}
+.view button[aria-pressed=true]{background:var(--ink);color:#fff}
+.frame{flex:1;min-height:0;display:flex;justify-content:center;background:#E3E8EE;border-radius:12px;overflow:hidden}
+iframe{border:0;background:#fff;width:100%;height:100%;max-width:100%}
+.frame.hp iframe{width:390px;box-shadow:0 0 0 1px var(--line)}
+aside{background:#fff;border-left:1px solid var(--line);padding:16px;overflow:auto;display:flex;flex-direction:column;gap:14px}
+h1{font-size:17px;margin:0}
+p.s{margin:0;color:#5F6C7B;font-size:12.5px}
+.row{display:grid;grid-template-columns:44px minmax(0,1fr) 82px;gap:8px;align-items:center}
+.row label{display:flex;flex-direction:column;font-weight:700;font-size:13px;line-height:1.2}
+.row label small{font-weight:500;color:#5F6C7B;font-size:11.5px}
+.row input[type=color]{width:44px;height:36px;padding:0;border:1.5px solid var(--ink);border-radius:8px;background:none;cursor:pointer}
+.row input[type=text]{width:82px;font:12.5px ui-monospace,Menlo,monospace;padding:6px;border:1.5px solid var(--line);border-radius:8px}
+.row{grid-template-columns:44px minmax(0,1fr) 82px}
+.pre{display:flex;flex-wrap:wrap;gap:6px}
+.pre button,.act button{border:1.5px solid var(--ink);background:#fff;border-radius:10px;padding:7px 11px;font:inherit;font-weight:700;cursor:pointer}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.act .utama{background:var(--ink);color:#fff}
+.hasil{width:100%;height:110px;font:11.5px ui-monospace,Menlo,monospace;border:1.5px solid var(--line);border-radius:8px;padding:8px;resize:vertical}
+.ok{color:#1B7A4B;font-weight:700;min-height:1.2em}
+@media(max-width:900px){body{grid-template-columns:minmax(0,1fr);grid-template-rows:60vh auto;height:auto}aside{border-left:0;border-top:1px solid var(--line)}.stage{height:60vh}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="view" role="group" aria-label="Ukuran tampilan">
+    <button type="button" id="vDesk" aria-pressed="true">Desktop</button>
+    <button type="button" id="vHp" aria-pressed="false">HP</button>
+    <span style="color:#5F6C7B;font-size:12.5px">Pratinjau beranda baru (beranda-baru.html). Klik mana saja di dalamnya seperti biasa.</span>
+  </div>
+  <div class="frame" id="frame"><iframe id="pv" src="beranda-baru.html" title="Pratinjau beranda"></iframe></div>
+</div>
+<aside>
+  <h1>Coba warna</h1>
+  <p class="s">Pilihanmu tersimpan di browser ini saja dan hanya terlihat di halaman ini. Pengunjung lain tidak terpengaruh.</p>
+  <div class="pre" id="pre"></div>
+  <div id="rows" style="display:flex;flex-direction:column;gap:10px"></div>
+  <div class="act">
+    <button type="button" class="utama" id="salin">Salin kode warna</button>
+    <button type="button" id="reset">Kembalikan awal</button>
+  </div>
+  <div class="ok" id="ok" aria-live="polite"></div>
+  <textarea class="hasil" id="hasil" readonly aria-label="Kode warna"></textarea>
+  <p class="s">Kirim kode di atas ke Claude kalau sudah cocok, nanti dijadikan permanen di beranda.</p>
+</aside>
+<script>
+var DEF={"--pink":"#8DBBEA","--lime":"#BCD7F5","--lime-soft":"#E3EEFA","--pink-soft":"#D6E6F7","--cream":"#EEF5FC","--ink":"#1B2A3C","--butter":"#FFF0BF","--peach":"#FFE0CC","--mint":"#D6EFE2"};
+var INFO=[["--pink","Biru utama","hero, kotak terpilih"],["--lime","Biru terang","tombol gelap, nomor"],["--lime-soft","Biru pucat","jadwal kosong, latar kecil"],["--pink-soft","Biru lembut","bayangan tombol, hover"],["--cream","Latar halaman","di belakang semua bagian"],["--ink","Teks dan bingkai","tinta gelap, garis tebal"],["--butter","Kuning","kartu paket, toko"],["--peach","Peach","kartu paket, toko"],["--mint","Mint","kartu materi"]];
+var PRE={"Saat ini":DEF,
+"Lebih kalem":{"--pink":"#A9CBEA","--lime":"#CFE2F6","--lime-soft":"#EAF2FB","--pink-soft":"#DDEAF7","--cream":"#F3F8FD","--ink":"#27374A","--butter":"#FFF4D6","--peach":"#FFE9DA","--mint":"#E1F3EA"},
+"Lebih ramai":{"--pink":"#7FB2E8","--lime":"#B5D3F5","--lime-soft":"#DCEBFA","--pink-soft":"#CFE2F6","--cream":"#EAF3FC","--ink":"#1B2A3C","--butter":"#FFE79A","--peach":"#FFD0B0","--mint":"#BDE6D0"},
+"Hangat":{"--pink":"#F4C6A5","--lime":"#FFE08A","--lime-soft":"#FFF3D1","--pink-soft":"#FFE3D0","--cream":"#FFF8EE","--ink":"#3A2A22","--butter":"#FFF0BF","--peach":"#FFE0CC","--mint":"#D6EFE2"}};
+var KEY="ahmathz-warna",cur=Object.assign({},DEF);
+try{var sv=JSON.parse(localStorage.getItem(KEY)||"null");if(sv)Object.assign(cur,sv)}catch(e){}
+var pv=document.getElementById("pv"),rows=document.getElementById("rows");
+function simpan(){try{localStorage.setItem(KEY,JSON.stringify(cur))}catch(e){}}
+function terap(){try{var r=pv.contentDocument.documentElement;for(var k in cur)r.style.setProperty(k,cur[k])}catch(e){}
+ document.getElementById("hasil").value=":root{\n"+Object.keys(cur).map(function(k){return"  "+k+": "+cur[k]+";"}).join("\n")+"\n}"}
+function isi(){INFO.forEach(function(x){var k=x[0];document.getElementById("c"+k).value=cur[k];document.getElementById("t"+k).value=cur[k]})}
+INFO.forEach(function(x){var k=x[0],d=document.createElement("div");d.className="row";
+ d.innerHTML='<input type="color" id="c'+k+'" aria-label="'+x[1]+'"><label for="c'+k+'">'+x[1]+'<small>'+x[2]+'</small></label><input type="text" id="t'+k+'" maxlength="7" aria-label="Kode '+x[1]+'">';rows.appendChild(d);
+ d.querySelector("input[type=color]").addEventListener("input",function(e){cur[k]=e.target.value;document.getElementById("t"+k).value=cur[k];simpan();terap()});
+ d.querySelector("input[type=text]").addEventListener("input",function(e){var v=e.target.value.trim();if(v[0]!=="#")v="#"+v;if(/^#[0-9a-fA-F]{6}$/.test(v)){cur[k]=v;document.getElementById("c"+k).value=v;simpan();terap()}})});
+var pre=document.getElementById("pre");
+Object.keys(PRE).forEach(function(n){var b=document.createElement("button");b.type="button";b.textContent=n;b.onclick=function(){cur=Object.assign({},PRE[n]);simpan();isi();terap()};pre.appendChild(b)});
+document.getElementById("reset").onclick=function(){cur=Object.assign({},DEF);try{localStorage.removeItem(KEY)}catch(e){}isi();terap();ok("Kembali ke warna awal.")};
+document.getElementById("salin").onclick=function(){var t=document.getElementById("hasil").value;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){ok("Kode warna disalin.")},function(){document.getElementById("hasil").select();ok("Tekan Ctrl+C untuk menyalin.")})};
+function ok(m){var o=document.getElementById("ok");o.textContent=m;setTimeout(function(){o.textContent=""},2500)}
+function lihat(hp){document.getElementById("frame").classList.toggle("hp",hp);document.getElementById("vHp").setAttribute("aria-pressed",hp);document.getElementById("vDesk").setAttribute("aria-pressed",!hp)}
+document.getElementById("vHp").onclick=function(){lihat(true)};document.getElementById("vDesk").onclick=function(){lihat(false)};
+pv.addEventListener("load",terap);isi();terap();
+</script>
+</body>
+</html>

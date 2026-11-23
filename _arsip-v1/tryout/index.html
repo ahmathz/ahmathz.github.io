@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Portal Tryout Kalkulus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<script src="config.js"></script>
+<script>
+window.MathJax = { tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] }, svg: { fontCache: "global" }, startup: { typeset: false } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.min.js"></script>
+<style>
+/* Layout: satu kolom; layar berganti (masuk -> daftar paket -> konfirmasi -> mengerjakan -> pembahasan); timer menempel di atas saat mengerjakan */
+*,*::before,*::after{box-sizing:border-box}
+:root {
+  --bg: #f4f5f7; --paper: #ffffff; --ink: #1b2330; --muted: #5c6777; --rule: #d8dde5;
+  --biru: #1f5fbf; --biru-bg: #eef3fc; --merah: #c0262d; --merah-bg: #fcefef; --hijau: #1f7a3c; --hijau-bg: #ecf7ef;
+  --kuning: #8a5a00; --kuning-bg: #fff6e0;
+  --font-display: "Spectral", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #12161d; --paper: #1a2029; --ink: #e4e8ee; --muted: #9aa5b4; --rule: #2e3644; --biru: #7aa7ee; --biru-bg: #1b2638;
+    --merah: #f07b80; --merah-bg: #321c20; --hijau: #6fcf8c; --hijau-bg: #17291d; --kuning: #e0b05a; --kuning-bg: #2d2412; color-scheme: dark; }
+}
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+[hidden] { display: none !important; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 20px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--font-display); font-size: clamp(28px, 5vw, 38px); line-height: 1.15; margin: 4px 0 0; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-size: 22px; margin: 0; }
+h3 { font-size: 15px; margin: 2px 0 0; }
+p { margin: 0; }
+.layar { display: grid; gap: 20px; }
+.kartu { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; display: grid; gap: 14px; min-width: 0; }
+input[type=text], input[type=password] { font: 500 18px var(--font-mono); letter-spacing: 0.08em; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); width: 100%; max-width: 280px; }
+#kode { text-transform: uppercase; }
+input:focus-visible { outline: 2px solid var(--biru); outline-offset: 1px; }
+button { font: 600 15px var(--font-body); border-radius: 6px; padding: 9px 16px; cursor: pointer; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); }
+button.utama { background: var(--biru); border-color: var(--biru); color: #fff; }
+button.bahaya { background: var(--merah); border-color: var(--merah); color: #fff; }
+button.kecil { font-size: 14px; padding: 8px 12px; font-weight: 500; min-height: 38px; }
+button { touch-action: manipulation; }
+button:disabled { opacity: 0.5; cursor: default; }
+button:focus-visible { outline: 2px solid var(--biru); outline-offset: 2px; }
+.baris { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.pesan { padding: 10px 12px; border-radius: 6px; font-size: 14px; }
+.pesan.galat { background: var(--merah-bg); color: var(--merah); }
+.pesan.info { background: var(--biru-bg); }
+.pesan.peringatan { background: var(--kuning-bg); color: var(--kuning); }
+.halo { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; }
+.halo .siapa { font-weight: 600; }
+.halo .kelas { color: var(--muted); font-size: 14px; }
+/* daftar paket */
+.paket-list { display: grid; gap: 12px; }
+.paket { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; align-items: center; }
+.paket .judul { font-weight: 600; }
+.paket .meta { font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; }
+.chip { display: inline-block; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 1px 10px; }
+.chip.belum { background: var(--biru-bg); color: var(--biru); }
+.chip.mengerjakan { background: var(--kuning-bg); color: var(--kuning); }
+.chip.selesai { background: var(--hijau-bg); color: var(--hijau); }
+.chip.tutup { background: var(--bg); color: var(--muted); border: 1px solid var(--rule); }
+.nilai { font: 600 15px var(--font-mono); font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .paket { grid-template-columns: 1fr; } }
+dl.data { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
+dl.data dt { color: var(--muted); }
+dl.data dd { margin: 0; font-weight: 600; }
+ul.aturan { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+/* timer */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--rule); }
+.bar-isi { max-width: 820px; margin: 0 auto; padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.timer { font: 600 22px var(--font-mono); font-variant-numeric: tabular-nums; }
+.timer.tipis { color: var(--merah); }
+.bar .nama { color: var(--muted); font-size: 14px; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* soal & pembahasan */
+.soal { display: grid; gap: 12px; scroll-margin-top: 80px; }
+.soal-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.subbab { font-size: 12px; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 0 8px; }
+.teks ol { margin: 6px 0 0; padding-left: 24px; }
+.eq { overflow-x: auto; overflow-y: hidden; text-align: center; padding: 2px 0; }
+.biru, .merah { display: inline-block; border: 1.5px solid; border-radius: 4px; padding: 1px 7px; }
+.biru { border-color: var(--biru); background: var(--biru-bg); }
+.merah { border-color: var(--merah); background: var(--merah-bg); }
+.gambar { background: #fff; border-radius: 8px; padding: 10px; text-align: center; overflow-x: auto; }
+.gambar img { max-width: min(100%, 520px); height: auto; }
+.unggah { border: 1.5px dashed var(--rule); border-radius: 8px; padding: 12px; display: grid; gap: 10px; }
+.unggah .baris span { font-size: 13px; color: var(--muted); }
+.foto-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.foto { position: relative; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; aspect-ratio: 3 / 4; background: var(--bg); }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto .status { position: absolute; left: 0; right: 0; bottom: 0; font-size: 11px; padding: 2px 6px; background: rgba(0,0,0,0.6); color: #fff; }
+.foto .status.ok { background: rgba(31,122,60,0.85); }
+.foto .status.gagal { background: rgba(192,38,45,0.9); cursor: pointer; }
+.foto .hapus { position: absolute; top: 4px; right: 4px; padding: 0 7px; font-size: 14px; line-height: 22px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: 0; }
+.ringkas { width: 100%; border-collapse: collapse; }
+.ringkas td { padding: 6px 4px; border-bottom: 1px solid var(--rule); }
+.ringkas td.kosong { color: var(--merah); font-weight: 600; }
+.petunjuk { background: var(--biru-bg); border-left: 3px solid var(--biru); border-radius: 6px; padding: 10px 12px; font-size: 15px; }
+.kontrol { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-top: 1px solid var(--rule); padding-top: 14px; }
+.kontrol button { font-size: 14px; font-weight: 500; padding: 7px 14px; }
+.progres { font-size: 13px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+.langkah-list { display: grid; gap: 14px; }
+.langkah { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+.langkah .no { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--rule); display: grid; place-items: center; font: 500 13px var(--font-mono); color: var(--muted); }
+.langkah .isi { min-width: 0; display: grid; gap: 8px; }
+@media (max-width: 480px) { .kartu { padding: 14px; } .progres { margin-left: 0; width: 100%; } }
+footer { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="bar" id="bar" hidden>
+  <div class="bar-isi">
+    <span class="timer" id="timer">--:--</span>
+    <span class="nama" id="barNama"></span>
+    <button type="button" class="utama" id="btnKumpul">Kumpulkan</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Kalkulus 1 · Tryout dan kuis</div>
+    <h1>Portal Tryout Kalkulus</h1>
+  </header>
+
+  <div class="pesan peringatan" id="belumTerhubung" hidden>Portal belum terhubung ke server. Pengajar perlu mengisi alamat backend di <code>config.js</code>.</div>
+
+  <!-- 1. MASUK -->
+  <section class="kartu" id="layarMasuk">
+    <h2>Masukkan kode akses</h2>
+    <p>Kode akses diberikan oleh pengajar dan berlaku untuk semua paket yang dibuka untukmu.</p>
+    <form id="formKode" class="baris" autocomplete="off">
+      <input type="text" id="kode" placeholder="KODE" maxlength="20" required aria-label="Kode akses">
+      <button type="submit" class="utama" id="btnMasuk">Masuk</button>
+    </form>
+    <div class="pesan galat" id="galatMasuk" hidden></div>
+  </section>
+
+  <!-- 2. DAFTAR PAKET -->
+  <section class="layar" id="layarDaftar" hidden>
+    <div class="halo">
+      <div><span class="siapa" id="dNama"></span> <span class="kelas" id="dKelas"></span></div>
+      <div class="baris"><button type="button" class="kecil" id="btnSegarkan">Segarkan</button><button type="button" class="kecil" id="btnKeluar">Keluar</button></div>
+    </div>
+    <div class="paket-list" id="paketList"></div>
+    <p class="pesan info" id="kosong" hidden>Belum ada paket yang dibuka untukmu. Hubungi pengajar.</p>
+  </section>
+
+  <!-- 3. KONFIRMASI -->
+  <section class="kartu" id="layarKonfirmasi" hidden>
+    <h2 id="kJudul"></h2>
+    <dl class="data">
+      <dt>Nama</dt><dd id="kNama"></dd>
+      <dt>Waktu</dt><dd id="kDurasi"></dd>
+    </dl>
+    <ul class="aturan">
+      <li>Kerjakan semua soal di kertas, lalu foto lembar jawabanmu dan unggah sekaligus di bagian <b>Foto jawaban</b> (di bawah soal terakhir). Boleh beberapa foto.</li>
+      <li>Waktu mulai berjalan saat kamu menekan <b>Mulai mengerjakan</b> dan tidak berhenti walaupun halaman ditutup.</li>
+      <li>Saat waktu habis, foto yang sudah terunggah otomatis dikumpulkan. Paket ini hanya bisa dikerjakan sekali.</li>
+      <li>Pembahasan terbuka di daftar paket setelah jawaban dikumpulkan.</li>
+    </ul>
+    <div class="baris">
+      <button type="button" class="utama" id="btnMulai">Mulai mengerjakan</button>
+      <button type="button" id="btnBatalMulai">Kembali</button>
+    </div>
+    <div class="pesan galat" id="galatKonfirmasi" hidden></div>
+  </section>
+
+  <!-- 4. MENGERJAKAN -->
+  <section class="layar" id="layarKerja" hidden>
+    <div class="pesan info">Foto berstatus <b>terkirim</b> sudah aman tersimpan. Jika ada yang <b>gagal</b>, ketuk statusnya untuk mencoba lagi.</div>
+    <div class="layar" id="soalKerja"></div>
+    <section class="kartu" id="panelKumpul" hidden>
+      <h2>Kumpulkan jawaban?</h2>
+      <p>Setelah dikumpulkan, jawaban tidak bisa diubah lagi.</p>
+      <table class="ringkas" id="ringkas"></table>
+      <div class="baris">
+        <button type="button" class="bahaya" id="btnYaKumpul">Ya, kumpulkan</button>
+        <button type="button" id="btnBatalKumpul">Kembali mengerjakan</button>
+      </div>
+      <div class="pesan galat" id="galatKumpul" hidden></div>
+    </section>
+  </section>
+
+  <!-- 5. SELESAI -->
+  <section class="kartu" id="layarSelesai" hidden>
+    <h2>Jawaban sudah terkumpul</h2>
+    <p id="selesaiInfo">Terima kasih. Jawabanmu sudah tersimpan dan akan dinilai oleh pengajar.</p>
+    <div class="baris"><button type="button" class="utama" id="btnLihatBahas">Lihat pembahasan</button><button type="button" id="btnKeDaftar">Ke daftar paket</button></div>
+  </section>
+
+  <!-- 6. PEMBAHASAN -->
+  <section class="layar" id="layarBahas" hidden>
+    <div class="baris"><button type="button" class="kecil" id="btnBahasKembali">← Daftar paket</button></div>
+    <h2 id="bJudul"></h2>
+    <div class="layar" id="bahasIsi"></div>
+  </section>
+
+  <footer>Kendala teknis? Hubungi pengajar dan sebutkan kode aksesmu.</footer>
+</div>
+
+<script>
+(() => {
+  const API = window.TRYOUT_API || "";
+  const $ = id => document.getElementById(id);
+  const KUNCI = "portal-tryout-kode";
+  const simpan = v => { try { v ? localStorage.setItem(KUNCI, v) : localStorage.removeItem(KUNCI); } catch (e) {} };
+  const baca = () => { try { return localStorage.getItem(KUNCI); } catch (e) { return null; } };
+  const tunggu = ms => new Promise(r => setTimeout(r, ms));
+  const typeset = el => (window.MathJax && MathJax.typesetPromise) ? MathJax.typesetPromise([el]).catch(() => {}) : Promise.resolve();
+
+  const MAKS_FOTO = 20;   // sama dengan MAKS_FOTO di Code.gs
+  let kode = null, murid = null, paketAktif = null, sesi = null, foto = [], tikTimer = null, sedangKirim = false;
+
+  async function api(aksi, data) {
+    const res = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ aksi, kode }, data || {})) });
+    return res.json();
+  }
+  const LAYAR = ["layarMasuk", "layarDaftar", "layarKonfirmasi", "layarKerja", "layarSelesai", "layarBahas"];
+  function tampil(nama) { LAYAR.forEach(id => $(id).hidden = id !== nama); $("bar").hidden = nama !== "layarKerja"; scrollTo(0, 0); }
+  function galat(id, p) { $(id).textContent = p || ""; $(id).hidden = !p; }
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  /* ---------- masuk & daftar paket ---------- */
+  async function masuk(k) {
+    galat("galatMasuk", ""); $("btnMasuk").disabled = true; $("btnMasuk").textContent = "Memeriksa...";
+    kode = k.trim().toUpperCase();
+    try {
+      const r = await api("masuk");
+      if (!r.ok) { galat("galatMasuk", r.pesan); simpan(null); tampil("layarMasuk"); return; }
+      murid = r; simpan(kode); tampilDaftar();
+    } catch (e) { galat("galatMasuk", "Tidak bisa terhubung ke server. Periksa koneksi internet lalu coba lagi."); tampil("layarMasuk"); }
+    finally { $("btnMasuk").disabled = false; $("btnMasuk").textContent = "Masuk"; }
+  }
+  function tampilDaftar() {
+    $("dNama").textContent = murid.nama; $("dKelas").textContent = murid.kelas && murid.kelas !== "-" ? "· " + murid.kelas : "";
+    const L = $("paketList"); L.innerHTML = "";
+    $("kosong").hidden = murid.paket.length > 0;
+    murid.paket.forEach(p => {
+      const el = document.createElement("div"); el.className = "paket";
+      let chip, tombol = "";
+      if (p.status === "selesai") {
+        chip = '<span class="chip selesai">Sudah dikumpulkan</span>';
+        const nilai = p.nilai === "" || p.nilai == null ? '<span>Nilai belum diisi</span>' : '<span>Nilai <span class="nilai">' + esc(p.nilai) + '</span></span>';
+        chip += nilai;
+        tombol = '<button type="button" class="utama kecil" data-bahas>Lihat pembahasan</button>';
+      } else if (!p.aktif && p.status === "mengerjakan") {
+        chip = '<span class="chip tutup">Ditutup pengajar</span>';
+        tombol = '<button type="button" class="utama kecil" data-kumpul>Kumpulkan sekarang</button>';
+      } else if (!p.aktif) {
+        chip = '<span class="chip tutup">Belum dibuka</span>';
+      } else if (p.status === "mengerjakan") {
+        chip = '<span class="chip mengerjakan">Sedang dikerjakan</span>';
+        tombol = '<button type="button" class="utama kecil" data-kerja>Lanjutkan</button>';
+      } else {
+        chip = '<span class="chip belum">Belum dikerjakan</span>';
+        tombol = '<button type="button" class="utama kecil" data-kerja>Kerjakan</button>';
+      }
+      el.innerHTML = `<div><div class="judul">${esc(p.judul)}</div><div class="meta"><span>${esc(p.durasi)} menit</span>${chip}</div></div><div>${tombol}</div>`;
+      const bk = el.querySelector("[data-kerja]"), bb = el.querySelector("[data-bahas]"), bc = el.querySelector("[data-kumpul]");
+      if (bk) bk.onclick = () => bukaPaket(p);
+      if (bc) bc.onclick = async () => {
+        bc.disabled = true;
+        try { const r = await api("kirim", { paket: p.paket }); if (!r.ok) { alertDaftar(r.pesan); return; } masuk(kode); }
+        catch (e) { bc.disabled = false; alertDaftar("Tidak bisa terhubung ke server. Coba lagi."); }
+      };
+      if (bb) bb.onclick = () => bukaBahas(p);
+      L.appendChild(el);
+    });
+    tampil("layarDaftar");
+  }
+  $("formKode").addEventListener("submit", e => { e.preventDefault(); masuk($("kode").value); });
+  $("btnKeluar").onclick = () => { simpan(null); kode = null; murid = null; $("kode").value = ""; tampil("layarMasuk"); };
+  $("btnSegarkan").onclick = () => masuk(kode);
+  $("btnKeDaftar").onclick = () => masuk(kode);
+  $("btnBahasKembali").onclick = () => masuk(kode);
+
+  /* ---------- buka paket ---------- */
+  async function bukaPaket(p) {
+    paketAktif = p;
+    if (p.status === "mengerjakan") return masukKerja();
+    $("kJudul").textContent = p.judul; $("kNama").textContent = murid.nama; $("kDurasi").textContent = p.durasi + " menit";
+    galat("galatKonfirmasi", ""); tampil("layarKonfirmasi");
+  }
+  $("btnBatalMulai").onclick = tampilDaftar;
+  $("btnMulai").onclick = async () => {
+    $("btnMulai").disabled = true; galat("galatKonfirmasi", "");
+    try {
+      const r = await api("mulai", { paket: paketAktif.paket });
+      if (!r.ok) { galat("galatKonfirmasi", r.pesan); return; }
+      await masukKerja(r);
+    } catch (e) { galat("galatKonfirmasi", "Tidak bisa terhubung ke server. Coba lagi."); }
+    finally { $("btnMulai").disabled = false; }
+  };
+
+  async function masukKerja(info) {
+    const r = await api("buka", { paket: paketAktif.paket });
+    if (!r.ok) { alertDaftar(r.pesan); return; }
+    const m = info || r;
+    sesi = { mulai: m.mulai || Date.now(), durasi: m.durasi, offset: (m.server || Date.now()) - Date.now() };
+    foto = []; sedangKirim = false;
+    const W = $("soalKerja"); W.innerHTML = "";
+    r.soal.forEach(s => {
+      const sec = document.createElement("section"); sec.className = "kartu soal"; sec.dataset.soal = s.no;
+      sec.innerHTML = `<div class="soal-head"><h2>Soal ${s.no}</h2>${s.subbab ? `<span class="subbab">${esc(s.subbab)}</span>` : ""}</div><div class="teks">${s.html}</div>`;
+      W.appendChild(sec);
+    });
+    // satu tempat unggah untuk semua lembar jawaban
+    const up = document.createElement("section"); up.className = "kartu"; up.id = "kartuFoto";
+    up.innerHTML = `<h2>Foto jawaban</h2><p>Kerjakan semua soal di kertas, lalu foto semua lembar jawabanmu dan unggah di sini. Boleh beberapa foto, maksimal ${MAKS_FOTO}.</p>
+      <div class="unggah"><div class="baris"><button type="button" class="utama" data-pilih>Tambah foto jawaban</button>
+      <input type="file" accept="image/*" multiple hidden aria-label="Pilih foto lembar jawaban"><span>Foto dari kamera atau galeri</span></div><div class="foto-list"></div></div>`;
+    const inp = up.querySelector("input");
+    up.querySelector("[data-pilih]").onclick = () => inp.click();
+    inp.addEventListener("change", e => { [...e.target.files].forEach(tambahFoto); e.target.value = ""; });
+    W.appendChild(up);
+    (Array.isArray(r.foto) ? r.foto : []).forEach(f => {
+      const item = { id: f.id, status: "ok" }; foto.push(item);
+      item.el = kartuFoto(); item.el.querySelector("img").alt = f.nama; setStatus(item, "ok", "terkirim (tersimpan)");
+      item.el.querySelector(".hapus").onclick = () => hapusFoto(item);
+    });
+    $("barNama").textContent = murid.nama + " · " + paketAktif.judul;
+    $("panelKumpul").hidden = true; $("btnKumpul").disabled = false;
+    tampil("layarKerja"); typeset(W);
+    clearInterval(tikTimer); tikTimer = setInterval(tik, 1000); tik();
+  }
+  function alertDaftar(pesan) { masuk(kode).then(() => { const d = document.createElement("p"); d.className = "pesan galat"; d.textContent = pesan; $("paketList").prepend(d); }); }
+
+  function sisaDetik() { return Math.round((sesi.mulai + sesi.durasi * 60000 - (Date.now() + sesi.offset)) / 1000); }
+  function tik() {
+    const s = sisaDetik(), t = Math.max(0, s), j = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), d = t % 60;
+    $("timer").textContent = (j ? j + ":" + String(m).padStart(2, "0") : m) + ":" + String(d).padStart(2, "0");
+    $("timer").classList.toggle("tipis", t <= 300);
+    if (s <= 0 && !sedangKirim) { clearInterval(tikTimer); kumpulkan(true); }
+  }
+
+  /* ---------- foto ---------- */
+  function kompres(file) {
+    return new Promise((ok, gagal) => {
+      const img = new Image(), url = URL.createObjectURL(file);
+      img.onload = () => {
+        const k = Math.min(1, 1600 / Math.max(img.width, img.height)), cv = document.createElement("canvas");
+        cv.width = Math.round(img.width * k); cv.height = Math.round(img.height * k);
+        cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height); URL.revokeObjectURL(url); ok(cv.toDataURL("image/jpeg", 0.75));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); gagal(new Error("bukan gambar")); };
+      img.src = url;
+    });
+  }
+  function kartuFoto() {
+    const el = document.createElement("div"); el.className = "foto";
+    el.innerHTML = `<img alt="Foto lembar jawaban"><div class="status">mengunggah...</div><button type="button" class="hapus" aria-label="Hapus foto">×</button>`;
+    document.querySelector("#kartuFoto .foto-list").appendChild(el); return el;
+  }
+  async function tambahFoto(file) {
+    if (foto.length >= MAKS_FOTO) { alert("Maksimal " + MAKS_FOTO + " foto. Hapus foto yang tidak perlu dulu."); return; }
+    const item = { status: "proses" }; foto.push(item);
+    item.el = kartuFoto(); item.el.querySelector(".hapus").onclick = () => hapusFoto(item);
+    try { item.lokal = await kompres(file); item.el.querySelector("img").src = item.lokal; } catch (e) { setStatus(item, "gagal", "bukan gambar"); return; }
+    kirimFoto(item);
+  }
+  async function kirimFoto(item) {
+    setStatus(item, "proses", "mengunggah...");
+    let pesan = "gagal, ketuk untuk ulang";
+    try {
+      const r = await api("unggah", { paket: paketAktif.paket, data: item.lokal });
+      if (!r.ok) { pesan = r.pesan + " (ketuk untuk ulang)"; throw new Error(r.pesan); }
+      item.id = r.id; setStatus(item, "ok", "terkirim");
+    } catch (e) { setStatus(item, "gagal", pesan); item.el.querySelector(".status").onclick = () => kirimFoto(item); }
+  }
+  function setStatus(item, s, teks) { item.status = s; const st = item.el.querySelector(".status"); st.className = "status " + (s === "ok" ? "ok" : s === "gagal" ? "gagal" : ""); st.textContent = teks; st.onclick = null; }
+  async function hapusFoto(item) {
+    if (item.id) { try { const r = await api("hapus", { paket: paketAktif.paket, id: item.id }); if (!r.ok) return; } catch (e) { return; } }
+    item.el.remove(); foto = foto.filter(x => x !== item);
+  }
+
+  /* ---------- kumpulkan ---------- */
+  $("btnKumpul").onclick = () => {
+    const ok = foto.filter(f => f.status === "ok").length, lain = foto.length - ok;
+    $("ringkas").innerHTML = `<tr><td>Foto jawaban</td><td class="${ok ? "" : "kosong"}">${ok ? ok + " foto terkirim" : "belum ada foto"}${lain ? ` · ${lain} belum terkirim` : ""}</td></tr>`;
+    $("panelKumpul").hidden = false; $("panelKumpul").scrollIntoView({ block: "center" });
+  };
+  $("btnBatalKumpul").onclick = () => { $("panelKumpul").hidden = true; };
+  $("btnYaKumpul").onclick = () => kumpulkan(false);
+  async function kumpulkan(otomatis) {
+    if (sedangKirim) return; sedangKirim = true;
+    $("btnYaKumpul").disabled = true; $("btnKumpul").disabled = true; galat("galatKumpul", "");
+    const batas = Date.now() + 60000;
+    while (foto.some(f => f.status === "proses") && Date.now() < batas) await tunggu(500);
+    for (let i = 0; i < 3; i++) {
+      try {
+        const r = await api("kirim", { paket: paketAktif.paket });
+        if (r.ok) {
+          clearInterval(tikTimer);
+          $("selesaiInfo").textContent = otomatis ? "Waktu habis. Foto yang sudah terunggah otomatis dikumpulkan dan akan dinilai oleh pengajar."
+            : "Terima kasih. Jawabanmu sudah tersimpan dan akan dinilai oleh pengajar.";
+          paketAktif.status = "selesai"; tampil("layarSelesai"); return;
+        }
+        galat("galatKumpul", r.pesan); break;
+      } catch (e) { galat("galatKumpul", "Gagal mengirim, mencoba lagi..."); await tunggu(3000); }
+    }
+    $("panelKumpul").hidden = false; $("btnYaKumpul").disabled = false; $("btnKumpul").disabled = false; sedangKirim = false;
+  }
+  $("btnLihatBahas").onclick = () => bukaBahas(paketAktif);
+
+  /* ---------- pembahasan ---------- */
+  async function bukaBahas(p) {
+    paketAktif = p;
+    const r = await api("pembahasan", { paket: p.paket });
+    if (!r.ok) { alertDaftar(r.pesan); return; }
+    $("bJudul").textContent = "Pembahasan " + r.judul;
+    const W = $("bahasIsi"); W.innerHTML = "";
+    r.soal.forEach(s => {
+      const b = r.pembahasan.find(x => x.no === s.no) || { langkah: [] };
+      const art = document.createElement("article"); art.className = "kartu soal";
+      art.innerHTML = `<div class="soal-head"><h2>Soal ${s.no}</h2>${s.subbab ? `<span class="subbab">${esc(s.subbab)}</span>` : ""}</div><div class="teks">${s.html}</div>
+        ${b.petunjuk ? `<div class="petunjuk" hidden><b>Petunjuk:</b> ${b.petunjuk}</div>` : ""}
+        <div class="langkah-list">${b.langkah.map((l, i) => `<section class="langkah" hidden><div class="no">${i + 1}</div><div class="isi"><h3>${l.judul}</h3>${l.html}</div></section>`).join("")}</div>
+        <div class="kontrol"></div>`;
+      W.appendChild(art); pasangLangkah(art);
+    });
+    tampil("layarBahas"); typeset(W);
+  }
+  function pasangLangkah(soal) {
+    const steps = [...soal.querySelectorAll(".langkah")], k = soal.querySelector(".kontrol"), hint = soal.querySelector(".petunjuk");
+    k.innerHTML = (hint ? '<button type="button" data-a="hint" aria-expanded="false">Petunjuk</button>' : '') +
+      '<button type="button" class="utama" data-a="next">Langkah berikutnya</button><button type="button" data-a="all">Tampilkan semua</button>' +
+      '<button type="button" data-a="hide">Sembunyikan</button><span class="progres"></span>';
+    const next = k.querySelector('[data-a="next"]'), all = k.querySelector('[data-a="all"]'), hide = k.querySelector('[data-a="hide"]'), prog = k.querySelector(".progres");
+    let shown = 0;
+    const show = n => { steps.forEach((s, i) => s.hidden = i >= n); shown = n; next.disabled = all.disabled = n >= steps.length; hide.disabled = n === 0; prog.textContent = n + " dari " + steps.length + " langkah"; };
+    if (hint) { const hb = k.querySelector('[data-a="hint"]'); hb.onclick = () => { hint.hidden = !hint.hidden; hb.setAttribute("aria-expanded", String(!hint.hidden)); hb.textContent = hint.hidden ? "Petunjuk" : "Tutup petunjuk"; }; }
+    next.onclick = () => { show(shown + 1); steps[shown - 1].scrollIntoView({ block: "nearest" }); };
+    all.onclick = () => show(steps.length);
+    hide.onclick = () => { show(0); soal.scrollIntoView({ block: "start" }); };
+    show(0);
+  }
+
+  addEventListener("beforeunload", e => { if (!$("layarKerja").hidden && !sedangKirim) { e.preventDefault(); e.returnValue = ""; } });
+
+  if (!API) { $("belumTerhubung").hidden = false; $("btnMasuk").disabled = true; tampil("layarMasuk"); return; }
+  const lama = baca();
+  if (lama) { $("kode").value = lama; masuk(lama); } else tampil("layarMasuk");
+})();
+</script>
+</body>
+</html>

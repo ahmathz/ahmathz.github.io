@@ -1,377 +1,377 @@
 /* Data dan penggambar grafik interaktif Latihan 5.4 (diambil dari grafik-5-4.html). */
 const SOAL = [
   {
-    no: 1, fx: "y = x² − 2x − 3", jenis: "Sketsa polinomial",
+    no: 1, fx: "\\(y = x^{2} - 2x - 3\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x, 2) - 2*x - 3, view: [-2.8, 4.8, -5.21, 3.97], vas: [], has: [], obl: null,
     pts: [
-      { x: 1.0, y: -4.0, k: "min", t: "(1, −4)" },
-      { x: -1.0, y: 0.0, k: "sumbu", t: "(−1, 0)" },
-      { x: 3.0, y: 0.0, k: "sumbu", t: "(3, 0)" },
-      { x: 0.0, y: -3.0, k: "sumbu", t: "(0, −3)" }
+      { x: 1.0, y: -4.0, k: "min", t: "\\((1,\\ -4)\\)" },
+      { x: -1.0, y: 0.0, k: "sumbu", t: "\\((-1,\\ 0)\\)" },
+      { x: 3.0, y: 0.0, k: "sumbu", t: "\\((3,\\ 0)\\)" },
+      { x: 0.0, y: -3.0, k: "sumbu", t: "\\((0,\\ -3)\\)" }
     ]
   },
   {
-    no: 2, fx: "y = 1 + x − x²", jenis: "Sketsa polinomial",
+    no: 2, fx: "\\(y = 1 + x - x^{2}\\)", jenis: "Sketsa polinomial",
     f: x => -Math.pow(x, 2) + x + 1, view: [-1.12, 1.62, -0.5, 1.74], vas: [], has: [], obl: null,
     pts: [
-      { x: 0.5, y: 1.25, k: "maks", t: "(1/2, 5/4)" },
-      { x: -0.61803398875, y: 0.0, k: "sumbu", t: "(1/2 − √5/2, 0)" },
-      { x: 1.61803398875, y: 0.0, k: "sumbu", t: "(1/2 + √5/2, 0)" },
-      { x: 0.0, y: 1.0, k: "sumbu", t: "(0, 1)" }
+      { x: 0.5, y: 1.25, k: "maks", t: "\\((\\frac{1}{2},\\ \\frac{5}{4})\\)" },
+      { x: -0.61803398875, y: 0.0, k: "sumbu", t: "\\((\\frac{1}{2} - \\frac{\\sqrt{5}}{2},\\ 0)\\)" },
+      { x: 1.61803398875, y: 0.0, k: "sumbu", t: "\\((\\frac{1}{2} + \\frac{\\sqrt{5}}{2},\\ 0)\\)" },
+      { x: 0.0, y: 1.0, k: "sumbu", t: "\\((0,\\ 1)\\)" }
     ]
   },
   {
-    no: 3, fx: "y = x³ − 3x + 1", jenis: "Sketsa polinomial",
+    no: 3, fx: "\\(y = x^{3} - 3x + 1\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x, 3) - 3*x + 1, view: [-3, 3, -4, 6], vas: [], has: [], obl: null,
     pts: [
-      { x: -1.0, y: 3.0, k: "maks", t: "(−1, 3)" },
-      { x: 1.0, y: -1.0, k: "min", t: "(1, −1)" },
-      { x: 0.0, y: 1.0, k: "belok", t: "(0, 1), juga perpotongan sumbu" }
+      { x: -1.0, y: 3.0, k: "maks", t: "\\((-1,\\ 3)\\)" },
+      { x: 1.0, y: -1.0, k: "min", t: "\\((1,\\ -1)\\)" },
+      { x: 0.0, y: 1.0, k: "belok", t: "\\((0,\\ 1)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 4, fx: "y = 2x³ − 3x² + 12x + 9", jenis: "Sketsa polinomial",
+    no: 4, fx: "\\(y = 2x^{3} - 3x^{2} + 12x + 9\\)", jenis: "Sketsa polinomial",
     f: x => 2*Math.pow(x, 3) - 3*Math.pow(x, 2) + 12*x + 9, view: [-1.12, 1.62, -3.58, 26.1], vas: [], has: [], obl: null,
     pts: [
-      { x: 0.5, y: 14.5, k: "belok", t: "(1/2, 29/2)" },
-      { x: 0.0, y: 9.0, k: "sumbu", t: "(0, 9)" }
+      { x: 0.5, y: 14.5, k: "belok", t: "\\((\\frac{1}{2},\\ \\frac{29}{2})\\)" },
+      { x: 0.0, y: 9.0, k: "sumbu", t: "\\((0,\\ 9)\\)" }
     ]
   },
   {
-    no: 5, fx: "y = x³ − 3x² + 3", jenis: "Sketsa polinomial",
+    no: 5, fx: "\\(y = x^{3} - 3x^{2} + 3\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x, 3) - 3*Math.pow(x, 2) + 3, view: [-1.12, 3.12, -3.8, 5.8], vas: [], has: [], obl: null,
     pts: [
-      { x: 0.0, y: 3.0, k: "maks", t: "(0, 3), juga perpotongan sumbu" },
-      { x: 2.0, y: -1.0, k: "min", t: "(2, −1)" },
-      { x: 1.0, y: 1.0, k: "belok", t: "(1, 1)" }
+      { x: 0.0, y: 3.0, k: "maks", t: "\\((0,\\ 3)\\), juga perpotongan sumbu" },
+      { x: 2.0, y: -1.0, k: "min", t: "\\((2,\\ -1)\\)" },
+      { x: 1.0, y: 1.0, k: "belok", t: "\\((1,\\ 1)\\)" }
     ]
   },
   {
-    no: 6, fx: "y = (x − 1)⁴", jenis: "Sketsa polinomial",
+    no: 6, fx: "\\(y = (x - 1)^{4}\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x - 1, 4), view: [-1.5, 3.5, -0.83, 4.4], vas: [], has: [], obl: null,
     pts: [
-      { x: 1.0, y: 0.0, k: "min", t: "(1, 0), juga perpotongan sumbu" },
-      { x: 0.0, y: 1.0, k: "sumbu", t: "(0, 1)" }
+      { x: 1.0, y: 0.0, k: "min", t: "\\((1,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 0.0, y: 1.0, k: "sumbu", t: "\\((0,\\ 1)\\)" }
     ]
   },
   {
-    no: 7, fx: "y = (x − 1)⁵", jenis: "Sketsa polinomial",
+    no: 7, fx: "\\(y = (x - 1)^{5}\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x - 1, 5), view: [-1.12, 2.12, -2.45, 1.45], vas: [], has: [], obl: null,
     pts: [
-      { x: 1.0, y: 0.0, k: "belok", t: "(1, 0), juga perpotongan sumbu" },
-      { x: 0.0, y: -1.0, k: "sumbu", t: "(0, −1)" }
+      { x: 1.0, y: 0.0, k: "belok", t: "\\((1,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 0.0, y: -1.0, k: "sumbu", t: "\\((0,\\ -1)\\)" }
     ]
   },
   {
-    no: 8, fx: "y = x⁴ − 2x³ − 1", jenis: "Sketsa polinomial",
+    no: 8, fx: "\\(y = x^{4} - 2x^{3} - 1\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x, 4) - 2*Math.pow(x, 3) - 1, view: [-1.12, 2.62, -3.29, 0.5], vas: [], has: [], obl: null,
     pts: [
-      { x: 1.5, y: -2.6875, k: "min", t: "(3/2, −43/16)" },
-      { x: 0.0, y: -1.0, k: "belok", t: "(0, −1), juga perpotongan sumbu" },
-      { x: 1.0, y: -2.0, k: "belok", t: "(1, −2)" }
+      { x: 1.5, y: -2.6875, k: "min", t: "\\((\\frac{3}{2},\\ -\\frac{43}{16})\\)" },
+      { x: 0.0, y: -1.0, k: "belok", t: "\\((0,\\ -1)\\), juga perpotongan sumbu" },
+      { x: 1.0, y: -2.0, k: "belok", t: "\\((1,\\ -2)\\)" }
     ]
   },
   {
-    no: 9, fx: "y = x⁴ − 2x² − 12", jenis: "Sketsa polinomial",
+    no: 9, fx: "\\(y = x^{4} - 2x^{2} - 12\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x, 4) - 2*Math.pow(x, 2) - 12, view: [-2.6, 2.6, -15, 3], vas: [], has: [], obl: null, note: "Sketsa di PDF tidak berskala; grafik ini berskala sebenarnya.",
     pts: [
-      { x: -1.0, y: -13.0, k: "min", t: "(−1, −13)" },
-      { x: 0.0, y: -12.0, k: "maks", t: "(0, −12), juga perpotongan sumbu" },
-      { x: 1.0, y: -13.0, k: "min", t: "(1, −13)" },
-      { x: -0.57735026919, y: -12.555555555556, k: "belok", t: "(−√3/3, −113/9)" },
-      { x: 0.57735026919, y: -12.555555555556, k: "belok", t: "(√3/3, −113/9)" }
+      { x: -1.0, y: -13.0, k: "min", t: "\\((-1,\\ -13)\\)" },
+      { x: 0.0, y: -12.0, k: "maks", t: "\\((0,\\ -12)\\), juga perpotongan sumbu" },
+      { x: 1.0, y: -13.0, k: "min", t: "\\((1,\\ -13)\\)" },
+      { x: -0.57735026919, y: -12.555555555556, k: "belok", t: "\\((-\\frac{\\sqrt{3}}{3},\\ -\\frac{113}{9})\\)" },
+      { x: 0.57735026919, y: -12.555555555556, k: "belok", t: "\\((\\frac{\\sqrt{3}}{3},\\ -\\frac{113}{9})\\)" }
     ]
   },
   {
-    no: 10, fx: "y = x⁴ − 3x³ + 3x² + 1", jenis: "Sketsa polinomial",
+    no: 10, fx: "\\(y = x^{4} - 3x^{3} + 3x^{2} + 1\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x, 4) - 3*Math.pow(x, 3) + 3*Math.pow(x, 2) + 1, view: [-1.12, 2.12, -0.5, 2.52], vas: [], has: [], obl: null,
     pts: [
-      { x: 0.0, y: 1.0, k: "min", t: "(0, 1), juga perpotongan sumbu" },
-      { x: 0.5, y: 1.4375, k: "belok", t: "(1/2, 23/16)" },
-      { x: 1.0, y: 2.0, k: "belok", t: "(1, 2)" }
+      { x: 0.0, y: 1.0, k: "min", t: "\\((0,\\ 1)\\), juga perpotongan sumbu" },
+      { x: 0.5, y: 1.4375, k: "belok", t: "\\((\\frac{1}{2},\\ \\frac{23}{16})\\)" },
+      { x: 1.0, y: 2.0, k: "belok", t: "\\((1,\\ 2)\\)" }
     ]
   },
   {
-    no: 11, fx: "y = x⁵ − 4x⁴ + 4x³", jenis: "Sketsa polinomial",
+    no: 11, fx: "\\(y = x^{5} - 4x^{4} + 4x^{3}\\)", jenis: "Sketsa polinomial",
     f: x => Math.pow(x, 5) - 4*Math.pow(x, 4) + 4*Math.pow(x, 3), view: [-1.0, 2.62, -0.53, 1.64], vas: [], has: [], obl: null,
     pts: [
-      { x: 1.2, y: 1.10592, k: "maks", t: "(6/5, 3456/3125)" },
-      { x: 2.0, y: 0.0, k: "min", t: "(2, 0), juga perpotongan sumbu" },
-      { x: 0.0, y: 0.0, k: "belok", t: "(0, 0), juga perpotongan sumbu" },
-      { x: 0.710102051443, y: 0.595762284286, k: "belok", t: "(6/5 − √6/5, 84√6/3125 + 1656/3125)" },
-      { x: 1.689897948557, y: 0.464077715714, k: "belok", t: "(√6/5 + 6/5, 1656/3125 − 84√6/3125)" }
+      { x: 1.2, y: 1.10592, k: "maks", t: "\\((\\frac{6}{5},\\ \\frac{3456}{3125})\\)" },
+      { x: 2.0, y: 0.0, k: "min", t: "\\((2,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 0.0, y: 0.0, k: "belok", t: "\\((0,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 0.710102051443, y: 0.595762284286, k: "belok", t: "\\((\\frac{6}{5} - \\frac{\\sqrt{6}}{5},\\ \\frac{84\\sqrt{6}}{3125} + \\frac{1656}{3125})\\)" },
+      { x: 1.689897948557, y: 0.464077715714, k: "belok", t: "\\((\\frac{\\sqrt{6}}{5} + \\frac{6}{5},\\ \\frac{1656}{3125} - \\frac{84\\sqrt{6}}{3125})\\)" }
     ]
   },
   {
-    no: 12, fx: "y = 3x⁵ − 5x³", jenis: "Sketsa polinomial",
+    no: 12, fx: "\\(y = 3x^{5} - 5x^{3}\\)", jenis: "Sketsa polinomial",
     f: x => 3*Math.pow(x, 5) - 5*Math.pow(x, 3), view: [-1.94, 1.94, -2.88, 2.88], vas: [], has: [], obl: null,
     pts: [
-      { x: -1.0, y: 2.0, k: "maks", t: "(−1, 2)" },
-      { x: 1.0, y: -2.0, k: "min", t: "(1, −2)" },
-      { x: -0.707106781187, y: 1.237436867076, k: "belok", t: "(−√2/2, 7√2/8)" },
-      { x: 0.0, y: 0.0, k: "belok", t: "(0, 0), juga perpotongan sumbu" },
-      { x: 0.707106781187, y: -1.237436867076, k: "belok", t: "(√2/2, −7√2/8)" },
-      { x: -1.290994448736, y: 0.0, k: "sumbu", t: "(−√15/3, 0)" },
-      { x: 1.290994448736, y: 0.0, k: "sumbu", t: "(√15/3, 0)" }
+      { x: -1.0, y: 2.0, k: "maks", t: "\\((-1,\\ 2)\\)" },
+      { x: 1.0, y: -2.0, k: "min", t: "\\((1,\\ -2)\\)" },
+      { x: -0.707106781187, y: 1.237436867076, k: "belok", t: "\\((-\\frac{\\sqrt{2}}{2},\\ \\frac{7\\sqrt{2}}{8})\\)" },
+      { x: 0.0, y: 0.0, k: "belok", t: "\\((0,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 0.707106781187, y: -1.237436867076, k: "belok", t: "\\((\\frac{\\sqrt{2}}{2},\\ -\\frac{7\\sqrt{2}}{8})\\)" },
+      { x: -1.290994448736, y: 0.0, k: "sumbu", t: "\\((-\\frac{\\sqrt{15}}{3},\\ 0)\\)" },
+      { x: 1.290994448736, y: 0.0, k: "sumbu", t: "\\((\\frac{\\sqrt{15}}{3},\\ 0)\\)" }
     ]
   },
   {
-    no: 23, fx: "y = 2x / (x − 3)", jenis: "Sketsa fungsi rasional",
+    no: 23, fx: "\\(y = \\frac{2x}{x - 3}\\)", jenis: "Sketsa fungsi rasional",
     f: x => 2*x/(x - 3), view: [-6.0, 9.0, -7.9, 23.23], vas: [3.0], has: [2.0], obl: null,
     pts: [
-      { x: 0.0, y: 0.0, k: "sumbu", t: "(0, 0), juga perpotongan sumbu" }
+      { x: 0.0, y: 0.0, k: "sumbu", t: "\\((0,\\ 0)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 24, fx: "y = x / (x² − 1)", jenis: "Sketsa fungsi rasional",
+    no: 24, fx: "\\(y = \\frac{x}{x^{2} - 1}\\)", jenis: "Sketsa fungsi rasional",
     f: x => x/(Math.pow(x, 2) - 1), view: [-7.0, 7.0, -3.0, 3.0], vas: [-1.0, 1.0], has: [0.0], obl: null,
     pts: [
-      { x: 0.0, y: 0.0, k: "belok", t: "(0, 0), juga perpotongan sumbu" }
+      { x: 0.0, y: 0.0, k: "belok", t: "\\((0,\\ 0)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 25, fx: "y = x² / (x² − 1)", jenis: "Sketsa fungsi rasional",
+    no: 25, fx: "\\(y = \\frac{x^{2}}{x^{2} - 1}\\)", jenis: "Sketsa fungsi rasional",
     f: x => Math.pow(x, 2)/(Math.pow(x, 2) - 1), view: [-7.0, 7.0, -2.5, 3.5], vas: [-1.0, 1.0], has: [1.0], obl: null,
     pts: [
-      { x: 0.0, y: 0.0, k: "maks", t: "(0, 0), juga perpotongan sumbu" }
+      { x: 0.0, y: 0.0, k: "maks", t: "\\((0,\\ 0)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 26, fx: "y = 1 / (x − 1)²", jenis: "Sketsa fungsi rasional",
+    no: 26, fx: "\\(y = \\frac{1}{(x - 1)^{2}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => Math.pow(x - 1, -2), view: [-6.0, 7.0, -2.5, 3.5], vas: [1.0], has: [0.0], obl: null,
     pts: [
-      { x: 0.0, y: 1.0, k: "sumbu", t: "(0, 1)" }
+      { x: 0.0, y: 1.0, k: "sumbu", t: "\\((0,\\ 1)\\)" }
     ]
   },
   {
-    no: 27, fx: "y = x / (1 + x²)", jenis: "Sketsa fungsi rasional",
+    no: 27, fx: "\\(y = \\frac{x}{1 + x^{2}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => x/(Math.pow(x, 2) + 1), view: [-8.66, 8.66, -1.15, 1.15], vas: [], has: [0.0], obl: null,
     pts: [
-      { x: -1.0, y: -0.5, k: "min", t: "(−1, −1/2)" },
-      { x: 1.0, y: 0.5, k: "maks", t: "(1, 1/2)" },
-      { x: -1.732050807569, y: -0.433012701892, k: "belok", t: "(−√3, −√3/4)" },
-      { x: 0.0, y: 0.0, k: "belok", t: "(0, 0), juga perpotongan sumbu" },
-      { x: 1.732050807569, y: 0.433012701892, k: "belok", t: "(√3, √3/4)" }
+      { x: -1.0, y: -0.5, k: "min", t: "\\((-1,\\ -\\frac{1}{2})\\)" },
+      { x: 1.0, y: 0.5, k: "maks", t: "\\((1,\\ \\frac{1}{2})\\)" },
+      { x: -1.732050807569, y: -0.433012701892, k: "belok", t: "\\((-\\sqrt{3},\\ -\\frac{\\sqrt{3}}{4})\\)" },
+      { x: 0.0, y: 0.0, k: "belok", t: "\\((0,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 1.732050807569, y: 0.433012701892, k: "belok", t: "\\((\\sqrt{3},\\ \\frac{\\sqrt{3}}{4})\\)" }
     ]
   },
   {
-    no: 28, fx: "y = 1 − 1 / x", jenis: "Sketsa fungsi rasional",
+    no: 28, fx: "\\(y = 1 - \\frac{1}{x}\\)", jenis: "Sketsa fungsi rasional",
     f: x => 1 - 1/x, view: [-6.0, 7.0, -2.46, 3.54], vas: [0.0], has: [1.0], obl: null,
     pts: [
-      { x: 1.0, y: 0.0, k: "sumbu", t: "(1, 0)" }
+      { x: 1.0, y: 0.0, k: "sumbu", t: "\\((1,\\ 0)\\)" }
     ]
   },
   {
-    no: 29, fx: "y = (x − 1) / (x − 2)", jenis: "Sketsa fungsi rasional",
+    no: 29, fx: "\\(y = \\frac{x - 1}{x - 2}\\)", jenis: "Sketsa fungsi rasional",
     f: x => (x - 1)/(x - 2), view: [-6.0, 8.0, -2.5, 3.5], vas: [2.0], has: [1.0], obl: null,
     pts: [
-      { x: 1.0, y: 0.0, k: "sumbu", t: "(1, 0)" },
-      { x: 0.0, y: 0.5, k: "sumbu", t: "(0, 1/2)" }
+      { x: 1.0, y: 0.0, k: "sumbu", t: "\\((1,\\ 0)\\)" },
+      { x: 0.0, y: 0.5, k: "sumbu", t: "\\((0,\\ \\frac{1}{2})\\)" }
     ]
   },
   {
-    no: 30, fx: "y = 1 / (x² + 1)", jenis: "Sketsa fungsi rasional",
+    no: 30, fx: "\\(y = \\frac{1}{x^{2} + 1}\\)", jenis: "Sketsa fungsi rasional",
     f: x => 1/(Math.pow(x, 2) + 1), view: [-6.58, 6.58, -0.65, 1.65], vas: [], has: [0.0], obl: null,
     pts: [
-      { x: 0.0, y: 1.0, k: "maks", t: "(0, 1), juga perpotongan sumbu" },
-      { x: -0.57735026919, y: 0.75, k: "belok", t: "(−√3/3, 3/4)" },
-      { x: 0.57735026919, y: 0.75, k: "belok", t: "(√3/3, 3/4)" }
+      { x: 0.0, y: 1.0, k: "maks", t: "\\((0,\\ 1)\\), juga perpotongan sumbu" },
+      { x: -0.57735026919, y: 0.75, k: "belok", t: "\\((-\\frac{\\sqrt{3}}{3},\\ \\frac{3}{4})\\)" },
+      { x: 0.57735026919, y: 0.75, k: "belok", t: "\\((\\frac{\\sqrt{3}}{3},\\ \\frac{3}{4})\\)" }
     ]
   },
   {
-    no: 31, fx: "y = x² − 1 / x", jenis: "Asimtot berupa kurva",
-    f: x => Math.pow(x, 2) - 1/x, view: [-6.79, 7.0, -2.05, 3.95], vas: [0.0], has: [], obl: null, ac: x => Math.pow(x, 2), act: "y = x²",
+    no: 31, fx: "\\(y = x^{2} - \\frac{1}{x}\\)", jenis: "Asimtot berupa kurva",
+    f: x => Math.pow(x, 2) - 1/x, view: [-6.79, 7.0, -2.05, 3.95], vas: [0.0], has: [], obl: null, ac: x => Math.pow(x, 2), act: "\\(y = x^{2}\\)",
     pts: [
-      { x: -0.793700525984, y: 1.889881574842, k: "min", t: "(−2^(2/3)/2, 3·2^(1/3)/2)" },
-      { x: 1.0, y: 0.0, k: "belok", t: "(1, 0), juga perpotongan sumbu" }
+      { x: -0.793700525984, y: 1.889881574842, k: "min", t: "\\((-\\frac{2^{\\frac{2}{3}}}{2},\\ \\frac{3\\cdot 2^{\\frac{1}{3}}}{2})\\)" },
+      { x: 1.0, y: 0.0, k: "belok", t: "\\((1,\\ 0)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 32, fx: "y = (2x² − 1) / x²", jenis: "Sketsa fungsi rasional",
+    no: 32, fx: "\\(y = \\frac{2x^{2} - 1}{x^{2}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => (2*Math.pow(x, 2) - 1)/Math.pow(x, 2), view: [-6.71, 6.71, -2.0, 4.0], vas: [0.0], has: [2.0], obl: null,
     pts: [
-      { x: -0.707106781187, y: 0.0, k: "sumbu", t: "(−√2/2, 0)" },
-      { x: 0.707106781187, y: 0.0, k: "sumbu", t: "(√2/2, 0)" }
+      { x: -0.707106781187, y: 0.0, k: "sumbu", t: "\\((-\\frac{\\sqrt{2}}{2},\\ 0)\\)" },
+      { x: 0.707106781187, y: 0.0, k: "sumbu", t: "\\((\\frac{\\sqrt{2}}{2},\\ 0)\\)" }
     ]
   },
   {
-    no: 33, fx: "y = (1 − x) / x²", jenis: "Sketsa fungsi rasional",
+    no: 33, fx: "\\(y = \\frac{1 - x}{x^{2}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => (1 - x)/Math.pow(x, 2), view: [-6.0, 9.0, -2.68, 3.32], vas: [0.0], has: [0.0], obl: null,
     pts: [
-      { x: 2.0, y: -0.25, k: "min", t: "(2, −1/4)" },
-      { x: 3.0, y: -0.222222222222, k: "belok", t: "(3, −2/9)" },
-      { x: 1.0, y: 0.0, k: "sumbu", t: "(1, 0)" }
+      { x: 2.0, y: -0.25, k: "min", t: "\\((2,\\ -\\frac{1}{4})\\)" },
+      { x: 3.0, y: -0.222222222222, k: "belok", t: "\\((3,\\ -\\frac{2}{9})\\)" },
+      { x: 1.0, y: 0.0, k: "sumbu", t: "\\((1,\\ 0)\\)" }
     ]
   },
   {
-    no: 34, fx: "y = 8 / (4 − x²)", jenis: "Sketsa fungsi rasional",
+    no: 34, fx: "\\(y = \\frac{8}{4 - x^{2}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => 8/(4 - Math.pow(x, 2)), view: [-10.0, 10.0, -6.1, 5.2], vas: [-2.0, 2.0], has: [0.0], obl: null,
     pts: [
-      { x: 0.0, y: 2.0, k: "min", t: "(0, 2), juga perpotongan sumbu" }
+      { x: 0.0, y: 2.0, k: "min", t: "\\((0,\\ 2)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 35, fx: "y = (x − 1) / (x² − 4)", jenis: "Sketsa fungsi rasional",
+    no: 35, fx: "\\(y = \\frac{x - 1}{x^{2} - 4}\\)", jenis: "Sketsa fungsi rasional",
     f: x => (x - 1)/(Math.pow(x, 2) - 4), view: [-10.0, 10.0, -3.36, 2.64], vas: [-2.0, 2.0], has: [0.0], obl: null,
     pts: [
-      { x: 0.362165747256, y: 0.164864640797, k: "belok", t: "(x₀, f(x₀)) dengan 0 < x₀ < 1" },
-      { x: 1.0, y: 0.0, k: "sumbu", t: "(1, 0)" },
-      { x: 0.0, y: 0.25, k: "sumbu", t: "(0, 1/4)" }
+      { x: 0.362165747256, y: 0.164864640797, k: "belok", t: "\\((x_0,\\ f(x_0))\\) dengan \\(0 < x_0 < 1\\)" },
+      { x: 1.0, y: 0.0, k: "sumbu", t: "\\((1,\\ 0)\\)" },
+      { x: 0.0, y: 0.25, k: "sumbu", t: "\\((0,\\ \\frac{1}{4})\\)" }
     ]
   },
   {
-    no: 36, fx: "y = 8(x − 2) / x²", jenis: "Sketsa fungsi rasional",
+    no: 36, fx: "\\(y = \\frac{8(x - 2)}{x^{2}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => (8*x - 16)/Math.pow(x, 2), view: [-12.0, 18.0, -4.0, 2.45], vas: [0.0], has: [0.0], obl: null,
     pts: [
-      { x: 4.0, y: 1.0, k: "maks", t: "(4, 1)" },
-      { x: 6.0, y: 0.888888888889, k: "belok", t: "(6, 8/9)" },
-      { x: 2.0, y: 0.0, k: "sumbu", t: "(2, 0)" }
+      { x: 4.0, y: 1.0, k: "maks", t: "\\((4,\\ 1)\\)" },
+      { x: 6.0, y: 0.888888888889, k: "belok", t: "\\((6,\\ \\frac{8}{9})\\)" },
+      { x: 2.0, y: 0.0, k: "sumbu", t: "\\((2,\\ 0)\\)" }
     ]
   },
   {
-    no: 37, fx: "y = (x − 1)² / x²", jenis: "Sketsa fungsi rasional",
+    no: 37, fx: "\\(y = \\frac{(x - 1)^{2}}{x^{2}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => Math.pow(x - 1, 2)/Math.pow(x, 2), view: [-6.0, 7.5, -1.45, 5.0], vas: [0.0], has: [1.0], obl: null,
     pts: [
-      { x: 1.0, y: 0.0, k: "min", t: "(1, 0), juga perpotongan sumbu" },
-      { x: 1.5, y: 0.111111111111, k: "belok", t: "(3/2, 1/9)" }
+      { x: 1.0, y: 0.0, k: "min", t: "\\((1,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 1.5, y: 0.111111111111, k: "belok", t: "\\((\\frac{3}{2},\\ \\frac{1}{9})\\)" }
     ]
   },
   {
-    no: 38, fx: "y = 2 + 3 / x − 1 / x³", jenis: "Sketsa fungsi rasional",
+    no: 38, fx: "\\(y = 2 + \\frac{3}{x} - \\frac{1}{x^{3}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => 2 + 3/x - 1/Math.pow(x, 3), view: [-7.41, 7.41, -2.8, 6.8], vas: [0.0], has: [2.0], obl: null,
     pts: [
-      { x: -1.0, y: 0.0, k: "min", t: "(−1, 0), juga perpotongan sumbu" },
-      { x: 1.0, y: 4.0, k: "maks", t: "(1, 4)" },
-      { x: -1.414213562373, y: 0.232233047034, k: "belok", t: "(−√2, 2 − 5√2/4)" },
-      { x: 1.414213562373, y: 3.767766952966, k: "belok", t: "(√2, 5√2/4 + 2)" },
-      { x: 0.5, y: 0.0, k: "sumbu", t: "(1/2, 0)" }
+      { x: -1.0, y: 0.0, k: "min", t: "\\((-1,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 1.0, y: 4.0, k: "maks", t: "\\((1,\\ 4)\\)" },
+      { x: -1.414213562373, y: 0.232233047034, k: "belok", t: "\\((-\\sqrt{2},\\ 2 - \\frac{5\\sqrt{2}}{4})\\)" },
+      { x: 1.414213562373, y: 3.767766952966, k: "belok", t: "\\((\\sqrt{2},\\ \\frac{5\\sqrt{2}}{4} + 2)\\)" },
+      { x: 0.5, y: 0.0, k: "sumbu", t: "\\((\\frac{1}{2},\\ 0)\\)" }
     ]
   },
   {
-    no: 39, fx: "y = 3 − 4 / x − 4 / x²", jenis: "Sketsa fungsi rasional",
+    no: 39, fx: "\\(y = 3 - \\frac{4}{x} - \\frac{4}{x^{2}}\\)", jenis: "Sketsa fungsi rasional",
     f: x => 3 - 4/x - 4/Math.pow(x, 2), view: [-13.0, 12.0, -2.8, 6.8], vas: [0.0], has: [3.0], obl: null,
     pts: [
-      { x: -2.0, y: 4.0, k: "maks", t: "(−2, 4)" },
-      { x: -3.0, y: 3.888888888889, k: "belok", t: "(−3, 35/9)" },
-      { x: -0.666666666667, y: 0.0, k: "sumbu", t: "(−2/3, 0)" },
-      { x: 2.0, y: 0.0, k: "sumbu", t: "(2, 0)" }
+      { x: -2.0, y: 4.0, k: "maks", t: "\\((-2,\\ 4)\\)" },
+      { x: -3.0, y: 3.888888888889, k: "belok", t: "\\((-3,\\ \\frac{35}{9})\\)" },
+      { x: -0.666666666667, y: 0.0, k: "sumbu", t: "\\((-\\frac{2}{3},\\ 0)\\)" },
+      { x: 2.0, y: 0.0, k: "sumbu", t: "\\((2,\\ 0)\\)" }
     ]
   },
   {
-    no: 40, fx: "y = (x² − 1) / (x² + 1)", jenis: "Sketsa fungsi rasional",
+    no: 40, fx: "\\(y = \\frac{x^{2} - 1}{x^{2} + 1}\\)", jenis: "Sketsa fungsi rasional",
     f: x => (Math.pow(x, 2) - 1)/(Math.pow(x, 2) + 1), view: [-7.0, 7.0, -2.0, 2.0], vas: [], has: [1.0], obl: null,
     pts: [
-      { x: 0.0, y: -1.0, k: "min", t: "(0, −1), juga perpotongan sumbu" },
-      { x: -0.57735026919, y: -0.5, k: "belok", t: "(−√3/3, −1/2)" },
-      { x: 0.57735026919, y: -0.5, k: "belok", t: "(√3/3, −1/2)" },
-      { x: -1.0, y: 0.0, k: "sumbu", t: "(−1, 0)" },
-      { x: 1.0, y: 0.0, k: "sumbu", t: "(1, 0)" }
+      { x: 0.0, y: -1.0, k: "min", t: "\\((0,\\ -1)\\), juga perpotongan sumbu" },
+      { x: -0.57735026919, y: -0.5, k: "belok", t: "\\((-\\frac{\\sqrt{3}}{3},\\ -\\frac{1}{2})\\)" },
+      { x: 0.57735026919, y: -0.5, k: "belok", t: "\\((\\frac{\\sqrt{3}}{3},\\ -\\frac{1}{2})\\)" },
+      { x: -1.0, y: 0.0, k: "sumbu", t: "\\((-1,\\ 0)\\)" },
+      { x: 1.0, y: 0.0, k: "sumbu", t: "\\((1,\\ 0)\\)" }
     ]
   },
   {
-    no: 42, fx: "y = (x² − 2) / x", jenis: "Asimtot miring",
-    f: x => (Math.pow(x, 2) - 2)/x, view: [-7.41, 7.41, -3.0, 3.0], vas: [0.0], has: [], obl: [1.0, 0.0], oblt: "y = x",
+    no: 42, fx: "\\(y = \\frac{x^{2} - 2}{x}\\)", jenis: "Asimtot miring",
+    f: x => (Math.pow(x, 2) - 2)/x, view: [-7.41, 7.41, -3.0, 3.0], vas: [0.0], has: [], obl: [1.0, 0.0], oblt: "\\(y = x\\)",
     pts: [
-      { x: -1.414213562373, y: 0.0, k: "sumbu", t: "(−√2, 0)" },
-      { x: 1.414213562373, y: 0.0, k: "sumbu", t: "(√2, 0)" }
+      { x: -1.414213562373, y: 0.0, k: "sumbu", t: "\\((-\\sqrt{2},\\ 0)\\)" },
+      { x: 1.414213562373, y: 0.0, k: "sumbu", t: "\\((\\sqrt{2},\\ 0)\\)" }
     ]
   },
   {
-    no: 43, fx: "y = (x² − 2x − 3) / (x + 2)", jenis: "Asimtot miring",
-    f: x => (Math.pow(x, 2) - 2*x - 3)/(x + 2), view: [-18.71, 17.47, -16.18, 5.71], vas: [-2.0], has: [], obl: [1.0, -4.0], oblt: "y = x − 4",
+    no: 43, fx: "\\(y = \\frac{x^{2} - 2x - 3}{x + 2}\\)", jenis: "Asimtot miring",
+    f: x => (Math.pow(x, 2) - 2*x - 3)/(x + 2), view: [-18.71, 17.47, -16.18, 5.71], vas: [-2.0], has: [], obl: [1.0, -4.0], oblt: "\\(y = x - 4\\)",
     pts: [
-      { x: -4.2360679775, y: -10.472135955, k: "maks", t: "(−√5 − 2, −6 − 2√5)" },
-      { x: 0.2360679775, y: -1.527864045, k: "min", t: "(−2 + √5, −6 + 2√5)" },
-      { x: -1.0, y: 0.0, k: "sumbu", t: "(−1, 0)" },
-      { x: 3.0, y: 0.0, k: "sumbu", t: "(3, 0)" },
-      { x: 0.0, y: -1.5, k: "sumbu", t: "(0, −3/2)" }
+      { x: -4.2360679775, y: -10.472135955, k: "maks", t: "\\((-\\sqrt{5} - 2,\\ -6 - 2\\sqrt{5})\\)" },
+      { x: 0.2360679775, y: -1.527864045, k: "min", t: "\\((-2 + \\sqrt{5},\\ -6 + 2\\sqrt{5})\\)" },
+      { x: -1.0, y: 0.0, k: "sumbu", t: "\\((-1,\\ 0)\\)" },
+      { x: 3.0, y: 0.0, k: "sumbu", t: "\\((3,\\ 0)\\)" },
+      { x: 0.0, y: -1.5, k: "sumbu", t: "\\((0,\\ -\\frac{3}{2})\\)" }
     ]
   },
   {
-    no: 44, fx: "y = (x − 2)³ / x²", jenis: "Asimtot miring",
-    f: x => Math.pow(x - 2, 3)/Math.pow(x, 2), view: [-16.0, 14.0, -20.57, 7.08], vas: [0.0], has: [], obl: [1.0, -6.0], oblt: "y = x − 6",
+    no: 44, fx: "\\(y = \\frac{(x - 2)^{3}}{x^{2}}\\)", jenis: "Asimtot miring",
+    f: x => Math.pow(x - 2, 3)/Math.pow(x, 2), view: [-16.0, 14.0, -20.57, 7.08], vas: [0.0], has: [], obl: [1.0, -6.0], oblt: "\\(y = x - 6\\)",
     pts: [
-      { x: -4.0, y: -13.5, k: "maks", t: "(−4, −27/2)" },
-      { x: 2.0, y: 0.0, k: "belok", t: "(2, 0), juga perpotongan sumbu" }
+      { x: -4.0, y: -13.5, k: "maks", t: "\\((-4,\\ -\\frac{27}{2})\\)" },
+      { x: 2.0, y: 0.0, k: "belok", t: "\\((2,\\ 0)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 45, fx: "y = (4 − x³) / x²", jenis: "Asimtot miring",
-    f: x => (4 - Math.pow(x, 3))/Math.pow(x, 2), view: [-8.0, 6.0, -0.5, 8.86], vas: [0.0], has: [], obl: [-1.0, 0.0], oblt: "y = −x",
+    no: 45, fx: "\\(y = \\frac{4 - x^{3}}{x^{2}}\\)", jenis: "Asimtot miring",
+    f: x => (4 - Math.pow(x, 3))/Math.pow(x, 2), view: [-8.0, 6.0, -0.5, 8.86], vas: [0.0], has: [], obl: [-1.0, 0.0], oblt: "\\(y = -x\\)",
     pts: [
-      { x: -2.0, y: 3.0, k: "min", t: "(−2, 3)" },
-      { x: 1.587401051968, y: 0.0, k: "sumbu", t: "(2^(2/3), 0)" }
+      { x: -2.0, y: 3.0, k: "min", t: "\\((-2,\\ 3)\\)" },
+      { x: 1.587401051968, y: 0.0, k: "sumbu", t: "\\((2^{\\frac{2}{3}},\\ 0)\\)" }
     ]
   },
   {
-    no: 46, fx: "y = x + 1 − 1 / x − 1 / x²", jenis: "Asimtot miring",
-    f: x => x + 1 - 1/x - 1/Math.pow(x, 2), view: [-11.0, 9.0, -3.89, 2.11], vas: [0.0], has: [], obl: [1.0, 1.0], oblt: "y = x + 1",
+    no: 46, fx: "\\(y = x + 1 - \\frac{1}{x} - \\frac{1}{x^{2}}\\)", jenis: "Asimtot miring",
+    f: x => x + 1 - 1/x - 1/Math.pow(x, 2), view: [-11.0, 9.0, -3.89, 2.11], vas: [0.0], has: [], obl: [1.0, 1.0], oblt: "\\(y = x + 1\\)",
     pts: [
-      { x: -1.0, y: 0.0, k: "maks", t: "(−1, 0), juga perpotongan sumbu" },
-      { x: -3.0, y: -1.777777777778, k: "belok", t: "(−3, −16/9)" },
-      { x: 1.0, y: 0.0, k: "sumbu", t: "(1, 0)" }
+      { x: -1.0, y: 0.0, k: "maks", t: "\\((-1,\\ 0)\\), juga perpotongan sumbu" },
+      { x: -3.0, y: -1.777777777778, k: "belok", t: "\\((-3,\\ -\\frac{16}{9})\\)" },
+      { x: 1.0, y: 0.0, k: "sumbu", t: "\\((1,\\ 0)\\)" }
     ]
   },
   {
-    no: 47, fx: "y = (x − 2)^(1 / 3)", jenis: "Pangkat rasional",
+    no: 47, fx: "\\(y = (x - 2)^{\\frac{1}{3}}\\)", jenis: "Pangkat rasional",
     f: x => Math.cbrt(x - 2), view: [-4, 8, -3, 3], vas: [], has: [], obl: null,
     pts: [
-      { x: 2.0, y: 0.0, k: "tdd", t: "(2, 0), juga titik belok, juga perpotongan sumbu" },
-      { x: 0.0, y: -1.259921049895, k: "sumbu", t: "(0, −2^(1/3))" }
+      { x: 2.0, y: 0.0, k: "tdd", t: "\\((2,\\ 0),\\ jugatitikbelok\\), juga perpotongan sumbu" },
+      { x: 0.0, y: -1.259921049895, k: "sumbu", t: "\\((0,\\ -2^{\\frac{1}{3}})\\)" }
     ]
   },
   {
-    no: 50, fx: "y = x² + 1 / x", jenis: "Asimtot berupa kurva",
-    f: x => Math.pow(x, 2) + 1/x, view: [-7.0, 6.79, -2.05, 3.95], vas: [0.0], has: [], obl: null, ac: x => Math.pow(x, 2), act: "y = x²",
+    no: 50, fx: "\\(y = x^{2} + \\frac{1}{x}\\)", jenis: "Asimtot berupa kurva",
+    f: x => Math.pow(x, 2) + 1/x, view: [-7.0, 6.79, -2.05, 3.95], vas: [0.0], has: [], obl: null, ac: x => Math.pow(x, 2), act: "\\(y = x^{2}\\)",
     pts: [
-      { x: 0.793700525984, y: 1.889881574842, k: "min", t: "(2^(2/3)/2, 3·2^(1/3)/2)" },
-      { x: -1.0, y: 0.0, k: "belok", t: "(−1, 0), juga perpotongan sumbu" }
+      { x: 0.793700525984, y: 1.889881574842, k: "min", t: "\\((\\frac{2^{\\frac{2}{3}}}{2},\\ \\frac{3\\cdot 2^{\\frac{1}{3}}}{2})\\)" },
+      { x: -1.0, y: 0.0, k: "belok", t: "\\((-1,\\ 0)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 51, fx: "y = 3 − x² + 2 / x", jenis: "Asimtot berupa kurva",
-    f: x => -Math.pow(x, 2) + 3 + 2/x, view: [-7.0, 8.0, -2.35, 5.35], vas: [0.0], has: [], obl: null, ac: x => 3 - Math.pow(x, 2), act: "y = 3 − x²",
+    no: 51, fx: "\\(y = 3 - x^{2} + \\frac{2}{x}\\)", jenis: "Asimtot berupa kurva",
+    f: x => -Math.pow(x, 2) + 3 + 2/x, view: [-7.0, 8.0, -2.35, 5.35], vas: [0.0], has: [], obl: null, ac: x => 3 - Math.pow(x, 2), act: "\\(y = 3 - x^{2}\\)",
     pts: [
-      { x: -1.0, y: 0.0, k: "maks", t: "(−1, 0), juga perpotongan sumbu" },
-      { x: 1.259921049895, y: 3.0, k: "belok", t: "(2^(1/3), 3)" },
-      { x: 2.0, y: 0.0, k: "sumbu", t: "(2, 0)" }
+      { x: -1.0, y: 0.0, k: "maks", t: "\\((-1,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 1.259921049895, y: 3.0, k: "belok", t: "\\((2^{\\frac{1}{3}},\\ 3)\\)" },
+      { x: 2.0, y: 0.0, k: "sumbu", t: "\\((2,\\ 0)\\)" }
     ]
   },
   {
-    no: 52, fx: "y = 2x + 800 / x", jenis: "Asimtot miring",
-    f: x => 2*x + 800/x, view: [-100.0, 100.0, -153.0, 153.0], vas: [0.0], has: [], obl: [2.0, 0.0], oblt: "y = 2x", note: "Dalam konteks soal, hanya bagian x > 0 yang dipakai.",
+    no: 52, fx: "\\(y = 2x + \\frac{800}{x}\\)", jenis: "Asimtot miring",
+    f: x => 2*x + 800/x, view: [-100.0, 100.0, -153.0, 153.0], vas: [0.0], has: [], obl: [2.0, 0.0], oblt: "\\(y = 2x\\)", note: "Dalam konteks soal, hanya bagian \\(x > 0\\) yang dipakai.",
     pts: [
-      { x: -20.0, y: -80.0, k: "maks", t: "(−20, −80)" },
-      { x: 20.0, y: 80.0, k: "min", t: "(20, 80)" }
+      { x: -20.0, y: -80.0, k: "maks", t: "\\((-20,\\ -80)\\)" },
+      { x: 20.0, y: 80.0, k: "min", t: "\\((20,\\ 80)\\)" }
     ]
   },
   {
-    no: 53, fx: "y = x² + 2000 / x", jenis: "Asimtot berupa kurva",
-    f: x => Math.pow(x, 2) + 2000/x, view: [-57.8, 55.2, -322.06, 436.0], vas: [0.0], has: [], obl: null, ac: x => Math.pow(x, 2), act: "y = x²", note: "Dalam konteks soal, hanya bagian x > 0 yang dipakai.",
+    no: 53, fx: "\\(y = x^{2} + \\frac{2000}{x}\\)", jenis: "Asimtot berupa kurva",
+    f: x => Math.pow(x, 2) + 2000/x, view: [-57.8, 55.2, -322.06, 436.0], vas: [0.0], has: [], obl: null, ac: x => Math.pow(x, 2), act: "\\(y = x^{2}\\)", note: "Dalam konteks soal, hanya bagian \\(x > 0\\) yang dipakai.",
     pts: [
-      { x: 10.0, y: 300.0, k: "min", t: "(10, 300)" },
-      { x: -12.599210498949, y: 0.0, k: "belok", t: "(−10·2^(1/3), 0), juga perpotongan sumbu" }
+      { x: 10.0, y: 300.0, k: "min", t: "\\((10,\\ 300)\\)" },
+      { x: -12.599210498949, y: 0.0, k: "belok", t: "\\((-10\\cdot 2^{\\frac{1}{3}},\\ 0)\\), juga perpotongan sumbu" }
     ]
   },
   {
-    no: 54, fx: "y = x⁵(x − 1) / 10", jenis: "Sketsa polinomial",
-    f: x => (1/10)*Math.pow(x, 5)*(x - 1), view: [-0.7, 1.3, -0.03, 0.05], vas: [], has: [], obl: null, note: "Sketsa di PDF tidak berskala; grafik ini berskala sebenarnya. Perbesar di sekitar 0 sampai 1.",
+    no: 54, fx: "\\(y = \\frac{x^{5}(x - 1)}{10}\\)", jenis: "Sketsa polinomial",
+    f: x => (1/10)*Math.pow(x, 5)*(x - 1), view: [-0.7, 1.3, -0.03, 0.05], vas: [], has: [], obl: null, note: "Sketsa di PDF tidak berskala; grafik ini berskala sebenarnya. Perbesar di sekitar \\(0\\) sampai \\(1\\).",
     pts: [
-      { x: 0.833333333333, y: -0.006697959534, k: "min", t: "(5/6, −625/93312)" },
-      { x: 0.0, y: 0.0, k: "belok", t: "(0, 0), juga perpotongan sumbu" },
-      { x: 0.666666666667, y: -0.00438957476, k: "belok", t: "(2/3, −16/3645)" },
-      { x: 1.0, y: 0.0, k: "sumbu", t: "(1, 0)" }
+      { x: 0.833333333333, y: -0.006697959534, k: "min", t: "\\((\\frac{5}{6},\\ -\\frac{625}{93312})\\)" },
+      { x: 0.0, y: 0.0, k: "belok", t: "\\((0,\\ 0)\\), juga perpotongan sumbu" },
+      { x: 0.666666666667, y: -0.00438957476, k: "belok", t: "\\((\\frac{2}{3},\\ -\\frac{16}{3645})\\)" },
+      { x: 1.0, y: 0.0, k: "sumbu", t: "\\((1,\\ 0)\\)" }
     ]
   },
   {
-    no: 55, fx: "y = x⁵(x + 1)² / 10", jenis: "Sketsa polinomial",
-    f: x => (1/10)*Math.pow(x, 5)*Math.pow(x + 1, 2), view: [-1.4, 0.45, -0.008, 0.008], vas: [], has: [], obl: null, note: "Sketsa di PDF tidak berskala; grafik ini berskala sebenarnya. Perbesar di sekitar −1 sampai 0.",
+    no: 55, fx: "\\(y = \\frac{x^{5}(x + 1)^{2}}{10}\\)", jenis: "Sketsa polinomial",
+    f: x => (1/10)*Math.pow(x, 5)*Math.pow(x + 1, 2), view: [-1.4, 0.45, -0.008, 0.008], vas: [], has: [], obl: null, note: "Sketsa di PDF tidak berskala; grafik ini berskala sebenarnya. Perbesar di sekitar \\(-1\\) sampai \\(0\\).",
     pts: [
-      { x: -1.0, y: 0.0, k: "maks", t: "(−1, 0), juga perpotongan sumbu" },
-      { x: -0.714285714286, y: -0.001517832099, k: "min", t: "(−5/7, −1250/823543)" },
-      { x: -0.898713492677, y: -0.00060146381, k: "belok", t: "x = −5/7 − √15/21 (nilai y tidak wajib dicari)" },
-      { x: -0.529857935895, y: -0.000923114209, k: "belok", t: "x = −5/7 + √15/21 (nilai y tidak wajib dicari)" },
-      { x: 0.0, y: 0.0, k: "belok", t: "(0, 0), juga perpotongan sumbu" }
+      { x: -1.0, y: 0.0, k: "maks", t: "\\((-1,\\ 0)\\), juga perpotongan sumbu" },
+      { x: -0.714285714286, y: -0.001517832099, k: "min", t: "\\((-\\frac{5}{7},\\ -\\frac{1250}{823543})\\)" },
+      { x: -0.898713492677, y: -0.00060146381, k: "belok", t: "\\(x = -\\frac{5}{7} - \\frac{\\sqrt{15}}{21}\\) (nilai y tidak wajib dicari)" },
+      { x: -0.529857935895, y: -0.000923114209, k: "belok", t: "\\(x = -\\frac{5}{7} + \\frac{\\sqrt{15}}{21}\\) (nilai y tidak wajib dicari)" },
+      { x: 0.0, y: 0.0, k: "belok", t: "\\((0,\\ 0)\\), juga perpotongan sumbu" }
     ]
   }
 ];

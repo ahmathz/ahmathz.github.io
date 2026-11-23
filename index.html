@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="id"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Kalkulator Harga AHmathZ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,6 +39,13 @@ body {
 .logo { font-family: var(--head); font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
 .logo span { background: var(--ink); color: var(--lime); padding: 1px 6px; border-radius: 6px; margin: 0 2px; }
 .top small { font-weight: 500; color: var(--muted); }
+.menu{display:flex;flex-wrap:wrap;gap:8px}
+.menu a{font-weight:700;font-size:13.5px;line-height:1.3;color:var(--ink);text-decoration:none;background:var(--white);border:2px solid var(--ink);border-radius:999px;padding:6px 13px;min-height:36px;display:inline-flex;align-items:center}
+.menu a:hover{background:var(--pink-soft)}
+.menu a[aria-current="page"]{background:var(--pink);box-shadow:3px 3px 0 var(--ink)}
+@media (max-width:480px){div.contact{grid-template-columns:1fr}div.ct strong{overflow-wrap:normal;word-break:normal}}
+@media (max-width:560px){.menu{flex-wrap:nowrap;overflow-x:auto;width:100%;padding:2px 2px 8px;scrollbar-width:none}.menu a{white-space:nowrap;flex:none;min-height:40px}}
+
 
 .hero { position: relative; background: var(--pink); border: var(--b); border-radius: 22px; padding: clamp(22px, 5vw, 44px); box-shadow: 6px 6px 0 var(--ink); overflow: hidden; }
 .hero h1 { font-family: var(--head); font-weight: 800; font-size: clamp(30px, 6.4vw, 60px); line-height: 1.02; letter-spacing: -.03em; margin: 0; max-width: 15ch; text-wrap: balance; position: relative; }
@@ -153,7 +160,7 @@ body {
 <div class="wrap">
   <div class="top">
     <div class="logo"><span>AH</span>math<span>Z</span></div>
-    <small>Les Kalkulus &amp; matkul Matematika &middot; offline Surabaya &amp; online</small>
+    <nav class="menu" aria-label="Menu utama"><a href="index.html" aria-current="page">Kalkulator harga</a><a href="pembahasan.html">Pembahasan</a><a href="grafik-5-4.html">Grafik 5.4</a><a href="visualisasi/index.html">Visualisasi</a></nav>
   </div>
 
   <section class="hero">
@@ -254,7 +261,7 @@ body {
       <a class="cta" id="cta" href="#" target="_blank" rel="noopener">Kirim nota ke WhatsApp &rarr;</a>
       <div class="contact">
         <div class="ct"><small>WhatsApp</small><strong><a id="waShow" href="https://wa.me/6285176971148" target="_blank" rel="noopener"></a></strong><button type="button" class="copy" id="copy">Salin nomor</button></div>
-        <div class="ct"><small>TikTok</small><strong><a id="tt" href="https://www.tiktok.com/@ahmathz" target="_blank" rel="noopener"></a></strong><small>Tips &amp; pembahasan soal</small></div>
+        <div class="ct"><small>TikTok</small><strong><a id="tt" href="https://www.tiktok.com/@ahmathz" target="_blank" rel="noopener"></a></strong><small>Tips &amp; pembahasan soal</small></div><div class="ct"><small>Instagram</small><strong><a href="https://www.instagram.com/belajar.ahmathz/" target="_blank" rel="noopener">belajar.ahmathz</a></strong><small>Info les &amp; materi</small></div>
         <div class="ct"><small>CV Tutor</small><strong><a href="https://bit.ly/CVAHmathZ" target="_blank" rel="noopener">bit.ly/CVAHmathZ</a></strong><small>Pengalaman mengajar</small></div>
       </div>
     </aside>

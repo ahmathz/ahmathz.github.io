@@ -1,0 +1,102 @@
+/* Kulit AHmathZ untuk tes diagnostik. Dimuat setelah ds.css dan stylesheet halaman. */
+:root{
+  --b900:#102038; --b800:#1B2A3C; --b700:#1B2A3C; --b600:#1B2A3C; --b500:#8DBBEA;
+  --b300:#8DBBEA; --b200:#BCD7F5; --b100:#D6E6F7; --b50:#E3EEFA;
+  --paper:#EEF5FC; --card:#FFFFFF; --ink:#1B2A3C; --mut:#5F6C7B; --line:#1B2A3C;
+  --grid:rgba(27,42,60,.05);
+  --ok:#17703B; --ok-bg:#DDF3E5; --warn:#8A4B00; --warn-bg:#FFE6CC; --bad:#B3262D; --bad-bg:#FCE3DF;
+  --r:18px; --sh:5px 5px 0 #1B2A3C;
+}
+body{font-family:var(--font-body)}
+h1,h2,h3{font-family:var(--font-head);letter-spacing:-.02em}
+.card{border:2.5px solid var(--ink);border-radius:18px;box-shadow:none}
+.brand{font-family:var(--font-head);font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--ink);margin:8px 0 18px}
+.brand i{width:auto;height:auto;border-radius:0;background:none;color:inherit;font-style:normal;font-size:inherit;display:inline}
+.brand .ds-logo{font-size:20px}
+.hero{background:var(--blue-400);color:var(--ink);border:2.5px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink)}
+.hero:after{display:none}
+.hero h1{font-weight:800;font-size:clamp(26px,6vw,34px);letter-spacing:-.03em;line-height:1.08}
+.hero p{opacity:1;font-weight:500}
+.chip{background:var(--white);border:2px solid var(--ink);color:var(--ink);font-weight:800}
+.chip:nth-child(even){background:var(--blue-200)}
+.steps li:before{background:var(--ink);color:var(--blue-200);border-radius:10px;font-family:var(--font-head)}
+label.f{font-size:.9rem;font-weight:800}
+input[type=text],select{border:2px solid var(--ink);border-radius:var(--radius-sm,10px);font-weight:600}
+input[type=text]:focus,select:focus{border-color:var(--ink);box-shadow:0 0 0 4px var(--blue-400)}
+.btn{background:var(--ink);color:var(--blue-200);border:2.5px solid var(--ink);border-radius:999px;font-family:var(--font-head);font-weight:800;font-size:.95rem;box-shadow:4px 4px 0 var(--blue-400)}
+.btn:hover{background:var(--navy)}
+.btn.ghost{background:var(--white);color:var(--ink);box-shadow:none;border:2.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--blue-50)}
+.btn:disabled{box-shadow:none}
+:focus-visible{outline:3px solid var(--ink)}
+.seg button{border:2px solid var(--ink);border-radius:999px;font-weight:800;background:var(--white)}
+.seg button.on{background:var(--blue-400);box-shadow:3px 3px 0 var(--ink);color:var(--ink)}
+.consent{background:var(--blue-100);border:2px solid var(--ink)}
+.consent input{accent-color:var(--ink)}
+.bar{background:var(--paper);backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:2.5px solid var(--ink)}
+.timer{background:var(--blue-200);color:var(--ink);border:2px solid var(--ink);font-family:var(--font-mono);font-weight:700;border-radius:999px}
+.prog .t{color:var(--ink)}
+.prog .tr{background:var(--white);border:2px solid var(--ink);height:12px;border-radius:999px}
+.prog i{background:var(--blue-400);border-right:2px solid var(--ink);border-radius:0}
+.navbtn{border:2px solid var(--ink);color:var(--ink);border-radius:999px;background:var(--white)}
+.sec .tag{background:var(--ink);color:var(--blue-200);font-family:var(--font-head);border-radius:10px}
+.q.done{border-color:var(--ink);background:var(--blue-50)}
+.q.need{border-color:var(--warn);box-shadow:4px 4px 0 var(--warn)}
+.qn{background:var(--blue-200);color:var(--ink);border:2px solid var(--ink);font-family:var(--font-head);border-radius:10px}
+.q.done .qn{background:var(--ink);color:var(--blue-200)}
+.opt{border:2px solid var(--ink);border-radius:16px}
+.opt:hover{background:var(--blue-50);border-color:var(--ink)}
+.opt .l{border:2px solid var(--ink);color:var(--ink);font-family:var(--font-mono)}
+.opt.sel{background:var(--blue-200);box-shadow:3px 3px 0 var(--ink)}
+.opt.sel .l{background:var(--ink);border-color:var(--ink);color:var(--blue-200)}
+.conf{border-top:2px dashed var(--ink)}
+.conf .lb,.qs{color:var(--muted)}
+.tog{background:var(--blue-100);border:2px solid var(--ink);border-radius:999px;padding:3px}
+.tog button{border-radius:999px;color:var(--ink)}
+.tog button.on.y,.tog button.on.g{background:var(--white);box-shadow:none;border:2px solid var(--ink)}
+.dock{background:linear-gradient(transparent,var(--paper) 35%)}
+.ov{background:rgba(16,32,56,.55)}
+.sheet{background:var(--white);border:2.5px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink)}
+.ngrid button{border:2px solid var(--ink);border-radius:12px;color:var(--ink)}
+.ngrid button.a{background:var(--ink);color:var(--blue-200)}
+.ngrid button.u{border:2px dashed var(--warn)}
+.legend,.meta,.foot{color:var(--muted)}
+.lvl{border:2.5px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);color:var(--ink)}
+.lvl .k{opacity:1}
+.lvl .v{font-family:var(--font-head);font-weight:800;letter-spacing:-.03em}
+.lvl .d{opacity:1;font-weight:500}
+.lvl.f{background:#F6B8B0}
+.lvl.i{background:var(--blue-400)}
+.lvl.s{background:#A9E2BF}
+.sc{background:var(--white);border:2px solid var(--ink)}
+.sc b{font-family:var(--font-head);color:var(--ink)}
+.sc small{color:var(--muted)}
+.sc .bar2{background:var(--white);border:2px solid var(--ink);height:10px}
+.sc .bar2 i{background:var(--blue-400)}
+.alert{border:2px solid var(--ink);border-radius:16px;font-weight:600}
+.alert.info{background:var(--blue-100);color:var(--ink);border:2px solid var(--ink)}
+.alert.warn{color:var(--ink);background:var(--peach)}
+.alert.ok{color:var(--ink)}
+.alert.bad{color:var(--ink)}
+.cell{border:2px solid var(--ink);color:var(--ink)}
+.cell.na{background:var(--white);color:var(--muted);border-color:var(--rule)}
+.weak{border:2px solid var(--ink);border-radius:16px;background:var(--white)}
+.weak .no{border:2px solid var(--ink);color:var(--ink);font-family:var(--font-head)}
+.weak .act{color:var(--ink)}
+.lk{color:var(--ink);background:var(--blue-50);border:2px solid var(--ink);border-radius:999px}
+.lk:hover{background:var(--blue-200)}
+.lk span{border:2px solid var(--ink);background:var(--white)}
+
+/* Header dan footer bersama. Header disembunyikan saat tes berjalan. */
+body > .ds-top{max-width:672px}
+body:has(#test:not(.hide)) > .ds-top{display:none}
+.wrap .ds-foot{padding:0 0 24px;margin-top:28px}
+.wrap .ds-foot-in{justify-content:center;text-align:center}
+.wrap .ds-foot-brand{justify-content:center}
+/* Kartu bergaya poster: border tebal dan bayangan keras */
+.card,.q{border:2.5px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.q.done{box-shadow:4px 4px 0 var(--blue-400)}
+.q.need{box-shadow:4px 4px 0 var(--warn)}
+#resume{border-color:var(--ink)!important;background:var(--blue-50)}
+.weak,.sc{box-shadow:3px 3px 0 var(--ink)}
+.sheet .btn,.dock .btn{box-shadow:3px 3px 0 var(--blue-400)}

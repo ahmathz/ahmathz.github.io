@@ -1,0 +1,71 @@
+/* Kulit untuk halaman pembahasan, tryout, grafik. Dimuat setelah ds.css. */
+body { background-color: var(--paper); background-image: linear-gradient(var(--paper-line) 1px, transparent 1px), linear-gradient(90deg, var(--paper-line) 1px, transparent 1px); background-size: 24px 24px; }
+body .wrap { max-width: 1040px; }
+body .eyebrow { font-size: 14px; font-weight: 700; color: var(--muted); text-transform: none; letter-spacing: 0; }
+body .eyebrow a { text-decoration: underline; text-decoration-color: var(--blue-400); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+body .wrap > header { padding: 4px 0 0; }
+body .wrap > header h1 { font-weight: 800; letter-spacing: -.03em; line-height: 1.1; font-size: clamp(24px, 4.2vw, 36px); margin: 6px 0 10px; }
+body .wrap > header p, body .wrap > header .lede { color: var(--ink); font-weight: 500; max-width: 62ch; }
+body .wrap > header .intro { color: var(--ink); }
+body .kembali { display: inline-block; font-weight: 800; color: var(--ink); text-decoration: none; background: var(--white); border: var(--border-thin); border-radius: 999px; padding: 6px 14px; width: fit-content; }
+body .kartu, body .soal, body section.soal, body .kunci-panel, body .paket, body ul.hasil-list { background: var(--white); border: var(--border-thick); border-radius: var(--radius-lg); box-shadow: none; }
+body .soal, body section.soal { padding: 22px; }
+body .kunci-panel { background: var(--blue-200); box-shadow: var(--shadow-chip); }
+body .kunci-panel p { font-weight: 700; }
+body .kunci-panel.kedip { outline: 3px solid var(--ink); outline-offset: 3px; }
+body .kunci-panel input, body input[type=text], body input[type=password] { font-family: var(--font-mono); font-weight: 700; border: var(--border-thin); border-radius: var(--radius-sm); background: var(--white); color: var(--ink); }
+body input:focus-visible { outline: 3px solid var(--blue-400); outline-offset: 2px; }
+body .soal-head h2, body .soal-head h3 { font-family: var(--font-head); }
+body .kata-kunci span, body .subbab { border: var(--border-thin); border-radius: 999px; color: var(--ink); background: var(--blue-50); font-weight: 700; padding: 1px 10px; }
+body .instruksi { border-left: 4px solid var(--blue-400); color: var(--ink); }
+body .petunjuk { background: var(--blue-100); border: var(--border-thin); border-left-width: 6px; border-radius: var(--radius-md); }
+body .kontrol { border-top: 2px dashed var(--ink); }
+body .progres, body .g54-judul, body .hint, body .pt-name, body .jenis { color: var(--muted); }
+body nav.nomor a, body nav#nav a, body header nav a { font-weight: 800; color: var(--ink); background: var(--white); border: var(--border-thin); border-radius: 999px; padding: 6px 12px; text-decoration: none; font-variant-numeric: tabular-nums; }
+body nav.nomor a:hover, body nav#nav a:hover, body header nav a:hover { background: var(--blue-200); }
+body nav.nomor a[aria-current="true"], body nav#nav a[aria-current="true"] { background: var(--orange); }
+body nav.nomor, body nav#nav { position: sticky; top: 8px; z-index: 6; flex-wrap: nowrap; overflow-x: auto; background: var(--paper); border: var(--border-thick); border-radius: 999px; padding: 7px 8px; box-shadow: var(--shadow-chip); scrollbar-width: thin; }
+body nav.nomor a, body nav#nav a { flex: none; min-width: 40px; text-align: center; }
+body button { font-family: var(--font-body); font-weight: 700; color: var(--ink); background: var(--white); border: var(--border-thin); border-radius: 999px; }
+body button:hover:not(:disabled) { background: var(--blue-100); border-color: var(--ink); color: var(--ink); }
+body button.utama { background: var(--ink); color: var(--blue-200); border: var(--border-thin); box-shadow: var(--shadow-cta); }
+body button.utama:hover:not(:disabled) { background: var(--ink); color: var(--blue-200); }
+body button.bahaya { background: var(--merah); border-color: var(--ink); color: #fff; }
+body .langkah .no { border: var(--border-thin); background: var(--blue-200); color: var(--ink); font-weight: 700; }
+body .canvas-box { border: var(--border-thick); border-radius: var(--radius-md); background: var(--white); }
+body .readout { border: var(--border-thin); border-radius: 999px; color: var(--ink); background: var(--blue-50); }
+body .gambar { border: var(--border-thin); border-radius: var(--radius-md); }
+body .tengah > .gambar { border: 0; border-radius: 0; padding: 0; background: transparent; }
+body .biru, body .merah { border-width: 2px; border-radius: var(--radius-xs); }
+body .tabel td { border-bottom: 1.5px solid var(--rule); }
+body .chip { border: var(--border-thin); font-weight: 800; }
+body .chip.belum { background: var(--blue-200); color: var(--ink); }
+body .chip.mengerjakan { background: var(--peach); color: var(--ink); }
+body .chip.selesai { background: #C9EBD5; color: var(--ink); }
+body .chip.tutup { background: var(--white); color: var(--muted); }
+body .pesan { border: var(--border-thin); border-radius: var(--radius-md); font-weight: 600; }
+body .pesan.galat { background: var(--merah-bg); color: #7D1A20; }
+body .pesan.info { background: var(--blue-100); color: var(--ink); }
+body .pesan.peringatan { background: var(--peach); color: var(--ink); }
+body .bar { background: var(--paper); border-bottom: var(--border-thick); }
+body .timer { font-family: var(--font-mono); font-weight: 700; }
+body .nilai { font-family: var(--font-mono); font-weight: 700; }
+body dl.data dt { color: var(--muted); }
+body .foto { border: var(--border-thin); border-radius: var(--radius-sm); }
+body .unggah { border: 2px dashed var(--ink); border-radius: var(--radius-md); }
+body .ringkas td { border-bottom: 1.5px solid var(--rule); }
+body footer { color: var(--muted); }
+@media (max-width: 480px) { body .soal, body section.soal { padding: 16px; } }
+
+/* kartu soal: judul nomor menjadi tab berwarna di bagian atas */
+body .soal-head { align-items: center; }
+body .soal-head h2 { font-size: 20px; }
+body .soal { padding: 22px 24px 22px 22px; }
+body .soal > .soal-head { margin: -22px -24px 4px -22px; padding: 12px 22px; border-bottom: var(--border-thick); background: var(--blue-100); border-radius: calc(var(--radius-lg) - 3px) calc(var(--radius-lg) - 3px) 0 0; }
+@media (max-width: 480px) { body .soal > .soal-head { margin: -16px -16px 4px -16px; padding: 10px 16px; } }
+
+body .soal, body section.soal { scroll-margin-top: 76px; }
+
+/* Rumus inline panjang di bagian pembuka, instruksi, dan soal tidak boleh melebarkan halaman: gulir di tempat. */
+body .wrap > * { min-width: 0; }
+body .intro, body .instruksi, body .teks { overflow-x: auto; overflow-y: hidden; }

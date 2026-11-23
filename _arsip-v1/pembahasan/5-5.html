@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Soal dan pembahasan Latihan 5.5 Kalkulus 1: Nilai Maksimum atau Minimum Suatu Fungsi.">
+<title>Pembahasan 5.5 Kalkulus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script src="../tryout/config.js"></script>
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]],
+    macros: { penting: ["\\bbox[2px,border:1.5px solid royalblue]{#1}", 1], nol: ["\\bbox[2px,border:1.5px solid royalblue]{#1}", 1],
+              hasil: ["\\bbox[2px,border:1.5px solid crimson]{#1}", 1], at: ["\\left.#1\\right|_{#2}", 2], R: "\\mathbb{R}" } },
+  svg: { fontCache: "global" }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.min.js"></script>
+<style>
+/* Layout: satu kolom; panel kode di atas; tiap soal = kartu (soal publik + petunjuk), langkah pembahasan disisipkan setelah kode terverifikasi */
+*,*::before,*::after{box-sizing:border-box}
+:root {
+  --bg: #f4f5f7; --paper: #ffffff; --ink: #1b2330; --muted: #5c6777; --rule: #d8dde5; --grid: #eceff4; --axis: #3a4352;
+  --biru: #1f5fbf; --biru-bg: #eef3fc; --merah: #c0262d; --merah-bg: #fcefef; --hijau: #1f7a3c; --hijau-bg: #ecf7ef;
+  --curve: #14202f; --asym: #7a8494; --maks: #c0262d; --min: #1b4fb8; --belok: #1f8a3c; --sumbu: #1d2430; --tdd: #d9790d;
+  --font-display: "Spectral", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #12161d; --paper: #1a2029; --ink: #e4e8ee; --muted: #9aa5b4; --rule: #2e3644; --grid: #1f2731; --axis: #aeb8c6;
+    --biru: #7aa7ee; --biru-bg: #1b2638; --merah: #f07b80; --merah-bg: #321c20; --hijau: #6fcf8c; --hijau-bg: #17291d;
+    --curve: #f1f4f8; --asym: #8792a3; --maks: #ff6b6b; --min: #6fa0ff; --belok: #4cc778; --sumbu: #e6eaf0; --tdd: #ffad4a; color-scheme: dark; }
+}
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+[hidden] { display: none !important; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 22px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.eyebrow a { color: inherit; }
+h1 { font-family: var(--font-display); font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 4px 0 6px; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-size: 22px; margin: 0; }
+h3 { font-size: 15px; margin: 2px 0 0; }
+p { margin: 0; }
+.intro { color: var(--muted); font-size: 15px; display: grid; gap: 8px; }
+nav.nomor { display: flex; flex-wrap: wrap; gap: 6px; }
+nav.nomor a { font: 500 14px var(--font-mono); color: var(--biru); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 12px; min-width: 40px; text-align: center; background: var(--paper); font-variant-numeric: tabular-nums; }
+nav.nomor a:hover, nav.nomor a:focus-visible { border-color: var(--biru); }
+.kunci-panel { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; scroll-margin-top: 16px; }
+.kunci-panel.kedip { outline: 2px solid var(--biru); }
+.kunci-panel p { flex: 1 1 260px; font-size: 15px; }
+.kunci-panel form { display: flex; gap: 8px; flex-wrap: wrap; }
+.kunci-panel input { font: 500 16px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); width: 140px; }
+.kunci-panel .ok { color: var(--hijau); font-weight: 600; }
+.galat { color: var(--merah); font-size: 14px; flex-basis: 100%; }
+.instruksi { font-style: italic; color: var(--muted); font-size: 15px; border-left: 3px solid var(--rule); padding-left: 12px; }
+.soal { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; display: grid; gap: 14px; scroll-margin-top: 16px; min-width: 0; }
+.soal-head { display: flex; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
+.kata-kunci { display: flex; flex-wrap: wrap; gap: 6px; }
+.kata-kunci span { font-size: 12px; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 0 8px; }
+.teks, .isi { display: block; min-width: 0; }
+.teks > * + *, .isi > * + * { margin-top: 8px; }
+.isi > h3 + * { margin-top: 4px; }
+.teks ol, .teks ul, .isi ol, .isi ul { margin: 0; padding-left: 24px; display: grid; gap: 4px; }
+li.custom { list-style: none; margin-left: -20px; }
+.lbl { font-weight: 600; }
+.eq { overflow-x: auto; overflow-y: hidden; text-align: center; padding: 2px 0; }
+.biru, .merah { display: inline-block; border: 1.5px solid; border-radius: 4px; padding: 1px 6px; }
+.biru { border-color: var(--biru); background: var(--biru-bg); }
+.merah { border-color: var(--merah); background: var(--merah-bg); }
+.tengah { display: grid; justify-items: center; gap: 8px; text-align: center; min-width: 0; }
+.tengah > * { max-width: 100%; min-width: 0; }
+.gambar { background: #fff; border-radius: 8px; padding: 8px; max-width: 100%; overflow-x: auto; }
+.gambar img { display: block; max-width: min(100%, 640px); height: auto; }
+.tabel { overflow-x: auto; }
+.tabel table, .misal table { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.tabel td { border-bottom: 1px solid var(--rule); padding: 4px 14px; text-align: center; }
+.misal { display: grid; gap: 4px; }
+.misal td { padding: 1px 8px; vertical-align: top; }
+.misal td:first-child { text-align: right; }
+.petunjuk { background: var(--biru-bg); border-left: 3px solid var(--biru); border-radius: 6px; padding: 10px 12px; font-size: 15px; }
+.kontrol { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-top: 1px solid var(--rule); padding-top: 14px; }
+button { font: 500 15px var(--font-body); border-radius: 6px; padding: 9px 14px; min-height: 40px; touch-action: manipulation; cursor: pointer; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); }
+button.utama { background: var(--biru); border-color: var(--biru); color: #fff; }
+button:disabled { opacity: 0.45; cursor: default; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--biru); outline-offset: 2px; }
+.progres { font-size: 13px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+.langkah-list { display: grid; gap: 14px; }
+.langkah { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+.langkah .no { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--rule); display: grid; place-items: center; font: 500 13px var(--font-mono); color: var(--muted); }
+.grafik { display: grid; gap: 6px; width: 100%; }
+.g54-judul { font-size: 13px; color: var(--muted); }
+.canvas-box { position: relative; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; touch-action: none; background: var(--paper); }
+.canvas-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+.readout { position: absolute; left: 8px; bottom: 8px; font: 12px var(--font-mono); background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 2px 6px; color: var(--muted); pointer-events: none; }
+.g54-alat { display: flex; flex-wrap: wrap; gap: 6px; }
+.g54-alat button { padding: 8px 12px; font-size: 14px; min-height: 38px; }
+mjx-container.rumus-lebar { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+footer { font-size: 13px; color: var(--muted); }
+.eyebrow a { display: inline-block; padding: 6px 0; }
+@media (max-width: 480px) { .soal { padding: 14px; } .progres { margin-left: 0; width: 100%; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><a href="../index.html">Kalkulus 1</a> · Bab 5 Aplikasi Turunan</div>
+    <h1>Subbab 5.5: Nilai Maksimum atau Minimum Suatu Fungsi</h1>
+    <p style="color:var(--muted)">Coba kerjakan dulu. Tombol <b>Petunjuk</b> memberi arah; langkah pembahasan terbuka dengan kode akses dari pengajar.</p>
+  </header>
+
+  <section class="kunci-panel" id="kunciPanel">
+    <p id="kunciTeks">Masukkan kode akses untuk membuka langkah pembahasan.</p>
+    <form id="formKode" autocomplete="off">
+      <input type="text" id="kode" maxlength="20" placeholder="KODE" aria-label="Kode akses" required>
+      <button type="submit" class="utama" id="btnKode">Buka</button>
+    </form>
+    <button type="button" id="btnKeluar" hidden>Keluar</button>
+    <div class="galat" id="galat" hidden></div>
+  </section>
+
+  <nav class="nomor" aria-label="Nomor soal"><a href="#no-1">1</a><a href="#no-2">2</a><a href="#no-3">3</a><a href="#no-4">4</a><a href="#no-5">5</a><a href="#no-6">6</a><a href="#no-7">7</a><a href="#no-8">8</a><a href="#no-9">9</a><a href="#no-10">10</a><a href="#no-11">11</a><a href="#no-12">12</a><a href="#no-13">13</a><a href="#no-14">14</a><a href="#no-15">15</a><a href="#no-16">16</a><a href="#no-17">17</a><a href="#no-18">18</a><a href="#no-19">19</a><a href="#no-20">20</a><a href="#no-21">21</a><a href="#no-22">22</a><a href="#no-23">23</a><a href="#no-24">24</a><a href="#no-25">25</a><a href="#no-26">26</a><a href="#no-27">27</a><a href="#no-28">28</a><a href="#no-29">29</a><a href="#no-30">30</a><a href="#no-31">31</a><a href="#no-32">32</a><a href="#no-33">33</a><a href="#no-34">34</a><a href="#no-35">35</a><a href="#no-36">36</a><a href="#no-37">37</a><a href="#no-38">38</a><a href="#no-39">39</a></nav>
+  <div class="intro"><p><i>Langkah umum mendapatkan nilai ekstrim (mutlak) \(f\) yang kontinu pada interval tertutup \([a,b]\): (1) tentukan titik kritis \(f\) di \((a,b)\), yaitu titik dengan \(f'(x)=0\) atau \(f'(x)\) tidak terdefinisi, (2) hitung nilai \(f\) di semua titik kritis dan di ujung-ujung \(a\) dan \(b\), (3) nilai terbesar adalah nilai maksimum dan nilai terkecil adalah nilai minimum. Pada interval yang tidak tertutup, nilai ekstrim belum tentu ada, sehingga perilaku \(f\) ditentukan dari tanda \(f'\) dan limit \(f\) di ujung-ujung interval.</i></p>
+<p><i>Untuk Soal-soal 1-14 tentukan nilai-nilai maksimum dan minimum \(f\) pada interval tertutup yang diberikan dan nyatakan dimana nilai-nilai itu terjadi.</i></p></div>
+
+  <article class="soal" id="no-1">
+    <div class="soal-head"><h2>No. 1</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=4x^2-4x+1;\ [0,1]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f\) kontinu pada interval tertutup: bandingkan nilai \(f\) di titik kritis dan di kedua ujung interval.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-2">
+    <div class="soal-head"><h2>No. 2</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=8x-x^2;\ [0,6]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Cari titik kritis dari \(f'(x)=0\), lalu bandingkan dengan nilai di ujung \(0\) dan \(6\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-3">
+    <div class="soal-head"><h2>No. 3</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=(x-2)^3;\ [1,4]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Satu-satunya titik kritis belum tentu ekstrim; tetap bandingkan dengan nilai di ujung.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-4">
+    <div class="soal-head"><h2>No. 4</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=2x^3-3x^2-12x;\ [-2,3]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Faktorkan \(f'(x)=6(x-2)(x+1)\); kedua titik kritis ada di dalam interval.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-5">
+    <div class="soal-head"><h2>No. 5</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=x-\tan x;\ [-\pi/4,\pi/4]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f'(x)=1-\sec^2x=-\tan^2x\). Untuk membandingkan, ingat \(\pi&lt;4\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-6">
+    <div class="soal-head"><h2>No. 6</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\sin x-\cos x;\ [0,\pi]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f'(x)=\cos x+\sin x=0\) berarti \(\tan x=-1\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-7">
+    <div class="soal-head"><h2>No. 7</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=2\sec x-\tan x;\ [0,\pi/4]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Faktorkan \(f'(x)=\sec x(2\tan x-\sec x)\); titik kritis saat \(\sin x=\frac12\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-8">
+    <div class="soal-head"><h2>No. 8</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\sin^2 x+\cos x;\ [-\pi,\pi]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Faktorkan \(f'(x)=\sin x(2\cos x-1)\); ada lima titik kritis di \([-\pi,\pi]\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-9">
+    <div class="soal-head"><h2>No. 9</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=1+|9-x^2|;\ [-5,1]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Titik kritis juga tempat \(f'\) tidak terdefinisi (lancipan nilai mutlak). Bisa pecah kasus atau pakai \(|u|=\sqrt{u^2}\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-10">
+    <div class="soal-head"><h2>No. 10</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=|6-4x|;\ [-3,3]\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f'\) tidak pernah nol; titik kritisnya hanya lancipan di \(x=\frac32\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal-soal 11-18 tentukan nilai-nilai maksimum dan minimum \(f\) pada interval yang diberikan, jika ada.</p></div>
+  <article class="soal" id="no-11">
+    <div class="soal-head"><h2>No. 11</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=x^2-3x-1;\ (-\infty,+\infty)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Interval tidak terbatas: lihat tanda \(f'\) dan limit \(f\) di \(\pm\infty\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-12">
+    <div class="soal-head"><h2>No. 12</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=3-4x-2x^2;\ (-\infty,+\infty)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Parabola terbuka ke bawah; limit di \(\pm\infty\) menunjukkan nilai mana yang tidak ada.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-13">
+    <div class="soal-head"><h2>No. 13</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=4x^3-3x^4;\ (-\infty,+\infty)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Faktorkan \(f'(x)=12x^2(1-x)\); tanda \(f'\) tidak berubah di \(x=0\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-14">
+    <div class="soal-head"><h2>No. 14</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=x^4+4x;\ (-\infty,+\infty)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f'(x)=4(x^3+1)\) hanya nol di \(x=-1\); faktor \(x^2-x+1\) selalu positif.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-15">
+    <div class="soal-head"><h2>No. 15</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=1+\dfrac{1}{x};\ (0,+\infty)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f'(x)=-\frac{1}{x^2}&lt;0\): fungsi turun terus pada \((0,\infty)\). Apakah nilai batasnya tercapai?</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-16">
+    <div class="soal-head"><h2>No. 16</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\dfrac{x}{x^2+1};\ (0,+\infty)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Interval terbuka: periksa limit di kedua ujung. Nilai yang hanya didekati bukan nilai ekstrim.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-17">
+    <div class="soal-head"><h2>No. 17</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\dfrac{x^2}{x^2+1};\ (-5,-1)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f'\) bertanda tetap pada \((-5,-1)\) dan intervalnya terbuka.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-18">
+    <div class="soal-head"><h2>No. 18</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(f(x)=\dfrac{x+3}{x-3};\ (-5,5)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Ada asimtot tegak \(x=3\) di dalam \((-5,5)\); periksa limit kiri dan kanannya.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-19">
+    <div class="soal-head"><h2>No. 19</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Tentukan nilai-nilai maksimum dan minimum dari
+    <div class="eq">\[
+        f(x)=2\sin 2x+\sin x
+    \]</div>
+    dan nyatakan dimana nilai-nilai maksimum dan minimum terjadi. (Petunjuk: karena \(f\) periodik, problem ini dapat diselesaikan dengan pertama-tama mendapatkan nilai-nilai maksimum dan minimum pada interval tertutup tertentu)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f\) periodik dengan periode \(2\pi\). Tulis \(\cos2x=2\cos^2x-1\) sehingga \(f'=0\) jadi persamaan kuadrat dalam \(\cos x\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-20">
+    <div class="soal-head"><h2>No. 20</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Tentukan nilai-nilai maksimum dan minimum
+    <div class="eq">\[
+        f(x)=3\cos\frac{x}{3}+2\cos\frac{x}{2}
+    \]</div>
+    (lihat petunjuk sebelumnya).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Periode \(f\) adalah KPK dari \(6\pi\) dan \(4\pi\). Pakai \(\sin A=\sin B\iff A=B+2k\pi\) atau \(A=\pi-B+2k\pi\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-21">
+    <div class="soal-head"><h2>No. 21</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Tentukan nilai-nilai maksimum dan minimum fungsi
+    <div class="eq">\[
+        f(x)=\sin(\cos x)\quad\text{pada}\quad[0,2\pi]
+    \]</div></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Aturan rantai; \(\cos(\cos x)&gt;0\) karena \(\cos x\in[-1,1]\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-22">
+    <div class="soal-head"><h2>No. 22</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Tentukan nilai-nilai maksimum dan minimum fungsi
+    <div class="eq">\[
+        f(x)=\cos(\sin x)\quad\text{pada}\quad[0,\pi]
+    \]</div></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Aturan rantai; \(\sin(\sin x)=0\) hanya jika \(\sin x=0\) di interval ini.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-23">
+    <div class="soal-head"><h2>No. 23</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Tentukan nilai maksimum dan minimum dari
+    <div class="eq">\[
+        f(x)=\begin{cases} 4x-2, &amp; x&lt;1 \\ (x-2)(x-3), &amp; x\geq 1 \end{cases}
+    \]</div>
+    pada \([\frac{1}{2},\frac{7}{2}]\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Cek dulu kekontinuan di titik sambung \(x=1\), lalu turunan kiri dan kanannya.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-24">
+    <div class="soal-head"><h2>No. 24</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misalkan \(f(x)=x^2+px+q\). Tentukan nilai-nilai \(p\) dan \(q\) sedemikian hingga \(f(1)=3\) adalah sebuah nilai ekstrim \(f\) pada \([0,2]\). Apakah nilai ini maksimum atau minimum.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Ekstrim di titik dalam yang dapat diturunkan berarti \(f'(1)=0\); ditambah syarat \(f(1)=3\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-25">
+    <div class="soal-head"><h2>No. 25</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misalkan \(f(x)=(x-a)^p\) dengan \(p\) suatu bilangan bulat yang lebih besar dari 1 dan \(a\) sebarang bilangan nyata. Tentukan ekstrim relatif \(f\) jika
+    <ol type="a"><li><p>\(p\) genap</p></li><li><p>\(p\) gasal</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Tanda \(f'(x)=p(x-a)^{p-1}\) bergantung pada genap/ganjilnya \(p-1\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-26">
+    <div class="soal-head"><h2>No. 26</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Berapa kemiringan terkecil yang mungkin untuk garis singgung kurva \(y=x^3-3x^2+5x\)?</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Kemiringan garis singgung adalah \(y'\). Cari nilai minimum \(y'=3x^2-6x+5\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-27">
+    <div class="soal-head"><h2>No. 27</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><ol type="a"><li><p>Tunjukkan bahwa
+        <div class="eq">\[
+            f(x)=\frac{64}{\sin x}+\frac{27}{\cos x}
+        \]</div>
+        mempunyai nilai minimum tetapi tidak ada nilai maksimum pada interval \((0,\pi/2)\).</p></li><li><p>Tentukan nilai minimumnya.</p></li></ol></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f'\) nol saat \(\tan x=\frac43\). Periksa limit \(f\) di kedua ujung interval.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-28">
+    <div class="soal-head"><h2>No. 28</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan bahwa nilai minimum
+    <div class="eq">\[
+        f(x)=x^2+\frac{16x^2}{(8-x)^2},\quad x&gt;8
+    \]</div>
+    terjadi di \(x=4(2+\sqrt[3]{2})\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Sederhanakan turunan suku pecahan; persamaannya menjadi \((8-x)^3=-128\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-29">
+    <div class="soal-head"><h2>No. 29</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Tentukan nilai maksimum fungsi \(f(\theta)=\sin^2\theta\cos\theta\) untuk \(0\leq\theta\leq\pi/2\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Faktorkan \(f'(\theta)=\sin\theta(2\cos^2\theta-\sin^2\theta)\); titik kritis saat \(\tan\theta=\sqrt2\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-30">
+    <div class="soal-head"><h2>No. 30</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan bahwa untuk setiap nilai positif \(t\) fungsi \(f(x)=x+t/x\) mempunyai nilai minimum, tetapi tidak ada nilai maksimum pada \((0,+\infty)\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> \(f'(x)=1-\frac{t}{x^2}\); limit di \(0^+\) dan \(+\infty\) menunjukkan tidak ada maksimum.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-31">
+    <div class="soal-head"><h2>No. 31</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Tentukan nilai-nilai \(a_0\), \(a_1\), dan \(a_2\) sedemikian hingga grafik \(f(x)=a_0+a_1x+a_2x^2\) melalui titik \((0,9)\) dan \(f\) mempunyai sebuah nilai minimum 1 di \(x=2\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Tiga syarat: \(f(0)=9\), \(f'(2)=0\), \(f(2)=1\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-32">
+    <div class="soal-head"><h2>No. 32</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan bahwa \(x\geq\sin x\) untuk semua \(x\) dalam interval \([0,2\pi]\). [<i>Petunjuk:</i> tentukan nilai minimum \(x-\sin x\) pada interval yang diberikan.]</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Cari nilai minimum \(g(x)=x-\sin x\) pada \([0,2\pi]\); \(g'(x)=1-\cos x\geq0\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-33">
+    <div class="soal-head"><h2>No. 33</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan bahwa
+    <div class="eq">\[
+        1-\frac{1}{2}x^2\leq\cos x
+    \]</div>
+    untuk semua \(x\) dalam interval \([0,2\pi]\). [Lihat petunjuk pada latihan sebelumnya.]</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pakai hasil Soal 32 untuk menentukan tanda \(g'(x)=x-\sin x\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-34">
+    <div class="soal-head"><h2>No. 34</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><ol type="a"><li><p>Buat sketsa grafik fungsi \(f\) yang kontinu pada interval terbuka \((-1,1)\) dan mempunyai nilai-nilai maksimum dan minimum pada interval itu.</p></li><li><p>Buat sketsa grafik fungsi \(f\) pada interval terbuka \((-1,1)\) dan tidak kontinu dimana-mana pada \((-1,1)\), meskipun mempunyai nilai maksimum dan minimum pada \((-1,1)\).</p></li><li><p>Apakah fungsi pada bagian (a) dan (b) bertentangan dengan Teorema Nilai-Ekstrim? Jelaskan.</p></li></ol></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Teorema Nilai Ekstrim hanya memberi syarat cukup (interval tertutup dan fungsi kontinu), bukan syarat perlu.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-35">
+    <div class="soal-head"><h2>No. 35</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan bahwa jika \(ax^2+bx+c=0\) mempunyai dua akar real yang berlainan, maka titik tengah antara dua akar ini adalah titik stasioner untuk \(f(x)=ax^2+bx+c\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Bandingkan titik tengah kedua akar (dari rumus kuadrat) dengan pembuat nol \(f'(x)=2ax+b\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-36">
+    <div class="soal-head"><h2>No. 36</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan Teorema 5.5.2 pada kasus dengan nilai ekstrim minimum.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pakai definisi turunan: untuk \(h&gt;0\) dan \(h&lt;0\), tanda hasil bagi selisihnya berbeda.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-37">
+    <div class="soal-head"><h2>No. 37</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misalkan \(f(x)=ax^2+bx+c\) dengan \(a&gt;0\). Buktikan bahwa \(f(x)\geq 0\) untuk semua \(x\) jika dan hanya jika \(b^2-4ac\leq 0\). [<i>Petunjuk:</i> tentukan minimum \(f(x)\).]</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Nilai minimum \(f\) adalah \(f\left(-\frac{b}{2a}\right)=\frac{4ac-b^2}{4a}\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-38">
+    <div class="soal-head"><h2>No. 38</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Diasumsikan bahwa fungsi \(f\) dapat diturunkan pada interval terbuka \((a,b)\) dan \(L\) garis tidak vertikal yang tidak berpotongan dengan kurva \(y=f(x)\) pada interval \((a,b)\). Tunjukkan bahwa jika ada suatu titik pada kurva ini pada interval \((a,b)\) yang terdekat ke atau terjauh dari \(L\), <b>maka garis singgung kurva di titik tersebut sejajar dengan \(L\)</b>. [<i>Petunjuk:</i> misalkan \(y=mx+b\) adalah persamaan \(L\) dan asumsikan tanpa pembuktian bahwa jarak tegak lurus antara sebuah titik pada \(y=f(x)\) dan \(L\) adalah terbesar (terkecil) pada tempat yang sama dimana jarak vertikal antara kurva dan garis terbesar (terkecil). (Lihat Gambar 5.53)]</p><div class="tengah"><div class="gambar"><img src="g/a4277a5efa8a4161.svg" alt="gambar" loading="lazy" style="width:227px"></div></div></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Jarak vertikal \(mx+k-f(x)\) bertanda tetap (kurva tidak memotong garis). Di titik ekstrimnya turunan jarak itu nol.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-39">
+    <div class="soal-head"><h2>No. 39</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Gunakan hasil pada Latihan 38 untuk menentukan koordinat semua titik pada grafik \(y=-x^2\) terdekat ke atau terjauh dari garis \(y=2-x\) untuk \(-1\leq x\leq\frac{3}{2}\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Jarak vertikal antara garis dan kurva adalah \(x^2-x+2\); cari nilai ekstremnya pada \([-1,\frac32]\).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <footer>Pembahasan lengkap juga tersedia dalam bentuk PDF dari pengajar.</footer>
+</div>
+<script>
+(() => {
+  const SUB = "5.5", API = window.TRYOUT_API || "", KUNCI = "portal-tryout-kode";
+  const $ = id => document.getElementById(id);
+  const typeset = el => (window.MathJax && MathJax.typesetPromise) ? MathJax.typesetPromise([el]).then(() => rapikanRumus(el)).catch(() => {}) : null;
+  /* rumus inline yang lebih lebar dari kolomnya: beri gulir mendatar sendiri (HP) */
+  function rapikanRumus(root) {
+    (root || document).querySelectorAll('mjx-container[jax="SVG"]:not([display="true"])').forEach(m => {
+      const induk = m.parentElement; if (!induk) return;
+      m.classList.remove("rumus-lebar");
+      const lebar = m.getBoundingClientRect().width, ruang = induk.getBoundingClientRect().width;
+      if (ruang >= 1 && lebar > ruang - 2) m.classList.add("rumus-lebar");   // ruang 0 = sedang tersembunyi
+    });
+  }
+  window.rapikanRumus = rapikanRumus;
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) MathJax.startup.promise.then(() => rapikanRumus());
+  let tundaRumus; addEventListener("resize", () => { clearTimeout(tundaRumus); tundaRumus = setTimeout(() => rapikanRumus(), 200); });
+
+  let terbuka = false;
+
+  function pasangKontrol(soal) {
+    const k = soal.querySelector(".kontrol"), hint = soal.querySelector(".petunjuk");
+    k.innerHTML = (hint ? '<button type="button" data-a="hint" aria-expanded="false">Petunjuk</button>' : '') +
+      '<button type="button" class="utama" data-a="next">Langkah berikutnya</button><button type="button" data-a="all">Tampilkan semua</button>' +
+      '<button type="button" data-a="hide">Sembunyikan</button><span class="progres"></span>';
+    const next = k.querySelector('[data-a="next"]'), all = k.querySelector('[data-a="all"]'), hide = k.querySelector('[data-a="hide"]'), prog = k.querySelector(".progres");
+    let shown = 0;
+    const steps = () => [...soal.querySelectorAll(".langkah")];
+    const show = n => {
+      const S = steps();
+      S.forEach((s, i) => {
+        s.hidden = i >= n;
+        if (!s.hidden) s.querySelectorAll(".grafik[data-grafik]:not([data-siap])").forEach(g => { g.dataset.siap = "1"; if (window.pasangGrafik54) pasangGrafik54(g, g.dataset.grafik); });
+      });
+      shown = n; next.disabled = all.disabled = terbuka && n >= S.length; hide.disabled = n === 0;
+      if (window.rapikanRumus) rapikanRumus(soal);
+      prog.textContent = terbuka ? n + " dari " + S.length + " langkah" : "";
+    };
+    const minta = () => { const p = $("kunciPanel"); p.scrollIntoView({ block: "start" }); p.classList.add("kedip"); setTimeout(() => p.classList.remove("kedip"), 1600); $("kode").focus({ preventScroll: true }); };
+    if (hint) { const hb = k.querySelector('[data-a="hint"]'); hb.onclick = () => { hint.hidden = !hint.hidden; hb.setAttribute("aria-expanded", String(!hint.hidden)); hb.textContent = hint.hidden ? "Petunjuk" : "Tutup petunjuk"; if (window.rapikanRumus) rapikanRumus(hint); }; }
+    next.onclick = () => { if (!terbuka) return minta(); show(shown + 1); steps()[shown - 1].scrollIntoView({ block: "nearest" }); };
+    all.onclick = () => { if (!terbuka) return minta(); show(steps().length); };
+    hide.onclick = () => { show(0); soal.scrollIntoView({ block: "start" }); };
+    soal._show = show; show(0);
+  }
+  document.querySelectorAll("article.soal").forEach(pasangKontrol);
+
+  async function buka(kode) {
+    $("galat").hidden = true; $("btnKode").disabled = true; $("btnKode").textContent = "Memeriksa...";
+    try {
+      if (!API) throw new Error("Situs belum terhubung ke server pembahasan.");
+      const res = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ aksi: "bahas", kode, subbab: SUB }) });
+      const r = await res.json();
+      if (!r.ok) throw new Error(r.pesan);
+      try { localStorage.setItem(KUNCI, kode); } catch (e) {}
+      terbuka = true;
+      r.soal.forEach(d => {
+        const soal = document.getElementById("no-" + d.no); if (!soal) return;
+        soal.querySelector(".kata-kunci").innerHTML = (d.kunci || "").split(",").map(x => x.trim()).filter(Boolean).map(x => "<span>" + x + "</span>").join("");
+        soal.querySelector(".langkah-list").innerHTML = d.langkah.map((l, i) => '<section class="langkah" hidden><div class="no">' + (i + 1) + '</div><div class="isi">' + (l.judul ? "<h3>" + l.judul + "</h3>" : "") + l.html + "</div></section>").join("");
+        soal._show(0);
+      });
+      $("kunciTeks").innerHTML = '<span class="ok">Pembahasan terbuka</span> untuk ' + (r.nama || "kode ini") + ".";
+      $("formKode").hidden = true; $("btnKeluar").hidden = false;
+      typeset(document.querySelector("main") || document.body);
+    } catch (e) {
+      $("galat").textContent = e.message || "Tidak bisa terhubung ke server."; $("galat").hidden = false;
+      try { localStorage.removeItem(KUNCI); } catch (x) {}
+    } finally { $("btnKode").disabled = false; $("btnKode").textContent = "Buka"; }
+  }
+  $("formKode").addEventListener("submit", e => { e.preventDefault(); buka($("kode").value.trim().toUpperCase()); });
+  $("btnKeluar").onclick = () => { try { localStorage.removeItem(KUNCI); } catch (e) {} location.reload(); };
+  let lama = null; try { lama = localStorage.getItem(KUNCI); } catch (e) {}
+  if (lama) { $("kode").value = lama; buka(lama); }
+})();
+</script>
+</body>
+</html>
