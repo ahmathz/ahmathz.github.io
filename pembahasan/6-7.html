@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Soal dan pembahasan Latihan 6.7 Kalkulus 1: Teorema Fundamental Kalkulus Kedua.">
+<title>Pembahasan 6.7 Kalkulus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<script src="../tryout/config.js"></script>
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]],
+    macros: { penting: ["\\bbox[2px,border:1.5px solid royalblue]{#1}", 1], nol: ["\\bbox[2px,border:1.5px solid royalblue]{#1}", 1],
+              hasil: ["\\bbox[2px,border:1.5px solid crimson]{#1}", 1], at: ["\\left.#1\\right|_{#2}", 2], R: "\\mathbb{R}" } },
+  svg: { fontCache: "global" }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.min.js"></script>
+<style>
+/* Layout: satu kolom; panel kode di atas; tiap soal = kartu (soal publik + petunjuk), langkah pembahasan disisipkan setelah kode terverifikasi */
+*,*::before,*::after{box-sizing:border-box}
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+[hidden] { display: none !important; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 22px; }
+.eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.eyebrow a { color: inherit; }
+h1 { font-family: var(--font-display); font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 4px 0 6px; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-size: 22px; margin: 0; }
+h3 { font-size: 15px; margin: 2px 0 0; }
+p { margin: 0; }
+.intro { color: var(--muted); font-size: 15px; display: grid; gap: 8px; }
+nav.nomor { display: flex; flex-wrap: wrap; gap: 6px; }
+nav.nomor a { font: 500 14px var(--font-mono); color: var(--biru); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 12px; min-width: 40px; text-align: center; background: var(--paper); font-variant-numeric: tabular-nums; }
+nav.nomor a:hover, nav.nomor a:focus-visible { border-color: var(--biru); }
+.kunci-panel { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; scroll-margin-top: 16px; }
+.kunci-panel.kedip { outline: 2px solid var(--biru); }
+.kunci-panel p { flex: 1 1 260px; font-size: 15px; }
+.kunci-panel form { display: flex; gap: 8px; flex-wrap: wrap; }
+.kunci-panel input { font: 500 16px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); width: 140px; }
+.kunci-panel .ok { color: var(--hijau); font-weight: 600; }
+.galat { color: var(--merah); font-size: 14px; flex-basis: 100%; }
+.instruksi { font-style: italic; color: var(--muted); font-size: 15px; border-left: 3px solid var(--rule); padding-left: 12px; }
+.soal { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; display: grid; gap: 14px; scroll-margin-top: 16px; min-width: 0; }
+.soal-head { display: flex; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
+.kata-kunci { display: flex; flex-wrap: wrap; gap: 6px; }
+.kata-kunci span { font-size: 12px; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 0 8px; }
+.teks, .isi { display: block; min-width: 0; }
+.teks > * + *, .isi > * + * { margin-top: 8px; }
+.isi > h3 + * { margin-top: 4px; }
+.teks ol, .teks ul, .isi ol, .isi ul { margin: 0; padding-left: 24px; display: grid; gap: 4px; }
+li.custom { list-style: none; margin-left: -20px; }
+.lbl { font-weight: 600; }
+.eq { overflow-x: auto; overflow-y: hidden; text-align: center; padding: 2px 0; }
+.biru, .merah { display: inline-block; border: 1.5px solid; border-radius: 4px; padding: 1px 6px; }
+.biru { border-color: var(--biru); background: var(--biru-bg); }
+.merah { border-color: var(--merah); background: var(--merah-bg); }
+.tengah { display: grid; justify-items: center; gap: 8px; text-align: center; min-width: 0; }
+.tengah > * { max-width: 100%; min-width: 0; }
+.gambar { background: #fff; border-radius: 8px; padding: 8px; max-width: 100%; overflow-x: auto; }
+.gambar img { display: block; max-width: min(100%, 640px); height: auto; }
+.tabel { overflow-x: auto; }
+.tabel table, .misal table { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.tabel td { border-bottom: 1px solid var(--rule); padding: 4px 14px; text-align: center; }
+.misal { display: grid; gap: 4px; }
+.misal td { padding: 1px 8px; vertical-align: top; }
+.misal td:first-child { text-align: right; }
+.petunjuk { background: var(--biru-bg); border-left: 3px solid var(--biru); border-radius: 6px; padding: 10px 12px; font-size: 15px; }
+.kontrol { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border-top: 1px solid var(--rule); padding-top: 14px; }
+button { font: 500 15px var(--font-body); border-radius: 6px; padding: 9px 14px; min-height: 40px; touch-action: manipulation; cursor: pointer; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); }
+button.utama { background: var(--biru); border-color: var(--biru); color: #fff; }
+button:disabled { opacity: 0.45; cursor: default; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--biru); outline-offset: 2px; }
+.progres { font-size: 13px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+.langkah-list { display: grid; gap: 14px; }
+.langkah { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+.langkah .no { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--rule); display: grid; place-items: center; font: 500 13px var(--font-mono); color: var(--muted); }
+.grafik { display: grid; gap: 6px; width: 100%; }
+.g54-judul { font-size: 13px; color: var(--muted); }
+.canvas-box { position: relative; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; touch-action: none; background: var(--paper); }
+.canvas-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+.readout { position: absolute; left: 8px; bottom: 8px; font: 12px var(--font-mono); background: var(--paper); border: 1px solid var(--rule); border-radius: 4px; padding: 2px 6px; color: var(--muted); pointer-events: none; }
+.g54-alat { display: flex; flex-wrap: wrap; gap: 6px; }
+.g54-alat button { padding: 8px 12px; font-size: 14px; min-height: 38px; }
+mjx-container.rumus-lebar { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+footer { font-size: 13px; color: var(--muted); }
+.eyebrow a { display: inline-block; padding: 6px 0; }
+@media (max-width: 480px) { .soal { padding: 14px; } .progres { margin-left: 0; width: 100%; } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../ds.css"><link rel="stylesheet" href="../ds-skin.css"></head>
+<body>
+<header class="ds-top"><a class="ds-logo" href="../index.html" aria-label="AHmathZ, ke beranda"><span>AH</span>math<span>Z</span></a><nav class="ds-nav" aria-label="Menu utama"><a href="../index.html">Kalkulator harga</a><a href="../pembahasan.html" aria-current="page">Pembahasan</a><a href="../grafik-5-4.html">Grafik 5.4</a><a href="../visualisasi/index.html">Visualisasi</a></nav></header>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><a href="../pembahasan.html">Pembahasan</a> / Bab 6 Integral</div>
+    <h1>Subbab 6.7: Teorema Fundamental Kalkulus Kedua</h1>
+    <p style="color:var(--muted)">Coba kerjakan dulu. Tombol <b>Petunjuk</b> memberi arah; langkah pembahasan terbuka dengan kode akses dari pengajar.</p>
+  </header>
+
+  <section class="kunci-panel" id="kunciPanel">
+    <p id="kunciTeks">Masukkan kode akses untuk membuka langkah pembahasan.</p>
+    <form id="formKode" autocomplete="off">
+      <input type="text" id="kode" maxlength="20" placeholder="KODE" aria-label="Kode akses" required>
+      <button type="submit" class="utama" id="btnKode">Buka</button>
+    </form>
+    <button type="button" id="btnKeluar" hidden>Keluar</button>
+    <div class="galat" id="galat" hidden></div>
+  </section>
+
+  <nav class="nomor" aria-label="Nomor soal"><a href="#no-1">1</a><a href="#no-2">2</a><a href="#no-3">3</a><a href="#no-4">4</a><a href="#no-5">5</a><a href="#no-6">6</a><a href="#no-7">7</a><a href="#no-8">8</a><a href="#no-9">9</a><a href="#no-10">10</a><a href="#no-11">11</a><a href="#no-12">12</a><a href="#no-13">13</a><a href="#no-14">14</a><a href="#no-15">15</a><a href="#no-16">16</a><a href="#no-17">17</a><a href="#no-18">18</a><a href="#no-19">19</a><a href="#no-20">20</a><a href="#no-18">18</a><a href="#no-19">19</a><a href="#no-20">20</a><a href="#no-21">21</a><a href="#no-22">22</a><a href="#no-23">23</a><a href="#no-24">24</a><a href="#no-25">25</a><a href="#no-26">26</a><a href="#no-27">27</a><a href="#no-28">28</a><a href="#no-29">29</a><a href="#no-30">30</a><a href="#no-31">31</a><a href="#no-32">32</a><a href="#no-33">33</a></nav>
+  <div class="intro"><p><i>Teorema Fundamental Kalkulus Kedua: jika \(f\) kontinu pada suatu interval \(I\) yang memuat \(a\), maka \(F(x)=\int_a^x f(t)\,dt\) adalah anti-turunan \(f\) pada \(I\), yaitu \(\displaystyle\frac{d}{dx}\int_a^x f(t)\,dt=f(x)\). Dengan aturan rantai, berlaku juga rumus \(\displaystyle\frac{d}{dx}\int_{h(x)}^{g(x)}f(t)\,dt=f(g(x))\,g'(x)-f(h(x))\,h'(x)\).</i></p></div>
+
+  <article class="soal" id="no-1">
+    <div class="soal-head"><h2>No. 1</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Diberikan \(\displaystyle\int_{-1}^5 f(x)\,dx=3\), dapatkan
+    <ol type="a"><li><p>\(\displaystyle\int_{-1}^5 f(t)\,dt\)</p></li><li><p>\(\displaystyle\int_{-1}^5 f(u)\,du\).</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Nama peubah integrasi tidak memengaruhi nilai integral tertentu.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-2">
+    <div class="soal-head"><h2>No. 2</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Didefinisikan \(F(x)\) dengan \(F(x)=\displaystyle\int_{\pi/4}^x\cos 2t\,dt\)
+    <ol type="a"><li><p>Gunakan Teorema Fundamental Kalkulus Kedua untuk mendapatkan \(F'(x)\).</p></li><li><p>Periksa hasil bagian (a) dengan mengintegralkan kemudian menurunkan.</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> (a) F'(x) = integran dengan t diganti x. (b) Hitung F(x) eksplisit lalu turunkan.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-3">
+    <div class="soal-head"><h2>No. 3</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Didefinisikan \(F(x)\) dengan \(F(x)=\displaystyle\int_1^x(t^3+1)\,dt\)
+    <ol type="a"><li><p>Gunakan Teorema Fundamental Kalkulus Kedua untuk mendapatkan \(F'(x)\).</p></li><li><p>Periksa hasil bagian (a) dengan mengintegralkan kemudian menurunkan.</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> (a) F'(x) = x^3 + 1. (b) Hitung F(x) eksplisit lalu turunkan.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 4&ndash;7, gunakan Teorema Fundamental Kalkulus Kedua untuk memperoleh turunannya.</p></div>
+  <article class="soal" id="no-4">
+    <div class="soal-head"><h2>No. 4</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\frac{d}{dx}\int_0^x\frac{dt}{1+\sqrt{t}}\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Batas atas adalah x dan integran kontinu, jadi turunannya adalah integran dengan t diganti x.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-5">
+    <div class="soal-head"><h2>No. 5</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\frac{d}{dx}\int_1^x\sin(\sqrt{t})\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integran kontinu untuk t &gt;= 0 dan batas atasnya x.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-6">
+    <div class="soal-head"><h2>No. 6</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\frac{d}{dx}\int_0^x\frac{t}{\cos t}\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integran kontinu pada (-pi/2, pi/2) yang memuat 0.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-7">
+    <div class="soal-head"><h2>No. 7</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\frac{d}{dx}\int_0^x|t|\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> |t| kontinu di mana-mana (walaupun tidak dapat diturunkan di 0).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 8&ndash;11, tuliskan fungsi \(F(x)\) dalam bentuk integral jika \(F(x)\) merupakan</p></div>
+  <article class="soal" id="no-8">
+    <div class="soal-head"><h2>No. 8</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Anti-turunan dari \(1/(1+x^2)\) pada interval \((-\infty,+\infty)\) dan \(F(1)=0\);</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> F(x) = integral dari a ke x; pilih a sehingga F(a) = 0, yaitu a = titik syarat.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-9">
+    <div class="soal-head"><h2>No. 9</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Anti-turunan dari \(1/(x-1)\) pada \((1,+\infty)\) dan \(F(2)=0\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> 1/(t-1) kontinu pada (1, inf) yang memuat 2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-10">
+    <div class="soal-head"><h2>No. 10</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Anti-turunan dari \(1/(x-1)\) pada \((-\infty,1)\) dan \(F(-3)=0\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> 1/(t-1) kontinu pada (-inf, 1) yang memuat -3.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-11">
+    <div class="soal-head"><h2>No. 11</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Anti-turunan dari \(1/(x-1)\) pada \((-\infty,1)\) dan \(F(0)=0\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> 1/(t-1) kontinu pada (-inf, 1) yang memuat 0.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-12">
+    <div class="soal-head"><h2>No. 12</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><ol type="a"><li><p>Pada interval terbuka yang manakah rumus \(F(x)=\displaystyle\int_1^x\frac{1}{t^2-9}\,dt\) menyajikan anti-turunan dari \(f(x)=\dfrac{1}{x^2-9}\)?</p></li><li><p>Dapatkan satu titik perpotongan grafik \(F\) dengan sumbu-\(x\).</p></li></ol></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Cari interval terbuka terbesar yang memuat 1 tempat 1/(t^2 - 9) kontinu.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-13">
+    <div class="soal-head"><h2>No. 13</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><ol type="a"><li><p>Pada interval terbuka yang manakah rumus \(F(x)=\displaystyle\int_1^x\frac{dt}{t}\) menyajikan anti-turunan dari \(f(x)=1/x\)?</p></li><li><p>Dapatkan satu titik perpotongan grafik \(F\) dengan sumbu-\(x\).</p></li></ol></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> 1/t tidak terdefinisi di t = 0; interval yang memuat 1 adalah (0, inf).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-14">
+    <div class="soal-head"><h2>No. 14</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misal \(F(x)=\displaystyle\int_2^x\sqrt{2t^2+1}\,dt\). Dapatkan (a) \(F(2)\), (b) \(F'(2)\), (c) \(F''(2)\)<br>
+    <b>(Soal EAS Gasal 2018/2019)</b>.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> F(2) bernilai nol karena batas atas dan bawah sama; F'(x) adalah integran; F&rdquo;(x) diturunkan dengan aturan rantai.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-15">
+    <div class="soal-head"><h2>No. 15</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misal \(F(x)=\displaystyle\int_0^x\frac{\sin t}{t^2+4}\,dt\). Dapatkan
+    <ol type="a"><li><p>\(F(0)\)</p></li><li><p>\(F'(0)\)</p></li><li><p>\(F''(0)\)</p></li></ol>
+    <b>(Soal EAS Gasal 2022/2023)</b></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> F(0) = 0; F'(x) = integran; F&rdquo; dengan aturan pembagian.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-16">
+    <div class="soal-head"><h2>No. 16</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misal \(F(x)=\displaystyle\int_0^x\frac{t^2-1}{t^3+1}\,dt\). Dapatkan
+    <ol type="a"><li><p>\(F(0)\)</p></li><li><p>\(F'(0)\)</p></li><li><p>\(F''(0)\)</p></li></ol>
+    <b>(Soal EAS Gasal 2022/2023)</b></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integran kontinu pada (-1, inf) yang memuat 0; F&rdquo; dengan aturan pembagian.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-17">
+    <div class="soal-head"><h2>No. 17</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misal \(F(x)=\displaystyle\int_1^x\frac{t+\sin\pi t}{t^2+1}\,dt\). Dapatkan
+    <ol type="a"><li><p>\(F(1)\)</p></li><li><p>\(F'(1)\)</p></li><li><p>\(F''(1)\)</p></li></ol>
+    <b>(Soal EAS Gasal 2022/2023)</b></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> F'(x) = (x + sin pi x)/(x^2 + 1); turunan sin pi x adalah pi cos pi x.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-18">
+    <div class="soal-head"><h2>No. 18</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misal \(F(x)=\displaystyle\int_0^x\frac{\cos t}{t^2+3}\,dt\). Dapatkan
+    <ol type="a"><li><p>\(F(0)\)</p></li><li><p>\(F'(0)\)</p></li><li><p>\(F''(0)\)</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> F'(x) = cos x/(x^2 + 3); F&rdquo; dengan aturan pembagian.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-19">
+    <div class="soal-head"><h2>No. 19</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misal \(F(x)=\displaystyle\int_0^x\frac{t-3}{t^2+7}\,dt\) untuk \(-\infty&lt;x&lt;+\infty\).
+    <ol type="a"><li><p>Dapatkan nilai \(x\) yang menyebabkan \(F\) mencapai nilai minimum.</p></li><li><p>Dapatkan interval, yang pada interval tersebut \(F\) hanya naik atau hanya turun.</p></li><li><p>Dapatkan interval terbuka, yang pada interval tersebut \(F\) hanya cekung ke atas atau hanya cekung ke bawah.</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> F'(x) adalah integran (TFK2); tanda F' menentukan naik/turun dan ekstrim, tanda F&rdquo; menentukan kecekungan.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-20">
+    <div class="soal-head"><h2>No. 20</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Misal \(F(x)=\displaystyle\int_0^x\frac{2t-3}{4t^2+7}\,dt\) untuk \(-\infty&lt;x&lt;+\infty\).
+    <ol type="a"><li><p>Dapatkan interval ketika \(F\) naik dan \(F\) turun.</p></li><li><p>Dapatkan interval ketika \(F\) cekung ke atas dan \(F\) cekung ke bawah.</p></li></ol>
+    <b>(Soal EAS Gasal 2021/2022)</b>.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> F'(x) = (2x - 3)/(4x^2 + 7); tanda F' untuk naik/turun, tanda F&rdquo; untuk kecekungan.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 18&ndash;21, tentukan domain dari \(F(x)\) dan tentukan semua nilai \(x\) yang menyebabkan \(F(x)\) positif, negatif, atau nol. (Tidak perlu melakukan penghitungan integralnya.)</p></div>
+  <article class="soal" id="no-18">
+    <div class="soal-head"><h2>No. 18</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(F(x)=\displaystyle\int_1^x\frac{t^4}{t^2+3}\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integran tak negatif; untuk x &gt; 1 integralnya positif, untuk x &lt; 1 balik batas sehingga negatif.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-19">
+    <div class="soal-head"><h2>No. 19</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(F(x)=\displaystyle\int_2^x\frac{2-t}{t^2+1}\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integran positif untuk t &lt; 2 dan negatif untuk t &gt; 2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-20">
+    <div class="soal-head"><h2>No. 20</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(F(x)=\displaystyle\int_{-1}^x\sqrt{4-t^2}\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integran hanya terdefinisi untuk -2 &lt;= t &lt;= 2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-21">
+    <div class="soal-head"><h2>No. 21</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(F(x)=\displaystyle\int_{-3}^x t^2\sqrt{2-t}\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Integran terdefinisi untuk t &lt;= 2 dan tak negatif.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 22&ndash;24, nyatakan \(F(x)\) dalam bentuk sepotong-sepotong yang tidak menggunakan integral.</p></div>
+  <article class="soal" id="no-22">
+    <div class="soal-head"><h2>No. 22</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(F(x)=\displaystyle\int_{-2}^x|t|\,dt\) <b>(Soal EAS Gasal 2019/2020)</b>.</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Pecah di titik t = 0 tempat |t| berubah rumus; kasus x&lt;0 dan x&gt;=0.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-23">
+    <div class="soal-head"><h2>No. 23</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(F(x)=\displaystyle\int_0^x f(t)\,dt\), dengan \(f(x)=\begin{cases} x, &amp; 0\leq x\leq 2 \\ 2, &amp; x&gt;2. \end{cases}\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Kasus 0 &lt;= x &lt;= 2 dan x &gt; 2; untuk x &gt; 2 pecah integral di t = 2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-24">
+    <div class="soal-head"><h2>No. 24</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(F(x)=\displaystyle\int_{-1}^x f(t)\,dt\), dengan \(f(x)=\begin{cases} x^2, &amp; x\leq 0 \\ 2x, &amp; x&gt;0. \end{cases}\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Kasus x &lt;= 0 dan x &gt; 0; untuk x &gt; 0 pecah integral di t = 0.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-25">
+    <div class="soal-head"><h2>No. 25</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Gunakan Teorema Fundamental Kalkulus Kedua dan aturan rantai untuk menunjukkan bahwa
+    <div class="eq">\[
+        \frac{d}{dx}\int_a^{g(x)}f(t)\,dt=f(g(x))g'(x).
+    \]</div></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Definisikan F(u) = integral a ke u f(t) dt; integral yang ditanya adalah komposisi F(g(x)).</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <div class="instruksi"><p>Untuk Soal 26 dan 27, gunakan hasil pada Soal 25 untuk mengerjakan integrasinya.</p></div>
+  <article class="soal" id="no-26">
+    <div class="soal-head"><h2>No. 26</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\frac{d}{dx}\int_1^{x^3}\frac{1}{t}\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> f(t) = 1/t, g(x) = x^3, g'(x) = 3x^2.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-27">
+    <div class="soal-head"><h2>No. 27</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>\(\displaystyle\frac{d}{dx}\int_3^{\sin x}\frac{1}{1+t^2}\,dt\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> f(t) = 1/(1 + t^2), g(x) = sin x, g'(x) = cos x.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-28">
+    <div class="soal-head"><h2>No. 28</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan bahwa fungsi
+    <div class="eq">\[
+        F(x)=\int_0^x\frac{1}{1+t^2}\,dt+\int_0^{1/x}\frac{1}{1+t^2}\,dt
+    \]</div>
+    adalah konstan pada interval \((0,+\infty)\)</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Turunkan kedua suku (suku kedua dengan Soal 25, g(x) = x^-1); hasilnya nol.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-29">
+    <div class="soal-head"><h2>No. 29</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Gunakan Soal 25 dan Teorema 6.4.2 untuk menunjukkan bahwa
+    <div class="eq">\[
+        \frac{d}{dx}\int_{h(x)}^{g(x)}f(t)\,dt=f(g(x))g'(x)-f(h(x))h'(x).
+    \]</div></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Sisipkan titik a: integral dari h ke g = integral a ke g - integral a ke h; turunkan masing-masing dengan Soal 25.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-30">
+    <div class="soal-head"><h2>No. 30</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Gunakan hasil Soal 29 untuk mengerjakan integrasi berikut ini:
+    <ol type="a"><li><p>\(\displaystyle\frac{d}{dx}\int_{x^2}^{x^3}\sin^2 t\,dt\),</p></li><li><p>\(\displaystyle\frac{d}{dx}\int_{-x}^{x}\frac{1}{1+t}\,dt\).</p></li></ol></p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Identifikasi f, batas atas g(x), dan batas bawah h(x); substitusikan ke rumus f(g)g' - f(h)h'.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-31">
+    <div class="soal-head"><h2>No. 31</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan bahwa fungsi \(F(x)=\displaystyle\int_x^{3x}\frac{1}{t}\,dt\) konstan pada interval \((0,+\infty)\) dengan menggunakan Soal 29 untuk mencari \(F'(x)\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> f(t) = 1/t, g(x) = 3x, h(x) = x; hitung F'(x) dengan rumus Soal 29.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-32">
+    <div class="soal-head"><h2>No. 32</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan: Jika \(f\) kontinu pada suatu interval \(I\) dan \(b\) sebarang titik pada \(I\), maka pada tiap titik di dalam \(I\) berlaku \(\displaystyle\frac{d}{dx}\int_x^b f(t)\,dt=-f(x)\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> Balik batas sehingga x menjadi batas atas.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <article class="soal" id="no-33">
+    <div class="soal-head"><h2>No. 33</h2><div class="kata-kunci"></div></div>
+    <div class="teks"><p>Buktikan: Jika \(f\) kontinu pada suatu interval terbuka \(I\) dan \(a\) sebarang titik di \(I\), maka \(F(x)=\displaystyle\int_a^x f(t)\,dt\) kontinu pada \(I\).</p></div>
+    <div class="petunjuk" hidden><b>Petunjuk:</b> TFK2 memberi F terdiferensialkan pada I; fungsi terdiferensialkan pasti kontinu.</div>
+    <div class="langkah-list"></div>
+    <div class="kontrol"></div>
+  </article>
+
+  <footer>Pembahasan lengkap juga tersedia dalam bentuk PDF dari pengajar.</footer>
+</div>
+<script>
+(() => {
+  const SUB = "6.7", API = window.TRYOUT_API || "", KUNCI = "portal-tryout-kode";
+  const $ = id => document.getElementById(id);
+  const typeset = el => (window.MathJax && MathJax.typesetPromise) ? MathJax.typesetPromise([el]).then(() => rapikanRumus(el)).catch(() => {}) : null;
+  /* rumus inline yang lebih lebar dari kolomnya: beri gulir mendatar sendiri (HP) */
+  function rapikanRumus(root) {
+    (root || document).querySelectorAll('mjx-container[jax="SVG"]:not([display="true"])').forEach(m => {
+      const induk = m.parentElement; if (!induk) return;
+      m.classList.remove("rumus-lebar");
+      const lebar = m.getBoundingClientRect().width, ruang = induk.getBoundingClientRect().width;
+      if (ruang >= 1 && lebar > ruang - 2) m.classList.add("rumus-lebar");   // ruang 0 = sedang tersembunyi
+    });
+  }
+  window.rapikanRumus = rapikanRumus;
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) MathJax.startup.promise.then(() => rapikanRumus());
+  let tundaRumus; addEventListener("resize", () => { clearTimeout(tundaRumus); tundaRumus = setTimeout(() => rapikanRumus(), 200); });
+
+  let terbuka = false;
+
+  function pasangKontrol(soal) {
+    const k = soal.querySelector(".kontrol"), hint = soal.querySelector(".petunjuk");
+    k.innerHTML = (hint ? '<button type="button" data-a="hint" aria-expanded="false">Petunjuk</button>' : '') +
+      '<button type="button" class="utama" data-a="next">Langkah berikutnya</button><button type="button" data-a="all">Tampilkan semua</button>' +
+      '<button type="button" data-a="hide">Sembunyikan</button><span class="progres"></span>';
+    const next = k.querySelector('[data-a="next"]'), all = k.querySelector('[data-a="all"]'), hide = k.querySelector('[data-a="hide"]'), prog = k.querySelector(".progres");
+    let shown = 0;
+    const steps = () => [...soal.querySelectorAll(".langkah")];
+    const show = n => {
+      const S = steps();
+      S.forEach((s, i) => {
+        s.hidden = i >= n;
+        if (!s.hidden) s.querySelectorAll(".grafik[data-grafik]:not([data-siap])").forEach(g => { g.dataset.siap = "1"; if (window.pasangGrafik54) pasangGrafik54(g, g.dataset.grafik); });
+      });
+      shown = n; next.disabled = all.disabled = terbuka && n >= S.length; hide.disabled = n === 0;
+      if (window.rapikanRumus) rapikanRumus(soal);
+      prog.textContent = terbuka ? n + " dari " + S.length + " langkah" : "";
+    };
+    const minta = () => { const p = $("kunciPanel"); p.scrollIntoView({ block: "start" }); p.classList.add("kedip"); setTimeout(() => p.classList.remove("kedip"), 1600); $("kode").focus({ preventScroll: true }); };
+    if (hint) { const hb = k.querySelector('[data-a="hint"]'); hb.onclick = () => { hint.hidden = !hint.hidden; hb.setAttribute("aria-expanded", String(!hint.hidden)); hb.textContent = hint.hidden ? "Petunjuk" : "Tutup petunjuk"; if (window.rapikanRumus) rapikanRumus(hint); }; }
+    next.onclick = () => { if (!terbuka) return minta(); show(shown + 1); steps()[shown - 1].scrollIntoView({ block: "nearest" }); };
+    all.onclick = () => { if (!terbuka) return minta(); show(steps().length); };
+    hide.onclick = () => { show(0); soal.scrollIntoView({ block: "start" }); };
+    soal._show = show; show(0);
+  }
+  document.querySelectorAll("article.soal").forEach(pasangKontrol);
+
+  async function buka(kode) {
+    $("galat").hidden = true; $("btnKode").disabled = true; $("btnKode").textContent = "Memeriksa...";
+    try {
+      if (!API) throw new Error("Situs belum terhubung ke server pembahasan.");
+      const res = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ aksi: "bahas", kode, subbab: SUB }) });
+      const r = await res.json();
+      if (!r.ok) throw new Error(r.pesan);
+      try { localStorage.setItem(KUNCI, kode); } catch (e) {}
+      terbuka = true;
+      r.soal.forEach(d => {
+        const soal = document.getElementById("no-" + d.no); if (!soal) return;
+        soal.querySelector(".kata-kunci").innerHTML = (d.kunci || "").split(",").map(x => x.trim()).filter(Boolean).map(x => "<span>" + x + "</span>").join("");
+        soal.querySelector(".langkah-list").innerHTML = d.langkah.map((l, i) => '<section class="langkah" hidden><div class="no">' + (i + 1) + '</div><div class="isi">' + (l.judul ? "<h3>" + l.judul + "</h3>" : "") + l.html + "</div></section>").join("");
+        soal._show(0);
+      });
+      $("kunciTeks").innerHTML = '<span class="ok">Pembahasan terbuka</span> untuk ' + (r.nama || "kode ini") + ".";
+      $("formKode").hidden = true; $("btnKeluar").hidden = false;
+      typeset(document.querySelector("main") || document.body);
+    } catch (e) {
+      $("galat").textContent = e.message || "Tidak bisa terhubung ke server."; $("galat").hidden = false;
+      try { localStorage.removeItem(KUNCI); } catch (x) {}
+    } finally { $("btnKode").disabled = false; $("btnKode").textContent = "Buka"; }
+  }
+  $("formKode").addEventListener("submit", e => { e.preventDefault(); buka($("kode").value.trim().toUpperCase()); });
+  $("btnKeluar").onclick = () => { try { localStorage.removeItem(KUNCI); } catch (e) {} location.reload(); };
+  let lama = null; try { lama = localStorage.getItem(KUNCI); } catch (e) {}
+  if (lama) { $("kode").value = lama; buka(lama); }
+})();
+</script>
+<script src="../ds-nav.js"></script><footer class="ds-foot"><!-- Ikon: Font Awesome Free 6.7.2 (CC BY 4.0) --><div class="ds-foot-in"><span class="ds-foot-brand"><a class="ds-logo" href="../index.html"><span>AH</span>math<span>Z</span></a> Les Kalkulus dan Matematika, offline di Surabaya dan online</span><nav aria-label="Kontak"><a href="https://wa.me/6285176971148" aria-label="WhatsApp 0851-7697-1148" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg><span>0851-7697-1148</span></a><a href="https://www.tiktok.com/@ahmathz" aria-label="TikTok @ahmathz" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg><span>@ahmathz</span></a><a href="https://www.instagram.com/belajar.ahmathz/" aria-label="Instagram belajar.ahmathz" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg><span>belajar.ahmathz</span></a></nav></div></footer>
+</body>
+</html>
