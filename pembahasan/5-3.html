@@ -511,7 +511,39 @@ footer { font-size: 13px; color: var(--muted); }
   if (window.MathJax && MathJax.startup && MathJax.startup.promise) MathJax.startup.promise.then(() => rapikanRumus());
   let tundaRumus; addEventListener("resize", () => { clearTimeout(tundaRumus); tundaRumus = setTimeout(() => rapikanRumus(), 200); });
 
-  let terbuka = false;
+  let terbuka = false, umum = false, perSub = false, terpakai = 0, maks = 5, namaKode = "", kodeAktif = "", devMem = "";
+  /* ID perangkat anonim: dipakai server untuk menghitung jatah kode umum */
+  function devId() {
+    if (devMem) return devMem;
+    try { devMem = localStorage.getItem("portal-tryout-dev") || ""; } catch (e) {}
+    if (devMem.length < 12) {
+      devMem = ((window.crypto && crypto.randomUUID && crypto.randomUUID()) || (Date.now().toString(36) + Math.random().toString(36).slice(2) + "000000000000")).replace(/[^A-Za-z0-9-]/g, "").slice(0, 48);
+      try { localStorage.setItem("portal-tryout-dev", devMem); } catch (e) {}
+    }
+    return devMem;
+  }
+  function tampilKode() {
+    $("kunciTeks").innerHTML = '<span class="ok">Pembahasan terbuka</span> untuk ' + (namaKode || "kode ini") + "." + (umum ? " Kode umum: " + terpakai + " dari " + maks + (perSub ? " soal di subbab ini" : " soal") + " sudah dibuka." : "");
+  }
+  function isi(d) {
+    const soal = document.getElementById("no-" + d.no); if (!soal) return;
+    soal.querySelector(".kata-kunci").innerHTML = (d.kunci || "").split(",").map(x => x.trim()).filter(Boolean).map(x => "<span>" + x + "</span>").join("");
+    soal.querySelector(".langkah-list").innerHTML = d.langkah.map((l, i) => '<section class="langkah" hidden><div class="no">' + (i + 1) + '</div><div class="isi">' + (l.judul ? "<h3>" + l.judul + "</h3>" : "") + l.html + "</div></section>").join("");
+    soal._show(0);
+  }
+  /* kode umum: langkah satu soal baru diminta ke server saat pertama dibuka (server yang menghitung jatah) */
+  async function pastikan(soal) {
+    if (!umum || soal.querySelector(".langkah")) return true;
+    const prog = soal.querySelector(".progres");
+    try {
+      const res = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ aksi: "bahas", kode: kodeAktif, subbab: SUB, dev: devId(), no: Number(soal.id.replace("no-", "")) }) });
+      const r = await res.json();
+      if (!r.ok) { if (r.batas) { terpakai = r.terpakai; maks = r.maks || maks; perSub = !!r.perSub; tampilKode(); } prog.textContent = r.pesan || "Pembahasan tidak bisa dibuka."; return false; }
+      r.soal.forEach(isi); terpakai = r.terpakai || terpakai; tampilKode();
+      typeset(soal);
+      return !!soal.querySelector(".langkah");
+    } catch (e) { prog.textContent = "Tidak bisa terhubung ke server."; return false; }
+  }
 
   function pasangKontrol(soal) {
     const k = soal.querySelector(".kontrol"), hint = soal.querySelector(".petunjuk");
@@ -527,14 +559,14 @@ footer { font-size: 13px; color: var(--muted); }
         s.hidden = i >= n;
         if (!s.hidden) s.querySelectorAll(".grafik[data-grafik]:not([data-siap])").forEach(g => { g.dataset.siap = "1"; if (window.pasangGrafik54) pasangGrafik54(g, g.dataset.grafik); });
       });
-      shown = n; next.disabled = all.disabled = terbuka && n >= S.length; hide.disabled = n === 0;
+      shown = n; next.disabled = all.disabled = terbuka && S.length > 0 && n >= S.length; hide.disabled = n === 0;
       if (window.rapikanRumus) rapikanRumus(soal);
-      prog.textContent = terbuka ? n + " dari " + S.length + " langkah" : "";
+      prog.textContent = terbuka && S.length ? n + " dari " + S.length + " langkah" : "";
     };
     const minta = () => { const p = $("kunciPanel"); p.scrollIntoView({ block: "start" }); p.classList.add("kedip"); setTimeout(() => p.classList.remove("kedip"), 1600); $("kode").focus({ preventScroll: true }); };
     if (hint) { const hb = k.querySelector('[data-a="hint"]'); hb.onclick = () => { hint.hidden = !hint.hidden; hb.setAttribute("aria-expanded", String(!hint.hidden)); hb.textContent = hint.hidden ? "Petunjuk" : "Tutup petunjuk"; if (window.rapikanRumus) rapikanRumus(hint); }; }
-    next.onclick = () => { if (!terbuka) return minta(); show(shown + 1); steps()[shown - 1].scrollIntoView({ block: "nearest" }); };
-    all.onclick = () => { if (!terbuka) return minta(); show(steps().length); };
+    next.onclick = async () => { if (!terbuka) return minta(); if (!(await pastikan(soal))) return; show(shown + 1); steps()[shown - 1].scrollIntoView({ block: "nearest" }); };
+    all.onclick = async () => { if (!terbuka) return minta(); if (!(await pastikan(soal))) return; show(steps().length); };
     hide.onclick = () => { show(0); soal.scrollIntoView({ block: "start" }); };
     soal._show = show; show(0);
   }
@@ -544,18 +576,14 @@ footer { font-size: 13px; color: var(--muted); }
     $("galat").hidden = true; $("btnKode").disabled = true; $("btnKode").textContent = "Memeriksa...";
     try {
       if (!API) throw new Error("Situs belum terhubung ke server pembahasan.");
-      const res = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ aksi: "bahas", kode, subbab: SUB }) });
+      const res = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ aksi: "bahas", kode, subbab: SUB, dev: devId() }) });
       const r = await res.json();
       if (!r.ok) throw new Error(r.pesan);
       try { localStorage.setItem(KUNCI, kode); } catch (e) {}
       terbuka = true;
-      r.soal.forEach(d => {
-        const soal = document.getElementById("no-" + d.no); if (!soal) return;
-        soal.querySelector(".kata-kunci").innerHTML = (d.kunci || "").split(",").map(x => x.trim()).filter(Boolean).map(x => "<span>" + x + "</span>").join("");
-        soal.querySelector(".langkah-list").innerHTML = d.langkah.map((l, i) => '<section class="langkah" hidden><div class="no">' + (i + 1) + '</div><div class="isi">' + (l.judul ? "<h3>" + l.judul + "</h3>" : "") + l.html + "</div></section>").join("");
-        soal._show(0);
-      });
-      $("kunciTeks").innerHTML = '<span class="ok">Pembahasan terbuka</span> untuk ' + (r.nama || "kode ini") + ".";
+      umum = !!r.umum; perSub = !!r.perSub; terpakai = r.terpakai || 0; maks = r.maks || 5;
+      r.soal.forEach(isi);
+      namaKode = r.nama; kodeAktif = kode; tampilKode();
       $("formKode").hidden = true; $("btnKeluar").hidden = false;
       typeset(document.querySelector("main") || document.body);
     } catch (e) {
